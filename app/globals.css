@@ -1,0 +1,34 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  exclude: rootcolor;
+}
+
+:root {
+  --background: #13a93e;
+  --foreground: #171717;
+  --gradient-a: #000000;
+  --gradient-b: #292b2a;
+}
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  min-height: 100%;
+}
+/* Button defaults */
+button[type="button"],
+button[type="submit"],
+a[type="button"] {
+  background-color: lab(86.9953 -47.2691 25.0054);
+  border: 1px solid lab(86.9953 -47.2691 25.0054);
+  color: #000000;
+  cursor: pointer;
+  font-family: var(--font-staatliches), sans-serif;
+  font-weight: bolder;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+button[type="button"]:hover,
+a[type="button"]:hover {
+  filter: brightness(0.9);
+  cursor: pointer;
+}
