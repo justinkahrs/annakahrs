@@ -169,7 +169,7 @@ export default function Quote() {
         {items.length > 0 && (
           <div className="mt-8 flex justify-center">
             <a
-              href="https://blog.annakahrs.com"
+              href="https://blog.justinkahrs.com"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center border border-black/20
