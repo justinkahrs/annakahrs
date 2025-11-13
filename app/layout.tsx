@@ -7,15 +7,15 @@ import BackgroundAnimation from "./BackgroundAnimation";
 const roboto = Roboto({ subsets: ["latin"], weight: "400" });
 
 export const metadata: Metadata = {
-  title: "Justin Kahrs",
+  title: "Anna Kahrs",
   description: "Senior Software Engineer",
-  metadataBase: new URL("https://www.justinkahrs.com"),
+  metadataBase: new URL("https://www.annakahrs.com"),
   openGraph: {
-    title: "Justin Kahrs",
+    title: "Anna Kahrs",
     description: "Senior Software Engineer",
-    url: "https://www.justinkahrs.com",
+    url: "https://www.annakahrs.com",
     type: "website",
-    siteName: "Justin Kahrs",
+    siteName: "Anna Kahrs",
     images: [
       {
         url: "/1024x1024.png",

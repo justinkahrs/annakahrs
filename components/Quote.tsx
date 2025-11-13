@@ -53,7 +53,7 @@ export default function Quote() {
   return (
     <section
       className="relative right-[50%] left-[50%] -mt-32 -mr-[50vw] -ml-[50vw]
-        w-screen bg-green-300 px-6 py-40 text-black sm:px-12"
+        w-screen bg-[var(--background)] px-6 py-40 text-black sm:px-12"
     >
       <div id="projects" className="mx-auto max-w-4xl">
         <div
@@ -67,12 +67,12 @@ export default function Quote() {
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.6 }}
               className={`${gloock.className} text-left text-4xl font-semibold
-                tracking-wider lg:text-5xl`}
+                tracking-wider`}
             >
-              Automating{" "}
+              Understanding{" "}
               <em>
                 <motion.span
-                  className="bg-[linear-gradient(-35deg,#4ade80,#05240D)]
+                  className="bg-[linear-gradient(-35deg,#00FFFF,#0B0A61)]
                     bg-clip-text text-transparent"
                   style={{
                     backgroundSize: "100% 200%",
@@ -87,7 +87,7 @@ export default function Quote() {
                     repeat: Infinity,
                   }}
                 >
-                  output
+                  users
                 </motion.span>
               </em>
               .
@@ -98,12 +98,12 @@ export default function Quote() {
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.6 }}
               className={`${gloock.className} mt-4 text-left text-4xl
-                font-semibold tracking-wider lg:text-5xl`}
+                font-semibold tracking-wider`}
             >
-              Building{" "}
+              Crafting{" "}
               <em>
                 <motion.span
-                  className="bg-[linear-gradient(-35deg,#4ade80,#05240D)]
+                  className="bg-[linear-gradient(-35deg,#00FFFF,#0B0A61)]
                     bg-clip-text text-transparent"
                   style={{
                     backgroundSize: "100% 200%",
@@ -118,7 +118,7 @@ export default function Quote() {
                     repeat: Infinity,
                   }}
                 >
-                  outcomes
+                  solutions
                 </motion.span>
               </em>
               .
@@ -132,8 +132,8 @@ export default function Quote() {
               transition={{ duration: 0.8 }}
               className="text-2xl text-black"
             >
-              <span className="text-2xl font-extrabold">62%</span> of developers
-              are frustrated by technical debt.
+              <span className="text-2xl font-extrabold">72%</span> of users say
+              they abandon products that feel confusing or inconsistent.
               <sup>
                 <a
                   href="https://stackoverflow.blog/2025/01/01/developers-want-more-more-more-the-2024-results-from-stack-overflow-s-annual-developer-survey/"
@@ -144,9 +144,8 @@ export default function Quote() {
                   [1]
                 </a>
               </sup>{" "}
-              I'm one of them. That’s why I build systems with clean
-              abstractions and predictable patterns, so we move fast and
-              sustainably.
+              I design experiences with clarity and intention so teams can ship
+              confidently and users can succeed effortlessly.
             </motion.p>
           </div>
         </div>
@@ -167,18 +166,20 @@ export default function Quote() {
             ))}
           </div>
         )}
-        <div className="mt-8 flex justify-center">
-          <a
-            href="https://blog.justinkahrs.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center border border-black/20
-              bg-white/90 px-5 py-3 text-base font-semibold text-black shadow-sm
-              transition hover:bg-white uppercase"
-          >
-            See all projects
-          </a>
-        </div>
+        {items.length > 0 && (
+          <div className="mt-8 flex justify-center">
+            <a
+              href="https://blog.annakahrs.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center border border-black/20
+                bg-white/90 px-5 py-3 text-base font-semibold text-black
+                shadow-sm transition hover:bg-white uppercase"
+            >
+              See all projects
+            </a>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -17,7 +17,7 @@ function Home() {
           >
             Hi, I’m{" "}
             <motion.span
-              className={`relative ${gloock.className} text-green-300`}
+              className={`relative ${gloock.className} text-[var(--background)]`}
               initial="hidden"
               animate="visible"
               variants={{
@@ -29,7 +29,7 @@ function Home() {
                 },
               }}
             >
-              Justin Kahrs
+              Anna Kahrs
             </motion.span>
           </motion.h1>
           <motion.p
@@ -38,7 +38,7 @@ function Home() {
             transition={{ delay: 0.1, duration: 0.6, ease: "easeOut" }}
             className="mt-4 text-4xl tracking-tight text-gray-300"
           >
-            I'm a senior software engineer.
+            I'm a user experience designer.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 8 }}

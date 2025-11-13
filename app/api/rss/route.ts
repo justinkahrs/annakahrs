@@ -1,6 +1,6 @@
 export const revalidate = 3600;
 export async function GET() {
-  const url = "https://blog.justinkahrs.com/rss.xml";
+  const url = "https://blog.annakahrs.com/rss.xml";
   const res = await fetch(url, { next: { revalidate } });
   if (!res.ok) {
     return new Response("Failed to fetch RSS", { status: 502 });

@@ -13,18 +13,10 @@ function Footer() {
       >
         <div className="flex items-center justify-center gap-4">
           <a
-            href="https://github.com/justinkahrs"
-            aria-label="GitHub"
-            className="rounded-full bg-green-300 p-2 hover:bg-zinc-200/60"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <GitHubIcon className="h-5 w-5" />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/justin-kahrs"
+            href="https://www.linkedin.com/in/annakahrs/"
             aria-label="LinkedIn"
-            className="rounded-full bg-green-300 p-2 hover:bg-zinc-200/60"
+            className="rounded-full bg-[var(--background)] p-2
+              hover:bg-zinc-200/60"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -32,7 +24,7 @@ function Footer() {
           </a>
         </div>
         <p className="text-sm text-zinc-200">
-          © {year} Made thoughtfully by Justin Kahrs. All rights reserved.
+          © {year} Made thoughtfully by Anna Kahrs. All rights reserved.
         </p>
       </div>
     </footer>

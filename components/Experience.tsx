@@ -7,73 +7,31 @@ const gloock = Gloock({ subsets: ["latin"], weight: "400" });
 function Experience() {
   const jobs = [
     {
-      role: "Creator / Solo-Developer",
-      company: "o11n (AI-augmented IDE)",
-      period: "April 2025 — Present",
-      blurb: (
-        <>
-          Designed and built o11n, an AI-augmented IDE that speeds up
-          development using a custom prompting interface and LLM integrations.{" "}
-          <a
-            href="https://www.youtube.com/watch?v=skla9HZTTfc"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline"
-          >
-            See demo on YouTube.
-          </a>
-        </>
-      ),
-      link: "https://o11n.life",
-      location: "Grand Rapids, MI (Remote)",
-    },
-    {
-      role: "Senior Full-Stack Engineer",
-      company: "Amastay AI",
-      period: "March 2025 — June 2025",
-      blurb: (
-        <>
-          Built the product POC (
-          <a
-            href="https://demo.amastay.ai"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline"
-          >
-            see live demo
-          </a>
-          ) and the Next.js dashboard for hosts to manage properties.
-        </>
-      ),
-      link: "https://amastay.ai",
+      role: "Lead UX Designer",
+      company: "University of California, San Francisco (UCSF)",
+      period: "January 2024 - Present",
+      blurb:
+        "Lead UX for UCSF website migrations to a modern Drupal platform, shaping strategy, structure, and design. Run usability testing and user research, design IA and content structures with stakeholders, explore concepts for internal platforms, and apply WCAG 2.1 accessibility standards.",
+      link: "https://www.ucsf.edu",
       location: "San Francisco, CA (Remote)",
     },
     {
-      role: "Senior Frontend Engineer",
-      company: "Ridecell",
-      period: "January 2018 — October 2024",
+      role: "Service Designer",
+      company: "University of California, San Francisco (UCSF)",
+      period: "October 2018 - December 2023",
       blurb:
-        "Shipped next-generation shared-mobility solutions and maintained fleet-automation, booking, and operations products for a Fortune Global 500 client.",
-      link: "https://www.ridecell.com",
+        "Collaborated with stakeholders to define goals, shape service concepts, and align on user needs. Led user research, created user flows and prototypes, facilitated workshops, and partnered with developers and content specialists to deliver seamless, scalable digital services.",
+      link: "https://www.ucsf.edu",
       location: "San Francisco, CA (Remote)",
     },
     {
-      role: "Senior Frontend Engineer",
-      company: "Indiana University",
-      period: "July 2015 — January 2018",
+      role: "Information Architect UX Intern",
+      company: "IU Studios - University Communications and Marketing",
+      period: "August 2017 - March 2018",
       blurb:
-        "Built internal data tools and dashboards, integrated Tableau/Denodo, and followed HIPAA/FERPA-compliant practices.",
-      link: "https://www.iu.edu",
+        "Supported UX and information architecture through interviews, analysis, and insight synthesis. Created wireframes and prototypes, helped plan and run usability testing, contributed to design documentation, and assisted with UI asset creation and interface refinements.",
+      link: "https://iu.edu",
       location: "Bloomington, IN",
-    },
-    {
-      role: "Server Support Technician",
-      company: "Grand Valley State University",
-      period: "August 2010 — July 2015",
-      blurb:
-        "Provisioned and maintained physical servers and wrote automation scripts for routine maintenance.",
-      link: "https://www.gvsu.edu",
-      location: "Allendale, MI",
     },
   ];
 
@@ -102,7 +60,7 @@ function Experience() {
               viewport={{ once: true, amount: 0.6 }}
               transition={{ duration: 0.7 }}
               className={`${gloock.className} text-left text-5xl font-semibold
-                tracking-wider text-green-900 uppercase`}
+                tracking-wider text-(--background) uppercase`}
             >
               Experience
             </motion.h2>
@@ -110,7 +68,7 @@ function Experience() {
           <a
             className="inline-flex items-center gap-2 p-2 text-sm"
             download
-            href="/Justin_Kahrs_resume.pdf"
+            href="/Anna_Kahrs_resume.pdf"
             type="button"
           >
             <svg
@@ -177,7 +135,7 @@ function Experience() {
                   <div className="mt-4 text-sm text-zinc-600">{job.blurb}</div>
                 </div>
                 {i !== jobs.length - 1 && (
-                  <hr className="border-2 border-green-300/30" />
+                  <hr className="border-2 border-(--background)/30" />
                 )}
               </li>
             ))}

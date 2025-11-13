@@ -16,7 +16,7 @@ function Contact() {
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.5 }}
             className={`${gloock.className} text-center text-5xl font-semibold
-              tracking-wider text-green-300 uppercase`}
+              tracking-wider text-(--background) uppercase`}
           >
             Contact
           </motion.h2>

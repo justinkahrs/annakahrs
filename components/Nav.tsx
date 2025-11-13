@@ -32,7 +32,8 @@ function Nav({ active, setActive, setPendingTarget }: NavProps) {
         >
           <div
             className="flex h-9 w-9 items-center justify-center rounded-full
-              bg-green-300 text-sm font-semibold text-black cursor-pointer ml-2"
+              bg-(--background) text-sm font-semibold text-black cursor-pointer
+              ml-2"
             onClick={() => {
               const id = "home";
               const el =
@@ -46,7 +47,7 @@ function Nav({ active, setActive, setPendingTarget }: NavProps) {
               handleScroll("#home");
             }}
           >
-            JK
+            AK
           </div>
           <ul className="flex items-center justify-between gap-1 sm:w-auto">
             {NAV.map((item) => (
@@ -72,7 +73,7 @@ function Nav({ active, setActive, setPendingTarget }: NavProps) {
                     {active === item.href && (
                       <motion.div
                         className="absolute -bottom-2 left-0 h-0.5 w-full
-                          origin-left bg-green-300"
+                          origin-left bg-(--background)"
                         initial={{ scaleX: 0 }}
                         animate={{ scaleX: 1 }}
                         transition={{ duration: 1.5, ease: "easeOut" }}

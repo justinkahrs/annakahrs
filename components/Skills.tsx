@@ -3,29 +3,33 @@ import TechCard from "./TechCard";
 import { Gloock } from "next/font/google";
 import TechMarquee from "./TechMarquee";
 const gloock = Gloock({ subsets: ["latin"], weight: "400" });
+
 const SKILL_SECTIONS = [
   {
-    title: "Frontend",
-    items: ["React", "Next.js", "Tailwind/Material", "Framer Motion"],
-  },
-  {
-    title: "Backend",
-    items: ["Python", "Django", "Rust", "PostgreSQL"],
-  },
-  {
-    title: "Business",
-    items: ["Stripe/Braintree", "LLM integrations", "Make/Zapier", "PandaDocs"],
-  },
-  {
-    title: "Testing & UX",
+    title: "Certifications",
     items: [
-      "Cypress/Jest",
-      "Github Actions",
-      "Internationalization",
-      "Accessibility",
+      "Nielsen Norman Group",
+      "UXC Certificate",
+      "Specialty in UX Research",
     ],
   },
+  {
+    title: "Core Skills",
+    items: [
+      "Design Thinking",
+      "User Research",
+      "Prototyping",
+      "Collaboration",
+      "Survey Design",
+      "UX Writing",
+    ],
+  },
+  {
+    title: "Relevant Tools",
+    items: ["Figma", "ChatGPT", "Adobe CC", "HTML", "CSS", "Qualtrics"],
+  },
 ];
+
 function Skills() {
   return (
     <section className="scroll-mt-28">
@@ -41,7 +45,7 @@ function Skills() {
               viewport={{ once: true, amount: 0.6 }}
               transition={{ duration: 0.7 }}
               className={`${gloock.className} text-left text-5xl font-semibold
-                tracking-wider text-green-300 uppercase`}
+                tracking-wider text-[var(--background)] uppercase`}
             >
               Skills
             </motion.h2>
@@ -53,7 +57,7 @@ function Skills() {
               className="text-left text-4xl tracking-tight text-gray-300
                 uppercase italic"
             >
-              &amp; Technology
+              and Tools
             </motion.h2>
           </div>
           <div className="sm:max-w-sm sm:text-left">
