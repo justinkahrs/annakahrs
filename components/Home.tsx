@@ -38,7 +38,7 @@ function Home() {
             transition={{ delay: 0.1, duration: 0.6, ease: "easeOut" }}
             className="mt-4 text-4xl tracking-tight text-gray-300"
           >
-            I'm a user experience designer.
+            I'm a lead user experience designer.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 8 }}
