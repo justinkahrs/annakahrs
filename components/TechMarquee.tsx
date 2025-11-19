@@ -1,11 +1,16 @@
 import { useRef, useState, useLayoutEffect } from "react";
 import { motion } from "motion/react";
 
+type TechMarqueeProps = {
+  logos?: string[];
+  speedSeconds?: number;
+  size?: number;
+};
 export default function TechMarquee({
   logos = [],
-  speed = 20,
+  speedSeconds = 20,
   size = 64,
-}) {
+}: TechMarqueeProps) {
   const baseRef = useRef<HTMLDivElement>(null);
   const [repeatCount, setRepeatCount] = useState(2);
 
@@ -23,17 +28,15 @@ export default function TechMarquee({
 
   return (
     <div
-      className="
-        relative left-1/2 right-1/2 -mx-[50vw] 
-        w-screen overflow-hidden py-6
-      "
+      className="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-hidden
+        py-6"
     >
       <motion.div
         className="flex"
         initial={{ x: 0 }}
         animate={{ x: "-100%" }}
         transition={{
-          duration: speed,
+          duration: speedSeconds,
           ease: "linear",
           repeat: Infinity,
         }}

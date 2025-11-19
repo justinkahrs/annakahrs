@@ -133,9 +133,9 @@ function Skills() {
                 `}
               >
                 I&apos;m NN/g certified with a{" "}
-                <span className="font-semibold">UX Research specialty</span>.
-                My work focuses on grounding decisions in real user needs
-                through interviews, usability testing, content analysis, and
+                <span className="font-semibold">UX Research specialty</span>. My
+                work focuses on grounding decisions in real user needs through
+                interviews, usability testing, content analysis, and
                 evidence-driven design.
               </p>
             </div>
@@ -233,7 +233,6 @@ function Skills() {
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );
