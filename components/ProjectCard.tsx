@@ -1,11 +1,24 @@
 import React from "react";
 import { motion } from "motion/react";
+import { Playfair_Display, DM_Sans } from "next/font/google";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+});
+
 type Props = {
   href: string;
   title: string;
   subtitle: string;
   src: string;
 };
+
 export default function ProjectCard({ href, title, src, subtitle }: Props) {
   return (
     <motion.div
@@ -13,33 +26,60 @@ export default function ProjectCard({ href, title, src, subtitle }: Props) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.45 }}
-      className="text-gray-300 h-full"
+      className="h-full"
     >
       <a
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="block h-full overflow-hidden rounded-2xl border-2
-          border-white/10 bg-black/50 backdrop-blur-sm transition transform
-          hover:-translate-y-1 hover:shadow-md focus:outline-none focus:ring-2
-          focus:ring-white/20 flex flex-col"
+        className="
+          group relative flex h-full flex-col overflow-hidden 
+          rounded-[2rem] bg-white shadow-sm
+          transition-transform duration-300
+          hover:-translate-y-1 hover:shadow-md
+        "
       >
+        {/* Gradient overlay to match marquee + skills */}
         <div
-          className="relative h-40 w-full bg-white/5 border-b border-white/10
-            shrink-0"
-        >
-          <img src={src} alt="" className="h-full w-full object-cover" />
+          className="
+            pointer-events-none absolute inset-0 opacity-[0.7]
+          "
+          style={{
+            background: `
+              radial-gradient(circle at 0% 20%, rgba(96,165,250,0.16), transparent 55%),
+              radial-gradient(circle at 100% 100%, rgba(244,114,182,0.16), transparent 55%)
+            `,
+          }}
+        />
+
+        {/* IMAGE */}
+        <div className="relative h-44 w-full overflow-hidden rounded-t-[2rem] z-[1]">
+          <img
+            src={src}
+            alt=""
+            className="h-full w-full object-cover"
+          />
         </div>
-        <div className="p-4 flex-1 flex flex-col">
+
+        {/* CONTENT */}
+        <div className="relative z-[1] p-6 flex flex-col flex-1 text-center items-center">
           <h3
-            className="text-xl uppercase font-extrabold overflow-hidden
-              text-ellipsis line-clamp-2"
+            className={`
+              ${playfair.className}
+              text-xl sm:text-2xl font-semibold tracking-tight
+              text-[var(--highlight)]
+              line-clamp-2
+            `}
           >
             {title}
           </h3>
+
           <p
-            className="mt-1 text-sm text-white/80 overflow-hidden text-ellipsis
-              line-clamp-2"
+            className={`
+              ${dmSans.className}
+              mt-3 text-sm sm:text-base leading-relaxed
+              text-[var(--highlight)]/75 line-clamp-2
+            `}
           >
             {subtitle}
           </p>

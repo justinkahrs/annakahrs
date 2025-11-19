@@ -1,63 +1,65 @@
+import { useRef, useState, useLayoutEffect } from "react";
 import { motion } from "motion/react";
-export default function TechMarquee() {
-  const logos = [
-    // "django",
-    "github",
-    "nextjs",
-    "openai",
-    "postgresql",
-    "python",
-    "react",
-    "rust",
-    "stripe",
-    "tailwind",
-    // "zapier",
-  ];
+
+export default function TechMarquee({
+  logos = [],
+  speed = 20,
+  size = 64,
+}) {
+  const baseRef = useRef<HTMLDivElement>(null);
+  const [repeatCount, setRepeatCount] = useState(2);
+
+  useLayoutEffect(() => {
+    if (!baseRef.current) return;
+
+    const baseWidth = baseRef.current.offsetWidth;
+    const screenWidth = window.innerWidth;
+
+    // how many copies needed to fill full width *plus* one extra for seamless looping
+    const needed = Math.ceil(screenWidth / baseWidth) + 2;
+
+    setRepeatCount(needed);
+  }, [logos, size]);
+
   return (
     <div
-      aria-label="Technology Marquee"
-      className="relative right-1/2 left-1/2 -mx-[50vw] w-screen my-10
-        overflow-x-hidden overflow-y-visible pb-6 pt-12"
+      className="
+        relative left-1/2 right-1/2 -mx-[50vw] 
+        w-screen overflow-hidden py-6
+      "
     >
       <motion.div
+        className="flex"
         initial={{ x: 0 }}
-        animate={{ x: "-50%" }}
-        transition={{ duration: 30, ease: "linear", repeat: Infinity }}
-        className="flex gap-10"
-        style={{ width: "200%" }}
+        animate={{ x: "-100%" }}
+        transition={{
+          duration: speed,
+          ease: "linear",
+          repeat: Infinity,
+        }}
       >
-        <div className="flex items-center gap-20 sm:gap-40 pr-40">
-          {logos.map((name) => (
-            <div
-              key={`a-${name}`}
-              className="tooltip flex h-24 w-12 items-center justify-center"
-              data-tip={name}
-            >
-              <img
-                src={`/${name}.svg`}
-                alt={`${name} logo`}
-                className={`${name === "django" || name === "zapier" ? "h-16 w-16" : "h-12 w-12"}
-                invert-[1]`}
-              />
-            </div>
-          ))}
-        </div>
-        <div className="flex items-center gap-20 sm:gap-40 pr-40">
-          {logos.map((name) => (
-            <div
-              key={`b-${name}`}
-              className="tooltip flex h-24 w-12 items-center justify-center"
-              data-tip={name}
-            >
-              <img
-                src={`/${name}.svg`}
-                alt={`${name} logo`}
-                className={`${name === "django" || name === "zapier" ? "h-16 w-16" : "h-12 w-12"}
-                invert-[1]`}
-              />
-            </div>
-          ))}
-        </div>
+        {/* dynamic clones */}
+        {Array.from({ length: repeatCount }).map((_, i) => (
+          <div
+            key={i}
+            ref={i === 0 ? baseRef : undefined}
+            className="flex items-center gap-10 mr-10"
+          >
+            {logos.map((name) => (
+              <div
+                key={`${i}-${name}`}
+                style={{ width: size, height: size }}
+                className="flex items-center justify-center"
+              >
+                <img
+                  src={`/${name}.svg`}
+                  alt={name}
+                  className="object-contain max-w-full max-h-full"
+                />
+              </div>
+            ))}
+          </div>
+        ))}
       </motion.div>
     </div>
   );

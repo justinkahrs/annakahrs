@@ -4,17 +4,18 @@ import { useScroll, useMotionValueEvent } from "framer-motion";
 import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
 import Home from "@/components/Home";
-import Quote from "@/components/Quote";
+import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import ThreeBackground from "@/components/ThreeBackground";
 
 export default function App() {
   const [active, setActive] = useState<string>("#home");
   const [pendingTarget, setPendingTarget] = useState<string | null>(null);
   const { scrollY } = useScroll();
   const updateActiveFromScroll = () => {
-    const ids = ["home", "skills", "experience", "projects", "contact"] as const;
+    const ids = ["home", "skills", "experience", "projects", "about", "contact"] as const;
     // If a click initiated the scroll, freeze the active state to that target
     // and ignore all scroll-based calculations until the scroll ends.
     if (pendingTarget) {
@@ -76,18 +77,20 @@ export default function App() {
   }, [pendingTarget]);
   return (
     <div className="antialiased">
+      <ThreeBackground />
       <Nav
         active={active}
         setActive={setActive}
         setPendingTarget={setPendingTarget}
       />
       <main
-        className="mx-auto flex min-h-screen w-full max-w-4xl flex-col gap-32
+        className="mx-auto flex min-h-screen w-full max-w-4xl flex-col gap-0
           px-6 pt-36 pb-24 sm:pt-40"
       >
         <Home />
         <Skills />
         <Experience />
+        <About />
         <Contact />
       </main>
       <Footer />

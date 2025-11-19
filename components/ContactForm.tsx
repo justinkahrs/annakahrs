@@ -122,18 +122,24 @@ function ContactForm() {
             />
           </div>
           <div className="flex flex-col gap-2 sm:col-span-2">
+            {/* SINGLE SECONDARY BUTTON — MATCHES HOME.TSX */}
+          <div className="mt-12 flex justify-center">
             <button
               type="submit"
-              disabled={!isFormValid}
-              className={`bg-zinc-900 px-4 py-3 text-sm font-medium text-white
-                transition ${
-                  isFormValid
-                    ? "hover:bg-zinc-800"
-                    : "cursor-not-allowed opacity-50"
-                }`}
+              className="
+                w-44 rounded-full border border-[var(--white)] bg-transparent
+                px-5 py-3 text-sm font-semibold uppercase tracking-wide
+                text-[var(--foreground)] transition cursor-pointer
+                hover:bg-[var(--secondary-light)] hover:text-white
+              "
+              style={{
+                ["--secondary-light"]: "rgba(71, 85, 105, 0.35)",
+              }}
             >
-              {status === "loading" ? "Sending..." : "Send"}
+              Send Message
             </button>
+          </div>
+
             {status === "error" && (
               <p className="text-sm text-red-400">
                 {errorMsg || "Something went wrong."}

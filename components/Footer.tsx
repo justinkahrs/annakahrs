@@ -24,7 +24,7 @@ function Footer() {
           </a>
         </div>
         <p className="text-sm text-zinc-200">
-          © {year} Made thoughtfully by Anna Kahrs. All rights reserved.
+          © {year} Made thoughtfully by Anna Kahrs. See, users do scroll.
         </p>
       </div>
     </footer>
