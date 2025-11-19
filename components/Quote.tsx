@@ -187,7 +187,7 @@ export default function Quote() {
                   text-[var(--highlight)]
                 `}
               >
-                Work in practice
+                Work in Practice
               </motion.h2>
             </div>
 

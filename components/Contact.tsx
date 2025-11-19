@@ -52,7 +52,7 @@ function Contact() {
                 tracking-tight text-[var(--highlight)]
               `}
             >
-              Let's talk about you
+              Let's talk about you.
             </motion.h3>
           </div>
 
