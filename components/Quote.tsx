@@ -20,6 +20,7 @@ type RssItem = {
   description: string;
   pubDate: Date | null;
   image?: string;
+  categories?: string[];
 };
 
 export default function Quote() {
@@ -32,25 +33,25 @@ export default function Quote() {
         const res = await fetch("/api/rss", { cache: "no-store" });
         const xmlText = await res.text();
         const doc = new DOMParser().parseFromString(xmlText, "application/xml");
-
-        const parsed: RssItem[] = Array.from(
-          doc.querySelectorAll("item"),
-        ).map((it) => {
-          const title = it.querySelector("title")?.textContent?.trim() || "";
-          const link = it.querySelector("link")?.textContent?.trim() || "";
-          const description =
-            it.querySelector("description")?.textContent?.trim() || "";
-          const pubDateStr =
-            it.querySelector("pubDate")?.textContent?.trim() || "";
-          const pubDate = pubDateStr ? new Date(pubDateStr) : null;
-
-          const mediaEl =
-            it.querySelector("media\\:content") || it.querySelector("enclosure");
-          const image = mediaEl?.getAttribute("url") || undefined;
-
-          return { title, link, description, pubDate, image };
-        });
-
+        const parsed: RssItem[] = Array.from(doc.querySelectorAll("item")).map(
+          (it) => {
+            const title = it.querySelector("title")?.textContent?.trim() || "";
+            const link = it.querySelector("link")?.textContent?.trim() || "";
+            const description =
+              it.querySelector("description")?.textContent?.trim() || "";
+            const pubDateStr =
+              it.querySelector("pubDate")?.textContent?.trim() || "";
+            const pubDate = pubDateStr ? new Date(pubDateStr) : null;
+            const mediaEl =
+              it.querySelector("media\\:content") ||
+              it.querySelector("enclosure");
+            const image = mediaEl?.getAttribute("url") || undefined;
+            const categories = Array.from(it.querySelectorAll("category"))
+              .map((el) => el.textContent?.trim() || "")
+              .filter(Boolean);
+            return { title, link, description, pubDate, image, categories };
+          },
+        );
         parsed.sort((a, b) => {
           const ta = a.pubDate ? a.pubDate.getTime() : 0;
           const tb = b.pubDate ? b.pubDate.getTime() : 0;
@@ -267,61 +268,35 @@ export default function Quote() {
 
                       <div className="px-6 py-6 sm:px-8 sm:py-7">
                         <div className="mb-4 flex flex-wrap gap-2">
-                          <span
-                            className={`
-                              ${dmSans.className}
-                              inline-flex items-center rounded-full
-                              border border-white/30 bg-white/10
-                              px-3 py-1 text-[0.65rem] tracking-[0.18em]
-                              uppercase text-white/85
-                            `}
-                          >
-                            UX Research
-                          </span>
-                          <span
-                            className={`
-                              ${dmSans.className}
-                              inline-flex items-center rounded-full
-                              border border-white/20 bg-white/5
-                              px-3 py-1 text-[0.65rem] tracking-[0.18em]
-                              uppercase text-white/80
-                            `}
-                          >
-                            Content Strategy
-                          </span>
-                          <span
-                            className={`
-                              ${dmSans.className}
-                              inline-flex items-center rounded-full
-                              border border-white/20 bg-white/5
-                              px-3 py-1 text-[0.65rem] tracking-[0.18em]
-                              uppercase text-white/80
-                            `}
-                          >
-                            Information Architecture
-                          </span>
-                          <span
-                            className={`
-                              ${dmSans.className}
-                              inline-flex items-center rounded-full
-                              border border-white/20 bg-white/5
-                              px-3 py-1 text-[0.65rem] tracking-[0.18em]
-                              uppercase text-white/80
-                            `}
-                          >
-                            Interaction Design
-                          </span>
-                          <span
-                            className={`
-                              ${dmSans.className}
-                              inline-flex items-center rounded-full
-                              border border-white/20 bg-white/5
-                              px-3 py-1 text-[0.65rem] tracking-[0.18em]
-                              uppercase text-white/80
-                            `}
-                          >
-                            Facilitation
-                          </span>
+                          {featured?.categories &&
+                          featured.categories.length > 0 ? (
+                            featured.categories.map((category) => (
+                              <span
+                                key={category}
+                                className={`
+                                  ${dmSans.className}
+                                  inline-flex items-center rounded-full
+                                  border border-white/30 bg-white/10
+                                  px-3 py-1 text-[0.65rem] tracking-[0.18em]
+                                  uppercase text-white/85
+                                `}
+                              >
+                                {category}
+                              </span>
+                            ))
+                          ) : (
+                            <span
+                              className={`
+                                ${dmSans.className}
+                                inline-flex items-center rounded-full
+                                border border-white/30 bg-white/10
+                                px-3 py-1 text-[0.65rem] tracking-[0.18em]
+                                uppercase text-white/85
+                              `}
+                            >
+                              Case Study
+                            </span>
+                          )}
                         </div>
 
                         <h3
