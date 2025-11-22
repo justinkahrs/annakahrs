@@ -18,7 +18,7 @@ export async function POST(req: Request) {
       );
     }
     const makeRes = await fetch(
-      "https://hook.us2.make.com/tgusw1qe2wkvisr54q5voaqeyb1o01q7",
+      "https://hook.us2.make.com/50p314l2xljo2sg72j6tmg2p4utqlz2i",
       {
         method: "POST",
         headers: {
