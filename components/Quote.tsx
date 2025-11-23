@@ -86,7 +86,7 @@ export default function Quote() {
       />
 
       {/* RECOGNIZED FOR EXCELLENCE – full-bleed band at very top */}
-      <div className="relative z-10 -mx-6 bg-[#f2e7ff] px-6 py-32 sm:-mx-12 sm:px-12 sm:py-40">
+      <div className="relative z-10 -mx-6 bg-[#f2e7ff] px-6 py-32 sm:-mx-12 sm:px-12 sm:py-40" id="projects">
         <div className="mx-auto flex max-w-4xl flex-col items-center justify-center gap-10 sm:flex-row">
           {/* Badge */}
           <img
@@ -146,7 +146,7 @@ export default function Quote() {
       </div>
 
       <div
-        id="projects"
+        
         className="relative mx-auto mt-40 max-w-4xl" // 40px gap below award band
       >
         {/* HEADER + BLURB */}

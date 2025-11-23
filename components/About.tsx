@@ -93,7 +93,7 @@ function About() {
                 text-base sm:text-lg leading-relaxed text-zinc-600
               `}
             >
-              Now it means designing digital experiences that don’t make you think twice, in the good way. I care about the details a lot. The sort of lot you only notice when something feels unusually smooth. I like taking complex systems and giving them a shape people can actually move through. I like when a journey feels intuitive because every layer, the taxonomy, the content, the interface, is in conversation with the next.
+              Now it means designing digital experiences that don’t make you think twice. I care about the details a lot. The sort of lot you only notice when something feels unusually smooth. I like taking complex systems and giving them a shape people can actually move through. I like when a journey feels intuitive because every layer is in conversation with the next.
             </p>
 
             <p
@@ -153,13 +153,13 @@ function About() {
           mt-4 space-y-3 text-sm sm:text-base text-zinc-600
         `}
       >
-        <li>A well maintained Jira ritual</li>
+        <li>A thoughtful Jira ritual</li>
         <li>Digging in my garden</li>
-        <li>Well-written documentation</li>
+        <li>Well written documentation</li>
         <li>Finding the perfect emoji</li>
         <li>Categorizing things</li>
         <li>Knitting, crocheting, and sewing</li>
-        <li>Hunting down thrift-store gold</li>
+        <li>Hunting down thrift store gold</li>
       </ul>
     </div>
 

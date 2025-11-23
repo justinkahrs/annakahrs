@@ -27,7 +27,7 @@ function Experience() {
         "Lead design system–level work for the enterprise Drupal platform, defining reusable patterns and standards across multiple sites.",
         "Guide information architecture strategy through content audits, user needs analysis, and collaborative working sessions with clients, shaping structures that stay aligned across platforms.",
         "Plan and run usability tests, card sorting studies, and user interviews that reveal patterns, validate design choices, and inform IA and content decisions.",
-        "Design low- and mid-fidelity wireframes and iterate based on qualitative and quantitative feedback while maintaining WCAG 2.1 accessibility requirements.",
+        "Design low and mid-fidelity wireframes and iterate based on qualitative and quantitative feedback while maintaining WCAG 2.1 accessibility requirements.",
       ],
     },
     {
