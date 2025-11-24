@@ -34,21 +34,27 @@ function Experience() {
       role: "Service Designer",
       company: "University of California, San Francisco (UCSF)",
       period: "October 2018 - December 2023",
-      blurb:
-        "Collaborated with stakeholders to define goals, shape service concepts, and align on user needs. Led user research, created workflows and prototypes, facilitated workshops, and partnered with development and content teams to deliver scalable digital services.",
+      blurb: null,
       link: "https://www.ucsf.edu",
       location: "San Francisco, CA (Remote)",
-      details: null,
+      details: [
+        "Supported the Library’s digital and instructional teams by conducting user research to uncover needs of students, faculty, and researchers.",
+        "Created wireframes, interface concepts, and visual design assets used in web content, presentations, and instructional materials.",
+        "Helped clarify user needs and pain points through interviews, observations, and stakeholder conversations, informing improvements to library services and digital content.",
+        "Contributed to the broader service design efforts by providing user-centered evidence that shaped team conversations and priorities.",
+      ],
     },
     {
       role: "Information Architect UX Intern",
       company: "IU Studios – University Communications and Marketing",
       period: "August 2017 - March 2018",
-      blurb:
-        "Supported UX and IA efforts through interviews, analysis, synthesis, wireframes, prototypes, usability testing, and documentation. Helped refine UI assets and interface patterns.",
+      blurb: null,
       link: "https://iu.edu",
       location: "Bloomington, IN",
-      details: null,
+      details: ["Worked on information architecture for large university sites, shaping navigation, page flows, and content structure.",
+        "Supported workshops, stakeholder sessions, and user research that informed project direction and identified usability needs.",
+        "Built and refined site content using Cascade CMS, turning UX and IA decisions into production-ready pages.",
+      ],
     },
   ];
 
@@ -56,13 +62,8 @@ function Experience() {
     <section className="w-full">
       <div
         id="experience"
-        
-        className="
-          relative right-1/2 left-1/2 -mx-[50vw]
-          w-screen bg-white/5
-          border-y border-white/10
-          py-32 sm:py-40
-        "
+        className="relative right-1/2 left-1/2 -mx-[50vw] w-screen bg-white/5
+          border-y border-white/10 py-32 sm:py-40"
       >
         <div className="mx-auto max-w-4xl px-6 sm:px-12">
           {/* HEADER — Professional ABOVE Experience */}
@@ -72,11 +73,8 @@ function Experience() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.6 }}
               transition={{ duration: 0.6 }}
-              className={`
-                ${dmSans.className}
-                mt-0 text-xs sm:text-sm uppercase tracking-[0.24em]
-                text-[var(--foreground)]/70
-              `}
+              className={` ${dmSans.className} mt-0 text-xs sm:text-sm uppercase
+                tracking-[0.24em] text-[var(--foreground)]/70 `}
             >
               Professional
             </motion.h3>
@@ -86,11 +84,8 @@ function Experience() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.6 }}
               transition={{ duration: 0.7, delay: 0.05 }}
-              className={`
-                ${playfair.className}
-                mt-3 text-5xl sm:text-6xl font-semibold tracking-tight
-                text-[var(--highlight)]
-              `}
+              className={` ${playfair.className} mt-3 text-5xl sm:text-6xl
+                font-semibold tracking-tight text-[var(--highlight)] `}
             >
               Experience
             </motion.h2>
@@ -101,19 +96,15 @@ function Experience() {
             <a
               href="/Anna_Kahrs_resume.pdf"
               download
-              className={`
-                ${dmSans.className}
-                inline-flex items-center justify-center gap-3
-                whitespace-nowrap
-                rounded-full bg-[var(--primary)] px-8 py-3
-                text-sm font-semibold uppercase tracking-wide text-white
-                shadow-sm transition
+              className={` ${dmSans.className} inline-flex items-center
+                justify-center gap-3 whitespace-nowrap rounded-full
+                bg-[var(--primary)] px-8 py-3 text-sm font-semibold uppercase
+                tracking-wide text-white shadow-sm transition
                 hover:bg-[var(--primary-hover)] hover:shadow-md
                 focus-visible:outline-none focus-visible:ring-2
                 focus-visible:ring-[var(--primary)]/40
-                focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)]
-                cursor-pointer
-              `}
+                focus-visible:ring-offset-2
+                focus-visible:ring-offset-[var(--background)] cursor-pointer `}
             >
               {/* original resume icon, forced white */}
               <svg
@@ -136,13 +127,20 @@ function Experience() {
           {/* TIMELINE */}
           <div className="relative mt-16 ml-6 mb-40">
             {/* vertical spine */}
-            <div className="pointer-events-none absolute left-[12px] top-0 bottom-0 w-[2px] bg-[var(--foreground)]/25" />
+            <div
+              className="pointer-events-none absolute left-[12px] top-0 bottom-0
+                w-[2px] bg-[var(--foreground)]/25"
+            />
 
             <ul className="space-y-16">
               {jobs.map((job, i) => (
                 <li key={i} className="relative">
                   {/* circle marker */}
-                  <div className="absolute left-0 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-[var(--highlight)] text-white shadow-sm">
+                  <div
+                    className="absolute left-0 top-0 flex h-6 w-6 items-center
+                      justify-center rounded-full bg-[var(--highlight)]
+                      text-white shadow-sm"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -159,44 +157,38 @@ function Experience() {
                   {/* content */}
                   <div className="ml-10">
                     <p
-                      className={`${dmSans.className} text-xs sm:text-sm text-[var(--foreground)]/70`}
+                      className={`${dmSans.className} text-xs sm:text-sm
+                      text-[var(--foreground)]/70`}
                     >
                       {job.period}
                     </p>
 
                     <h3
-                      className={`
-                        ${playfair.className}
-                        mt-1 text-xl sm:text-2xl font-semibold
-                        text-white
-                      `}
+                      className={` ${playfair.className} mt-1 text-xl
+                      sm:text-2xl font-semibold text-white `}
                     >
                       {job.role}
                     </h3>
 
                     <p
-                      className={`
-                        ${dmSans.className}
-                        mt-1 text-sm sm:text-base text-zinc-200
-                      `}
+                      className={` ${dmSans.className} mt-1 text-sm sm:text-base
+                      text-zinc-200 `}
                     >
                       <span className="text-zinc-200">at </span>
                       <a
                         href={job.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-medium text-[var(--highlight)] hover:underline"
+                        className="font-medium text-[var(--highlight)]
+                          hover:underline"
                       >
                         {job.company}
                       </a>
                     </p>
 
                     <p
-                      className={`
-                        ${dmSans.className}
-                        mt-1 text-xs sm:text-sm uppercase tracking-[0.14em]
-                        text-zinc-200
-                      `}
+                      className={` ${dmSans.className} mt-1 text-xs sm:text-sm
+                      uppercase tracking-[0.14em] text-zinc-200 `}
                     >
                       {job.location}
                     </p>
@@ -204,11 +196,8 @@ function Experience() {
                     {/* optional paragraph blurb */}
                     {job.blurb && (
                       <p
-                        className={`
-                          ${dmSans.className}
-                          mt-4 text-sm sm:text-base
-                          leading-relaxed text-zinc-200
-                        `}
+                        className={` ${dmSans.className} mt-4 text-sm
+                        sm:text-base leading-relaxed text-zinc-200 `}
                       >
                         {job.blurb}
                       </p>
@@ -217,11 +206,8 @@ function Experience() {
                     {/* optional bullet list */}
                     {job.details && (
                       <ul
-                        className={`
-                          ${dmSans.className}
-                          mt-4 ml-4 list-disc space-y-2
-                          text-sm sm:text-base text-zinc-200
-                        `}
+                        className={` ${dmSans.className} mt-4 ml-4 list-disc
+                        space-y-2 text-sm sm:text-base text-zinc-200 `}
                       >
                         {job.details.map((item, index) => (
                           <li key={index} className="leading-relaxed">

@@ -150,9 +150,7 @@ export default function Quote() {
         </div>
       </div>
 
-      <div
-        className="relative mx-auto mt-40 max-w-4xl" // 40px gap below award band
-      >
+      <div className="relative mx-auto mt-40 max-w-4xl">
         {/* HEADER + BLURB */}
         <div className="mx-auto mb-40 max-w-4xl">
           <div
@@ -230,7 +228,7 @@ export default function Quote() {
           </div>
         </div>
 
-        {/* FEATURED + PLACEHOLDERS GRID */}
+        {/* FEATURED + SECONDARY GRID */}
         <div className="mt-10">
           {loading ? (
             <div className="mt-20 flex justify-center">
@@ -322,6 +320,7 @@ export default function Quote() {
                   </a>
                 )}
               </div>
+
               {/* RIGHT: SECONDARY PROJECTS / PLACEHOLDERS */}
               <div className="flex h-full flex-col gap-4">
                 {[
@@ -330,6 +329,7 @@ export default function Quote() {
                   "More work coming",
                 ].map((fallbackTitle, index) => {
                   const item = secondary[index];
+
                   if (item) {
                     return (
                       <a
@@ -340,21 +340,41 @@ export default function Quote() {
                         className="block flex-1"
                       >
                         <article className="flex h-full flex-col rounded-[2rem] border border-white/25 bg-white/5 px-6 py-6 sm:px-8 sm:py-7 shadow-sm backdrop-blur-sm">
-                          <div
-                            className={`
-                              ${dmSans.className}
-                              inline-flex items-center rounded-full
-                              bg-white/10 px-3 py-1 text-[0.65rem] tracking-[0.2em]
-                              uppercase text-white/80
-                            `}
-                          >
-                            {(item.categories && item.categories[0]) ||
-                              "Case Study"}
+                          <div className="mb-4 flex flex-wrap gap-2">
+                            {item.categories && item.categories.length > 0 ? (
+                              item.categories.map((category) => (
+                                <span
+                                  key={category}
+                                  className={`
+                                    ${dmSans.className}
+                                    inline-flex items-center rounded-full
+                                    border border-white/30 bg-white/10
+                                    px-3 py-1 text-[0.65rem] tracking-[0.18em]
+                                    uppercase text-white/85
+                                  `}
+                                >
+                                  {category}
+                                </span>
+                              ))
+                            ) : (
+                              <span
+                                className={`
+                                  ${dmSans.className}
+                                  inline-flex items-center rounded-full
+                                  border border-white/30 bg-white/10
+                                  px-3 py-1 text-[0.65rem] tracking-[0.18em]
+                                  uppercase text-white/85
+                                `}
+                              >
+                                Case Study
+                              </span>
+                            )}
                           </div>
+
                           <h3
                             className={`
                               ${playfair.className}
-                              mt-4 text-xl sm:text-2xl font-semibold text-white
+                              mt-0 text-xl sm:text-2xl font-semibold text-white
                             `}
                           >
                             {item.title}
@@ -381,6 +401,8 @@ export default function Quote() {
                       </a>
                     );
                   }
+
+                  // Fallback "Coming soon" cards
                   return (
                     <div
                       key={fallbackTitle}
@@ -390,8 +412,9 @@ export default function Quote() {
                         className={`
                           ${dmSans.className}
                           inline-flex items-center rounded-full
-                          bg-white/10 px-3 py-1 text-[0.65rem] tracking-[0.2em]
-                          uppercase text-white/80
+                          border border-white/30 bg-white/10
+                          px-3 py-1 text-[0.65rem] tracking-[0.18em]
+                          uppercase text-white/85
                         `}
                       >
                         Coming soon
