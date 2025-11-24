@@ -63,11 +63,8 @@ function About() {
     <section className="scroll-mt-28">
       <div
         id="about"
-        className="
-          relative right-1/2 left-1/2 -mx-[50vw]
-          w-screen bg-white
-          px-10 py-32 sm:px-14 sm:py-40
-        "
+        className="relative right-1/2 left-1/2 -mx-[50vw] w-screen bg-white
+          px-10 py-32 sm:px-14 sm:py-40"
       >
         <div className="mx-auto max-w-3xl">
           {/* TOP: PHOTO + HEADING */}
@@ -88,11 +85,8 @@ function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 0.6 }}
-                className={`
-                  ${dmSans.className}
-                  mt-0 text-xs sm:text-sm uppercase tracking-[0.24em]
-                  text-zinc-500
-                `}
+                className={` ${dmSans.className} mt-0 text-xs sm:text-sm
+                  uppercase tracking-[0.24em] text-zinc-500 `}
               >
                 ABOUT
               </motion.h3>
@@ -102,11 +96,9 @@ function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 0.7, delay: 0.05 }}
-                className={`
-                  ${playfair.className}
-                  mt-1 text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight
-                  text-[var(--highlight)]
-                `}
+                className={` ${playfair.className} mt-1 text-4xl sm:text-5xl
+                  md:text-6xl font-semibold tracking-tight
+                  text-[var(--highlight)] `}
               >
                 This is the part where I talk about myself.
               </motion.h2>
@@ -122,10 +114,8 @@ function About() {
             className="mt-16 space-y-6"
           >
             <p
-              className={`
-                ${dmSans.className}
-                text-base sm:text-lg leading-relaxed text-zinc-600
-              `}
+              className={` ${dmSans.className} text-base sm:text-lg
+                leading-relaxed text-zinc-600 `}
             >
               I have always been drawn to the things most people never notice:
               the logic under the surface, the patterns that quietly guide you,
@@ -136,10 +126,8 @@ function About() {
             </p>
 
             <p
-              className={`
-                ${dmSans.className}
-                text-base sm:text-lg leading-relaxed text-zinc-600
-              `}
+              className={` ${dmSans.className} text-base sm:text-lg
+                leading-relaxed text-zinc-600 `}
             >
               Now it means designing digital experiences that do not make you
               think twice. I care about the details a lot. The sort of lot you
@@ -150,10 +138,8 @@ function About() {
             </p>
 
             <p
-              className={`
-                ${dmSans.className}
-                text-base sm:text-lg leading-relaxed text-zinc-600
-              `}
+              className={` ${dmSans.className} text-base sm:text-lg
+                leading-relaxed text-zinc-600 `}
             >
               If something feels polished, it is because I fussed over it until
               it could stand on its own.
@@ -162,23 +148,22 @@ function About() {
 
           {/* TWO-COLUMN DETAILS - centered like Skills */}
           <div className="mt-24 flex justify-center">
-            <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 max-w-3xl sm:max-w-4xl text-center">
+            <div
+              className="grid grid-cols-1 gap-12 sm:grid-cols-2 max-w-3xl
+                sm:max-w-4xl text-center"
+            >
               {/* HOT TAKES */}
               <div className="flex flex-col items-center">
                 <h4
-                  className={`
-                    ${playfair.className}
-                    text-xl sm:text-2xl font-semibold text-[var(--highlight)]
-                  `}
+                  className={` ${playfair.className} text-xl sm:text-2xl
+                    font-semibold text-[var(--highlight)] `}
                 >
                   UX opinions I will defend, politely:
                 </h4>
                 <div className="mt-3 h-[2px] w-10 bg-[var(--highlight)]/60" />
                 <ul
-                  className={`
-                    ${dmSans.className}
-                    mt-4 space-y-3 text-sm sm:text-base text-zinc-600
-                  `}
+                  className={` ${dmSans.className} mt-4 space-y-3 text-sm
+                    sm:text-base text-zinc-600 `}
                 >
                   <li>Clear is better than clever</li>
                   <li>“Learn more” is lazy</li>
@@ -192,19 +177,15 @@ function About() {
               {/* ENJOY LIST */}
               <div className="flex flex-col items-center">
                 <h4
-                  className={`
-                    ${playfair.className}
-                    text-xl sm:text-2xl font-semibold text-[var(--highlight)]
-                  `}
+                  className={` ${playfair.className} text-xl sm:text-2xl
+                    font-semibold text-[var(--highlight)] `}
                 >
                   Things I enjoy:
                 </h4>
                 <div className="mt-3 h-[2px] w-10 bg-[var(--highlight)]/60" />
                 <ul
-                  className={`
-                    ${dmSans.className}
-                    mt-4 space-y-3 text-sm sm:text-base text-zinc-600
-                  `}
+                  className={` ${dmSans.className} mt-4 space-y-3 text-sm
+                    sm:text-base text-zinc-600 `}
                 >
                   <li>A thoughtful Jira ritual</li>
                   <li>Digging in my garden</li>
@@ -226,11 +207,8 @@ function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 0.5 }}
-                className={`
-                  ${dmSans.className}
-                  text-xs sm:text-sm uppercase tracking-[0.24em]
-                  text-zinc-500
-                `}
+                className={` ${dmSans.className} text-xs sm:text-sm uppercase
+                  tracking-[0.24em] text-zinc-500 `}
               >
                 WHAT OTHERS SAY
               </motion.h3>
@@ -240,11 +218,8 @@ function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 0.6, delay: 0.05 }}
-                className={`
-                  ${playfair.className}
-                  mt-3 text-3xl sm:text-4xl font-semibold tracking-tight
-                  text-[var(--highlight)]
-                `}
+                className={` ${playfair.className} mt-3 text-3xl sm:text-4xl
+                  font-semibold tracking-tight text-[var(--highlight)] `}
               >
                 Voices about my work
               </motion.h2>
@@ -254,11 +229,8 @@ function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 0.7, delay: 0.1 }}
-                className={`
-                  ${dmSans.className}
-                  mx-auto mt-4 max-w-2xl text-sm sm:text-base
-                  leading-relaxed text-zinc-600
-                `}
+                className={` ${dmSans.className} mx-auto mt-4 max-w-2xl text-sm
+                  sm:text-base leading-relaxed text-zinc-600 `}
               >
                 A few things collaborators and leaders have shared after working
                 together on research, information architecture, and product
@@ -273,37 +245,23 @@ function About() {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
-                className="
-                  w-full rounded-4xl border border-[var(--highlight)] bg-zinc-50
-                  px-6 py-6 sm:px-7 sm:py-7 shadow-sm
-                  flex flex-col justify-between
-                "
+                className="w-full rounded-4xl border border-[var(--highlight)]
+                  bg-zinc-50 px-6 py-6 sm:px-7 sm:py-7 shadow-sm flex flex-col
+                  justify-between"
               >
                 <p
-                  className={`
-                    ${dmSans.className}
-                    text-sm sm:text-base leading-relaxed text-zinc-800
-                  `}
+                  className={` ${dmSans.className} text-sm sm:text-base
+                    leading-relaxed text-zinc-800 `}
                 >
                   “{testimonials[activeIndex].quote}”
                 </p>
 
                 <div className="mt-5">
                   <p
-                    className={`
-                      ${playfair.className}
-                      text-sm sm:text-base font-semibold text-zinc-900
-                    `}
+                    className={` ${playfair.className} text-sm sm:text-base
+                      font-semibold text-zinc-900 `}
                   >
                     {testimonials[activeIndex].name}
-                  </p>
-                  <p
-                    className={`
-                      ${dmSans.className}
-                      text-xs sm:text-sm text-zinc-600
-                    `}
-                  >
-                    {testimonials[activeIndex].role}
                   </p>
                 </div>
               </motion.article>
@@ -317,14 +275,11 @@ function About() {
                   type="button"
                   onClick={() => setActiveIndex(index)}
                   aria-label={`Go to testimonial ${index + 1}`}
-                  className={`
-                    h-1.5 w-1.5 rounded-full transition
-                    ${
-                      index === activeIndex
-                        ? "bg-[var(--highlight)]"
-                        : "bg-zinc-300"
-                    }
-                  `}
+                  className={` h-1.5 w-1.5 rounded-full transition ${
+                    index === activeIndex
+                      ? "bg-[var(--highlight)]"
+                      : "bg-zinc-300"
+                  } `}
                 />
               ))}
             </div>
