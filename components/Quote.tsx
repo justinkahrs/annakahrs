@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Playfair_Display, DM_Sans } from "next/font/google";
+import DicebearThumbnail from "./DiceBear";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -70,6 +71,7 @@ export default function Quote() {
   }, []);
 
   const featured = items[0];
+  const secondary = items.slice(1, 4);
 
   return (
     <section
@@ -86,7 +88,10 @@ export default function Quote() {
       />
 
       {/* RECOGNIZED FOR EXCELLENCE – full-bleed band at very top */}
-      <div className="relative z-10 -mx-6 bg-[#f2e7ff] px-6 py-32 sm:-mx-12 sm:px-12 sm:py-40" id="projects">
+      <div
+        className="relative z-10 -mx-6 bg-[#f2e7ff] px-6 py-32 sm:-mx-12 sm:px-12 sm:py-40"
+        id="projects"
+      >
         <div className="mx-auto flex max-w-4xl flex-col items-center justify-center gap-10 sm:flex-row">
           {/* Badge */}
           <img
@@ -146,7 +151,6 @@ export default function Quote() {
       </div>
 
       <div
-        
         className="relative mx-auto mt-40 max-w-4xl" // 40px gap below award band
       >
         {/* HEADER + BLURB */}
@@ -256,15 +260,12 @@ export default function Quote() {
                         shadow-sm backdrop-blur-sm
                       "
                     >
-                      {featured.image && (
-                        <div className="relative w-full overflow-hidden">
-                          <img
-                            src={featured.image}
-                            alt={featured.title}
-                            className="h-56 w-full object-cover sm:h-64"
-                          />
-                        </div>
-                      )}
+                      <div className="relative w-full overflow-hidden">
+                        <DicebearThumbnail
+                          seed={featured.title || featured.link || "featured"}
+                          size={500}
+                        />
+                      </div>
 
                       <div className="px-6 py-6 sm:px-8 sm:py-7">
                         <div className="mb-4 flex flex-wrap gap-2">
@@ -321,59 +322,109 @@ export default function Quote() {
                   </a>
                 )}
               </div>
-
-              {/* RIGHT: PLACEHOLDERS */}
+              {/* RIGHT: SECONDARY PROJECTS / PLACEHOLDERS */}
               <div className="flex h-full flex-col gap-4">
                 {[
                   "Next case study",
                   "Research in progress",
                   "More work coming",
-                ].map((title) => (
-                  <div
-                    key={title}
-                    className="flex-1 rounded-[2rem] border border-white/25 bg-white/5 px-6 py-6 sm:px-8 sm:py-7 shadow-sm backdrop-blur-sm"
-                  >
+                ].map((fallbackTitle, index) => {
+                  const item = secondary[index];
+                  if (item) {
+                    return (
+                      <a
+                        key={item.link || item.title || fallbackTitle}
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block flex-1"
+                      >
+                        <article className="flex h-full flex-col rounded-[2rem] border border-white/25 bg-white/5 px-6 py-6 sm:px-8 sm:py-7 shadow-sm backdrop-blur-sm">
+                          <div
+                            className={`
+                              ${dmSans.className}
+                              inline-flex items-center rounded-full
+                              bg-white/10 px-3 py-1 text-[0.65rem] tracking-[0.2em]
+                              uppercase text-white/80
+                            `}
+                          >
+                            {(item.categories && item.categories[0]) ||
+                              "Case Study"}
+                          </div>
+                          <h3
+                            className={`
+                              ${playfair.className}
+                              mt-4 text-xl sm:text-2xl font-semibold text-white
+                            `}
+                          >
+                            {item.title}
+                          </h3>
+                          <p
+                            className={`
+                              ${dmSans.className}
+                              mt-3 text-sm sm:text-base leading-relaxed text-white/80
+                            `}
+                          >
+                            {item.description}
+                          </p>
+                          {item.pubDate && (
+                            <p
+                              className={`
+                                ${dmSans.className}
+                                mt-4 text-xs tracking-[0.18em] uppercase text-white/60
+                              `}
+                            >
+                              {item.pubDate.toLocaleDateString()}
+                            </p>
+                          )}
+                        </article>
+                      </a>
+                    );
+                  }
+                  return (
                     <div
-                      className={`
-                        ${dmSans.className}
-                        inline-flex items-center rounded-full
-                        bg-white/10 px-3 py-1 text-[0.65rem] tracking-[0.2em]
-                        uppercase text-white/80
-                      `}
+                      key={fallbackTitle}
+                      className="flex-1 rounded-[2rem] border border-white/25 bg-white/5 px-6 py-6 sm:px-8 sm:py-7 shadow-sm backdrop-blur-sm"
                     >
-                      Coming soon
+                      <div
+                        className={`
+                          ${dmSans.className}
+                          inline-flex items-center rounded-full
+                          bg-white/10 px-3 py-1 text-[0.65rem] tracking-[0.2em]
+                          uppercase text-white/80
+                        `}
+                      >
+                        Coming soon
+                      </div>
+                      <h3
+                        className={`
+                          ${playfair.className}
+                          mt-4 text-xl sm:text-2xl font-semibold text-white
+                        `}
+                      >
+                        {fallbackTitle}
+                      </h3>
+                      <p
+                        className={`
+                          ${dmSans.className}
+                          mt-3 text-sm sm:text-base leading-relaxed text-white/80
+                        `}
+                      >
+                        I&apos;m currently shaping this story capturing the
+                        research, decisions, and outcomes in a way that does the
+                        work justice.
+                      </p>
+                      <p
+                        className={`
+                          ${dmSans.className}
+                          mt-4 text-xs tracking-[0.18em] uppercase text-white/60
+                        `}
+                      >
+                        Case study in progress
+                      </p>
                     </div>
-
-                    <h3
-                      className={`
-                        ${playfair.className}
-                        mt-4 text-xl sm:text-2xl font-semibold text-white
-                      `}
-                    >
-                      {title}
-                    </h3>
-
-                    <p
-                      className={`
-                        ${dmSans.className}
-                        mt-3 text-sm sm:text-base leading-relaxed text-white/80
-                      `}
-                    >
-                      I&apos;m currently shaping this story capturing the
-                      research, decisions, and outcomes in a way that does the
-                      work justice.
-                    </p>
-
-                    <p
-                      className={`
-                        ${dmSans.className}
-                        mt-4 text-xs tracking-[0.18em] uppercase text-white/60
-                      `}
-                    >
-                      Case study in progress
-                    </p>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           )}
