@@ -17,9 +17,9 @@
 
   --inactive: #94a3b8;
 
-  --gradient-a: #3b82f6;  /* lighter cool blue */
-  --gradient-b: #a855f7;  /* lighter violet */
-  --gradient-c: #f472b6;  /* lighter pink */
+  --gradient-a: #3b82f6; /* lighter cool blue */
+  --gradient-b: #a855f7; /* lighter violet */
+  --gradient-c: #f472b6; /* lighter pink */
 }
 
 body {
