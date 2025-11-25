@@ -51,7 +51,8 @@ function Experience() {
       blurb: null,
       link: "https://iu.edu",
       location: "Bloomington, IN",
-      details: ["Worked on information architecture for large university sites, shaping navigation, page flows, and content structure.",
+      details: [
+        "Worked on information architecture for large university sites, shaping navigation, page flows, and content structure.",
         "Supported workshops, stakeholder sessions, and user research that informed project direction and identified usability needs.",
         "Built and refined site content using Cascade CMS, turning UX and IA decisions into production-ready pages.",
       ],
@@ -96,28 +97,30 @@ function Experience() {
             <a
               href="/Anna_Kahrs_resume.pdf"
               download
-              className={` ${dmSans.className} inline-flex items-center
+              className={`${dmSans.className} inline-flex items-center
                 justify-center gap-3 whitespace-nowrap rounded-full
                 bg-[var(--primary)] px-8 py-3 text-sm font-semibold uppercase
-                tracking-wide text-white shadow-sm transition
-                hover:bg-[var(--primary-hover)] hover:shadow-md
+                tracking-wide text-white
+                hover:bg-[var(--primary-hover)]
                 focus-visible:outline-none focus-visible:ring-2
                 focus-visible:ring-[var(--primary)]/40
                 focus-visible:ring-offset-2
-                focus-visible:ring-offset-[var(--background)] cursor-pointer `}
+                focus-visible:ring-offset-[var(--background)] cursor-pointer`}
             >
-              {/* original resume icon, forced white */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 400 500"
-                className="h-4 w-4 shrink-0"
-                fill="white"
-                stroke="white"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="h-5 w-5 shrink-0"
+                aria-hidden="true"
               >
-                <g>
-                  <path d="M358.8,272.2v70.3c0,1.4-0.2,2.7-0.5,3.9v0c0,0,0,0,0,0c-1.4,6.9-7.5,12.1-14.7,12.1H56.3c-7.7,0-14.1-5.9-14.9-13.4c-0.2-0.9-0.2-1.7-0.2-2.7v-70.3c0-8.3,6.8-15,15-15c4.1,0,7.9,1.7,10.6,4.4c2.7,2.7,4.4,6.5,4.4,10.6v56.3h257.7v-56.3c0-8.3,6.8-15,15-15c4.1,0,7.9,1.7,10.6,4.4C357.1,264.3,358.8,268.1,358.8,272.2z" />
-                  <path d="M286.5,201.8l-73.7,73.7c-0.1,0.2-0.3,0.3-0.4,0.4c-2.7,2.7-6.2,4.4-9.7,4.9c-0.3,0-0.6,0.1-0.9,0.1c-0.6,0.1-1.2,0.1-1.8,0.1h0l-1.7-0.1c-0.3,0-0.6-0.1-0.9-0.1c-3.6-0.5-7-2.2-9.7-4.9c-0.1-0.1-0.3-0.3-0.4-0.4l-73.7-73.7c-3.4-3.4-5.1-7.9-5.1-12.4c0-4.5,1.7-9,5.1-12.4c6.8-6.8,17.9-6.8,24.8,0l44.3,44.3V59c0-9.6,7.9-17.5,17.5-17.5c4.8,0,9.2,2,12.4,5.1c3.2,3.2,5.1,7.5,5.1,12.4v162.3l44.3-44.3c6.8-6.8,17.9-6.8,24.8,0C293.3,183.9,293.3,195,286.5,201.8z" />
-                </g>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
+                />
               </svg>
 
               <span>Download Resume (PDF)</span>
@@ -143,13 +146,17 @@ function Experience() {
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
                       viewBox="0 0 24 24"
-                      className="h-3.5 w-3.5"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="h-4 w-4"
                       aria-hidden="true"
                     >
                       <path
-                        d="M9 5V4a3 3 0 0 1 3-3h0a3 3 0 0 1 3 3v1h3a2 2 0 0 1 2 2v4h-2v6a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-6H3V7a2 2 0 0 1 2-2h3Zm2 0h4V4a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v1Z"
-                        fill="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z"
                       />
                     </svg>
                   </div>
@@ -179,10 +186,25 @@ function Experience() {
                         href={job.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-medium text-[var(--highlight)]
-                          hover:underline"
+                        className="inline-flex items-center gap-1 font-medium
+                          text-[var(--highlight)] hover:underline"
                       >
                         {job.company}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="h-4 w-4 opacity-100"
+                          aria-hidden="true"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                          />
+                        </svg>
                       </a>
                     </p>
 

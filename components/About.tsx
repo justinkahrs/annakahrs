@@ -121,7 +121,7 @@ function About() {
               the logic under the surface, the patterns that quietly guide you,
               the hidden decisions that make something feel “right” without
               announcing themselves. In another life, that meant memorizing
-              art-movement timelines and happily losing afternoons in dusty
+              art movement timelines and happily losing afternoons in dusty
               archives.
             </p>
 
