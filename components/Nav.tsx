@@ -26,6 +26,7 @@ const NAV: NavItem[] = [
   { label: "Projects", href: "#projects" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
+  { label: "Blog", href: "https://blog.annakahrs.com" },
 ];
 
 interface NavProps {
@@ -44,7 +45,10 @@ function Nav({ active, setActive, setPendingTarget }: NavProps) {
     }
   }, [open]);
 
-  const handleInternalNavClick = (href: string) => {
+  const handleNavClick = (href: string) => {
+    if (href.startsWith('http')){
+      return window.open(href, '_blank');
+    }
     const id = href.replace("#", "");
     const el =
       typeof document !== "undefined" ? document.getElementById(id) : null;
@@ -100,10 +104,27 @@ function Nav({ active, setActive, setPendingTarget }: NavProps) {
                 type="button"
                 className="relative px-4 py-2 text-xs sm:text-sm font-semibold
                   text-white/90 hover:text-(--highlight) transition"
-                onClick={() => handleInternalNavClick(item.href)}
+                onClick={() => handleNavClick(item.href)}
               >
-                <span className="relative inline-block">
+                <span className="relative inline-flex items-center gap-1">
                   {item.label}
+                  {item.href.startsWith("http") && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="h-4 w-4 opacity-100"
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                      />
+                    </svg>
+                  )}
                   {active === item.href && (
                     <motion.div
                       className="absolute -bottom-1 left-0 h-0.5 w-full
@@ -185,10 +206,27 @@ function Nav({ active, setActive, setPendingTarget }: NavProps) {
                     <button
                       type="button"
                       className="uppercase text-lg font-semibold text-white/90
-                        hover:text-(--highlight) transition p-8"
-                      onClick={() => handleInternalNavClick(item.href)}
+                        hover:text-(--highlight) transition p-8 flex items-center gap-2"
+                      onClick={() => handleNavClick(item.href)}
                     >
                       {item.label}
+                      {item.href.startsWith("http") && (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="h-4 w-4 opacity-100"
+                          aria-hidden="true"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                          />
+                        </svg>
+                      )}
                     </button>
                   </li>
                 ))}
