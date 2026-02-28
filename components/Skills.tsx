@@ -171,7 +171,6 @@ function Skills() {
                 <TechMarquee
                   logos={[
                     "adobe",
-                    "chat-gpt",
                     "figma",
                     "drupal",
                     { src: "github", scale: 0.9 },
