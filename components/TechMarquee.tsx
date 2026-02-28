@@ -1,68 +1,84 @@
-import { useRef, useState, useLayoutEffect } from "react";
+"use client";
+
 import { motion } from "motion/react";
 
 type TechMarqueeProps = {
-  logos?: string[];
+  logos?: Array<string | { src: string; scale?: number }>;
   speedSeconds?: number;
   size?: number;
 };
+
 export default function TechMarquee({
   logos = [],
   speedSeconds = 20,
   size = 64,
 }: TechMarqueeProps) {
-  const baseRef = useRef<HTMLDivElement>(null);
-  const [repeatCount, setRepeatCount] = useState(2);
-
-  useLayoutEffect(() => {
-    if (!baseRef.current) return;
-
-    const baseWidth = baseRef.current.offsetWidth;
-    const screenWidth = window.innerWidth;
-
-    // how many copies needed to fill full width *plus* one extra for seamless looping
-    const needed = Math.ceil(screenWidth / baseWidth) + 2;
-
-    setRepeatCount(needed);
-  }, [logos, size]);
+  const getLogoSrc = (src: string) => {
+    if (src.startsWith("http://") || src.startsWith("https://")) return src;
+    return src.includes(".") ? `/${src}` : `/${src}.svg`;
+  };
 
   return (
     <div
-      className="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-hidden
-        py-6"
+      className="relative left-1/2 right-1/2 -mx-[50vw] -my-10 w-screen overflow-hidden py-0"
+      style={{
+        WebkitMaskImage:
+          "linear-gradient(to right, transparent 0%, transparent 8%, black 30%, black 70%, transparent 92%, transparent 100%)",
+        maskImage:
+          "linear-gradient(to right, transparent 0%, transparent 8%, black 30%, black 70%, transparent 92%, transparent 100%)",
+      }}
     >
       <motion.div
-        className="flex"
-        initial={{ x: 0 }}
-        animate={{ x: "-100%" }}
+        className="flex w-max will-change-transform"
+        initial={{ x: "0%" }}
+        animate={{ x: "-50%" }}
         transition={{
           duration: speedSeconds,
           ease: "linear",
           repeat: Infinity,
+          repeatType: "loop",
         }}
       >
-        {/* dynamic clones */}
-        {Array.from({ length: repeatCount }).map((_, i) => (
-          <div
-            key={i}
-            ref={i === 0 ? baseRef : undefined}
-            className="flex items-center gap-10 mr-10"
-          >
-            {logos.map((name) => (
-              <div
-                key={`${i}-${name}`}
-                style={{ width: size, height: size }}
-                className="flex items-center justify-center"
-              >
-                <img
-                  src={`/${name}.svg`}
-                  alt={name}
-                  className="object-contain max-w-full max-h-full"
-                />
-              </div>
-            ))}
-          </div>
-        ))}
+        <div className="flex items-center gap-20 pr-20 shrink-0">
+          {logos.map((logo, index) => {
+            const src = typeof logo === "string" ? logo : logo.src;
+            const scale = typeof logo === "string" ? 1 : (logo.scale ?? 1);
+            return (
+            <div
+              key={`set-a-${src}-${index}`}
+              style={{ width: size * scale, height: size * scale }}
+              className="flex items-center justify-center"
+            >
+              <img
+                src={getLogoSrc(src)}
+                alt={src}
+                className="object-contain max-w-full max-h-full"
+              />
+            </div>
+            );
+          })}
+        </div>
+
+        <div className="flex items-center gap-20 pr-20 shrink-0" aria-hidden="true">
+          {logos.map((logo, index) => {
+            const src = typeof logo === "string" ? logo : logo.src;
+            const scale = typeof logo === "string" ? 1 : (logo.scale ?? 1);
+            return (
+            <div
+              key={`set-b-${src}-${index}`}
+              style={{ width: size * scale, height: size * scale }}
+              className="flex items-center justify-center"
+            >
+              <img
+                src={getLogoSrc(src)}
+                alt=""
+                className="object-contain max-w-full max-h-full"
+              />
+            </div>
+            );
+          })}
+        </div>
+
       </motion.div>
     </div>
   );

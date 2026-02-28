@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import TechMarquee from "./TechMarquee";
 import { Playfair_Display, DM_Sans } from "next/font/google";
@@ -45,20 +44,9 @@ const SKILL_SECTIONS = [
 ];
 
 function Skills() {
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const doc = document.documentElement;
-      const total = doc.scrollHeight - doc.clientHeight;
-      const value = total > 0 ? (window.scrollY / total) * 100 : 0;
-      setProgress(value);
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const skillCards = SKILL_SECTIONS.filter(
+    (section) => section.title !== "Relevant Tools",
+  );
 
   return (
     <section className="scroll-mt-28">
@@ -141,98 +129,76 @@ function Skills() {
             </div>
           </div>
 
-          {/* SKILLS GRID */}
-          <div className="mx-auto mt-12 max-w-4xl">
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-              {SKILL_SECTIONS.map((section) => (
-                <div
+          {/* SKILL CARDS */}
+          <div className="mx-auto mt-10 mb-40 max-w-6xl">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {skillCards.map((section) => (
+                <article
                   key={section.title}
-                  className={`
-                    relative flex h-full flex-col items-center text-center
-                    rounded-[2rem] bg-white
-                    border-1 border-[var(--highlight)]/80
-                    px-6 py-7 sm:px-7 sm:py-8
-                    shadow-sm
-                  `}
+                  className="flex min-h-[320px] flex-col border border-zinc-300 bg-transparent px-7 py-8 sm:px-8 sm:py-9"
                 >
                   <h3
                     className={`
-                      ${playfair.className}
-                      text-lg sm:text-xl font-semibold tracking-tight
-                      text-[var(--highlight)]
+                      ${dmSans.className}
+                      text-3xl font-semibold tracking-tight text-zinc-900
                     `}
                   >
                     {section.title}
                   </h3>
 
-                  <div className="mt-3 h-[2px] w-10 bg-[var(--highlight)]/60" />
+                  <div className="mt-7 border-t border-dotted border-zinc-300" />
 
-                  <ul
-                    className={`
-                      ${dmSans.className}
-                      mt-4 flex flex-col items-center gap-2.5
-                      text-sm sm:text-base text-[var(--primary)]/85
-                    `}
-                  >
-                    {section.items.map((item) => (
-                      <li key={item} className="leading-snug">
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                  <div className="mt-auto pt-16">
+                    <p
+                      className={`
+                        ${dmSans.className}
+                        text-lg leading-relaxed text-zinc-700
+                      `}
+                    >
+                      {section.items.join(" • ")}
+                    </p>
+                  </div>
+                </article>
               ))}
+              </div>
             </div>
           </div>
 
           {/* MARQUEE — Tools */}
-          <div className="mx-auto mt-6 mb-40 max-w-4xl">
-            <div
-              className={`
-                relative overflow-hidden rounded-[2rem]
-                bg-white
-                border-1 border-[var(--highlight)]/80
-                px-6 py-10 shadow-sm
-              `}
-            >
-              <div className="relative flex flex-col items-center text-center">
-                <h3
-                  className={`
-                    ${playfair.className}
-                    text-lg sm:text-xl font-semibold tracking-tight
-                    text-[var(--highlight)]
-                  `}
-                >
-                  Tools I Use
-                </h3>
-                <div className="mt-3 h-[2px] w-10 bg-[var(--highlight)]/60" />
-
-                <div className="mt-6 w-full">
-                  <TechMarquee
-                    logos={[
-                      "adobe",
-                      "canva",
-                      "chat-gpt",
-                      "figma",
-                      "github",
-                      "jira",
-                      "loom",
-                      "miro",
-                      "optimalworkshop",
-                      "qualtrics",
-                      "siteimprove",
-                      "slack",
-                      "zendesk",
-                      "zoom",
-                    ]}
-                    speedSeconds={18}
-                    size={80}
-                  />
-                </div>
+          <div className="mt-12">
+            <div className="relative left-1/2 right-1/2 -mx-[50vw] mt-6 w-screen border-y border-[var(--highlight)]/45">
+              <div className="relative z-10">
+                <TechMarquee
+                  logos={[
+                    "adobe",
+                    "chat-gpt",
+                    "figma",
+                    "drupal",
+                    { src: "github", scale: 0.9 },
+                    {
+                      src: "https://upload.wikimedia.org/wikipedia/commons/5/50/Google_Antigravity_Logo.svg",
+                      scale: 2.0,
+                    },
+                    {
+                      src: "https://commons.wikimedia.org/wiki/Special:FilePath/N8n-logo-new.svg",
+                      scale: 1.7,
+                    },
+                    { src: "jira", scale: 1.35 },
+                    "loom",
+                    "make",
+                    "miro",
+                    "notion",
+                    "optimalworkshop",
+                    { src: "qualtrics", scale: 1.6 },
+                    { src: "siteimprove", scale: 1.15 },
+                    "zendesk",
+                  ]}
+                  speedSeconds={42}
+                  size={108}
+                />
               </div>
             </div>
           </div>
-        </div>
       </div>
     </section>
   );
