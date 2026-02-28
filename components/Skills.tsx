@@ -84,7 +84,7 @@ function Skills() {
               transition={{ duration: 0.6 }}
               className={`
                 ${playfair.className}
-                mt-3 text-5xl sm:text-6xl font-semibold tracking-tight
+                mt-3 text-6xl sm:text-8xl font-semibold tracking-tight
                 text-[var(--highlight)]
               `}
             >
@@ -98,7 +98,7 @@ function Skills() {
               transition={{ duration: 0.7, delay: 0.05 }}
               className={`
                 ${dmSans.className}
-                mt-4 text-xs sm:text-sm uppercase tracking-[0.24em]
+                mt-4 text-lg sm:text-2xl uppercase tracking-[0.24em]
                 text-zinc-500
               `}
             >
