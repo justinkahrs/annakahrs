@@ -24,10 +24,11 @@ const SKILL_SECTIONS = [
       "UX Writing",
       "Prototyping",
       "Survey Design",
+      "Service Design",
     ],
   },
   {
-    title: "Frameworks & Methods",
+    title: "Methods",
     items: [
       "Design Thinking",
       "Usability Testing",
@@ -47,6 +48,7 @@ function Skills() {
   const skillCards = SKILL_SECTIONS.filter(
     (section) => section.title !== "Relevant Tools",
   );
+  const hrLineStyle = { borderColor: "rgba(0, 0, 0, 0.1)" };
 
   return (
     <section className="scroll-mt-28">
@@ -54,29 +56,15 @@ function Skills() {
         id="skills"
         className="
           relative right-1/2 left-1/2 -mx-[50vw]
-          w-screen bg-white
+          w-screen bg-[#f4f3ec]
           px-6 pt-32 pb-0 sm:px-12 sm:pt-40 sm:pb-0
           overflow-hidden
         "
       >
-        {/* SUBTLE BOTTOM GRADIENT */}
-        <div
-          className="pointer-events-none absolute inset-0 z-0"
-          style={{
-            background: `
-              radial-gradient(
-                circle at 0% 100%,
-                rgba(26, 8, 164, 0.24),
-                transparent 60%
-              )
-            `,
-          }}
-        />
-
         {/* MAIN CONTENT */}
         <div className="relative z-10 mx-auto max-w-4xl">
           {/* HEADER BLOCK */}
-          <div className="mb-20 flex flex-col items-center text-center">
+          <div className="mb-20 flex flex-col items-start text-left">
             <motion.h2
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -84,11 +72,11 @@ function Skills() {
               transition={{ duration: 0.6 }}
               className={`
                 ${playfair.className}
-                mt-3 text-6xl sm:text-8xl font-semibold tracking-tight
-                text-[var(--highlight)]
+                mt-3 text-7xl sm:text-9xl font-semibold tracking-tight leading-[0.9]
+                text-[var(--color-zinc-900)]
               `}
             >
-              Skills
+              Craft
             </motion.h2>
 
             <motion.h3
@@ -97,27 +85,41 @@ function Skills() {
               viewport={{ once: true, amount: 0.6 }}
               transition={{ duration: 0.7, delay: 0.05 }}
               className={`
-                ${dmSans.className}
-                mt-4 text-lg sm:text-2xl uppercase tracking-[0.24em]
-                text-zinc-500
+                ${playfair.className}
+                mt-1 text-2xl sm:text-4xl tracking-[0.04em] leading-none
+                text-[var(--color-zinc-900)]
               `}
             >
-              &amp; Tools
+              &amp; Stack
             </motion.h3>
           </div>
 
           {/* NN/g Certification */}
           <div className="mx-auto mb-20 max-w-4xl">
-            <div className="flex flex-col items-center text-center gap-6">
-              <img
-                src="https://media.nngroup.com/nng-uxc-badge.png"
-                alt="NN/g UX Certification Badge"
-                className="h-28 sm:h-32 w-auto"
-              />
-              <p
+            <div className="flex flex-col gap-8 md:flex-row md:items-center md:gap-12">
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+                className="flex justify-center md:justify-start md:w-auto"
+              >
+                <img
+                  src="https://media.nngroup.com/nng-uxc-badge.png"
+                  alt="NN/g UX Certification Badge"
+                  className="h-36 sm:h-44 w-auto"
+                />
+              </motion.div>
+
+              <motion.p
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.7, ease: "easeOut", delay: 0.08 }}
                 className={`
                   ${dmSans.className}
-                  text-base sm:text-lg leading-relaxed text-zinc-600 max-w-xl
+                  text-xl sm:text-2xl leading-relaxed text-zinc-600
+                  text-left md:flex-1
                 `}
               >
                 I&apos;m NN/g certified with a{" "}
@@ -125,34 +127,38 @@ function Skills() {
                 work focuses on grounding decisions in real user needs through
                 interviews, usability testing, content analysis, and
                 evidence-driven design.
-              </p>
+              </motion.p>
             </div>
           </div>
 
           {/* SKILL CARDS */}
-          <div className="mx-auto mt-10 mb-40 max-w-6xl">
+          <div className="mx-auto mt-10 mb-0 max-w-6xl">
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               {skillCards.map((section) => (
                 <article
                   key={section.title}
-                  className="flex min-h-[320px] flex-col border border-zinc-300 bg-transparent px-7 py-8 sm:px-8 sm:py-9"
+                  className="flex min-h-[320px] flex-col rounded-2xl border bg-transparent px-7 py-8 sm:px-8 sm:py-9"
+                  style={hrLineStyle}
                 >
-                  <h3
-                    className={`
-                      ${dmSans.className}
-                      text-3xl font-semibold tracking-tight text-zinc-900
-                    `}
-                  >
+                    <h3
+                      className={`
+                        ${dmSans.className}
+                      text-3xl sm:text-4xl font-semibold tracking-tight text-[var(--color-zinc-900)]
+                      `}
+                    >
                     {section.title}
                   </h3>
 
-                  <div className="mt-7 border-t border-dotted border-zinc-300" />
+                  <div
+                    className="mt-12 border-t-[3px] border-dotted"
+                    style={hrLineStyle}
+                  />
 
-                  <div className="mt-auto pt-16">
+                  <div className="mt-auto pt-24">
                     <p
                       className={`
                         ${dmSans.className}
-                        text-lg leading-relaxed text-zinc-700
+                        text-xl sm:text-2xl leading-relaxed text-zinc-700
                       `}
                     >
                       {section.items.join(" • ")}
@@ -161,12 +167,24 @@ function Skills() {
                 </article>
               ))}
               </div>
+
+              <h3
+                className={`
+                  ${playfair.className}
+                  mt-48 mb-32 text-center text-4xl sm:text-5xl tracking-tight text-[var(--color-zinc-900)]
+                `}
+              >
+                Research, design, and delivery powered by
+              </h3>
             </div>
           </div>
 
           {/* MARQUEE — Tools */}
-          <div className="mt-12">
-            <div className="relative left-1/2 right-1/2 -mx-[50vw] mt-6 w-screen border-y border-[var(--highlight)]/45">
+          <div className="mt-0 mb-12">
+            <div
+              className="relative left-1/2 right-1/2 -mx-[50vw] mt-0 w-screen border-y"
+              style={hrLineStyle}
+            >
               <div className="relative z-10">
                 <TechMarquee
                   logos={[

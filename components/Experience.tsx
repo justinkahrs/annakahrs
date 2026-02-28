@@ -64,71 +64,38 @@ function Experience() {
       <div
         id="experience"
         className="relative right-1/2 left-1/2 -mx-[50vw] w-screen bg-white/5
-          border-y border-white/10 py-32 sm:py-40"
+          border-y border-white/10 px-6 py-32 sm:px-12 sm:py-40"
       >
-        <div className="mx-auto max-w-4xl px-6 sm:px-12">
-          {/* HEADER — Professional ABOVE Experience */}
-          <div className="flex flex-col items-center text-center w-full">
-            <motion.h3
+        <div className="relative z-10 mx-auto max-w-4xl">
+          {/* HEADER */}
+          <div className="mb-20 flex flex-col items-start text-left">
+            <motion.h2
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.6 }}
               transition={{ duration: 0.6 }}
-              className={` ${dmSans.className} mt-0 text-xs sm:text-sm uppercase
-                tracking-[0.24em] text-[var(--foreground)]/70 `}
+              className={` ${playfair.className}
+                mt-3 text-7xl sm:text-9xl font-semibold tracking-tight leading-[0.9]
+                text-[var(--color-zinc-900)] `}
             >
-              Professional
-            </motion.h3>
+              Experience
+            </motion.h2>
 
-            <motion.h2
+            <motion.h3
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.6 }}
               transition={{ duration: 0.7, delay: 0.05 }}
-              className={` ${playfair.className} mt-3 text-5xl sm:text-6xl
-                font-semibold tracking-tight text-[var(--highlight)] `}
+              className={` ${playfair.className}
+                mt-4 text-2xl sm:text-4xl tracking-[0.04em] leading-[1.35]
+                text-[var(--color-zinc-900)] `}
             >
-              Experience
-            </motion.h2>
-          </div>
-
-          {/* DOWNLOAD BUTTON */}
-          <div className="mt-10 flex justify-center">
-            <a
-              href="/Anna_Kahrs_resume.pdf"
-              download
-              className={`${dmSans.className} inline-flex items-center
-                justify-center gap-3 whitespace-nowrap rounded-full
-                bg-[var(--primary)] px-8 py-3 text-sm font-semibold uppercase
-                tracking-wide text-white
-                hover:bg-[var(--primary-hover)]
-                focus-visible:outline-none focus-visible:ring-2
-                focus-visible:ring-[var(--primary)]/40
-                focus-visible:ring-offset-2
-                focus-visible:ring-offset-[var(--background)] cursor-pointer`}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="h-5 w-5 shrink-0"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
-                />
-              </svg>
-
-              <span>Download Resume (PDF)</span>
-            </a>
+              Roles &amp; Responsibilities
+            </motion.h3>
           </div>
 
           {/* TIMELINE */}
-          <div className="relative mt-16 ml-6 mb-40">
+          <div className="relative mt-8 ml-6 mb-40">
             {/* vertical spine */}
             <div
               className="pointer-events-none absolute left-[12px] top-0 bottom-0
