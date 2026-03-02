@@ -51,10 +51,24 @@ function Skills() {
   const skillCards = SKILL_SECTIONS.filter(
     (section) => section.title !== "Relevant Tools",
   );
-  const hrLineStyle = { borderColor: "rgba(0, 0, 0, 0.1)" };
+  const hrLineStyle = { borderColor: "rgba(0, 0, 0, 0.05)" };
 
   return (
     <section className="scroll-mt-28">
+      <style>
+        {`
+          @keyframes subtle-gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+          }
+          .animated-gradient-card {
+            background: linear-gradient(-45deg, #bbf7d0, #fef08a, #86efac, #fde68a, #4ade80, #fcd34d);
+            background-size: 400% 400%;
+            animation: subtle-gradient 15s ease infinite;
+          }
+        `}
+      </style>
       <div
         id="skills"
         className="
@@ -65,67 +79,64 @@ function Skills() {
         "
       >
         {/* MAIN CONTENT */}
-        <div className="relative z-10 mx-auto max-w-4xl">
-          {/* HEADER BLOCK */}
-          <div className="mb-20 flex flex-col items-start text-left">
-            <motion.h2
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.6 }}
-              transition={{ duration: 0.6 }}
-              className={`
-                ${playfair.className}
-                mt-3 text-7xl sm:text-9xl font-semibold tracking-tight leading-[0.9]
-                text-[var(--color-zinc-900)]
-              `}
-            >
-              Craft
-            </motion.h2>
-
-            <motion.h3
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.6 }}
-              transition={{ duration: 0.7, delay: 0.05 }}
-              className={`
-                ${playfair.className}
-                mt-1 text-2xl sm:text-4xl tracking-[0.04em] leading-none
-                text-[var(--color-zinc-900)]
-              `}
-            >
-              &amp; Stack
-            </motion.h3>
+        <div className="relative z-10 mx-auto max-w-[1500px] px-6">
+          {/* EYEBROW BLOCK */}
+          <div
+            className={`${dmSans.className} flex items-center gap-2 text-sm sm:text-base font-semibold uppercase tracking-[0.2em] text-zinc-600/60 pointer-events-none select-none pl-10 sm:pl-20 lg:pl-32 mb-6`}
+          >
+            <div className="w-2 h-2 bg-[#ff4500]" />
+            FOCUS
           </div>
+
+          {/* NEW STRATEGIC STATEMENT */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className={`
+              ${dmSans.className}
+              mb-24 text-4xl sm:text-5xl lg:text-5xl text-zinc-900 leading-[1.2]
+              pl-10 sm:pl-20 lg:pl-32 max-w-5xl
+            `}
+          >
+            <span className="block mb-8 font-medium">
+              When workflows sprawl, navigation tangles, and platforms quietly compete with themselves, something feels <span className="italic">off</span>. That’s where I start paying attention.
+            </span>
+            <span className="block text-zinc-700 font-normal">
+              I’m a UX designer and systems-focused thinker who listens closely, studies patterns, and helps teams untangle complexity. My work is about turning friction into clarity and helping digital spaces feel simpler, steadier, and easier to navigate.
+            </span>
+          </motion.p>
         </div>
 
         {/* SKILL CARDS */}
-        <div className="mx-auto mt-0 mb-20 max-w-6xl">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="mx-auto mt-0 mb-20 max-w-[1500px] px-6">
+          <div className="animated-gradient-card rounded-3xl overflow-hidden p-8 sm:p-12 lg:p-20 flex flex-col items-end gap-12">
             {skillCards.map((section) => (
               <article
                 key={section.title}
-                className="flex min-h-[320px] flex-col rounded-2xl border bg-transparent px-7 py-8 sm:px-8 sm:py-9"
-                style={hrLineStyle}
+                className="bg-[#f4f3ec]/30 backdrop-blur-sm flex min-h-[320px] w-full max-w-4xl flex-col rounded-3xl px-7 py-8 sm:px-10 sm:py-12 border border-white/20"
               >
-                <h3
-                  className={`
-                        ${dmSans.className}
-                      text-3xl sm:text-4xl font-semibold tracking-tight text-[var(--color-zinc-900)]
-                      `}
-                >
-                  {section.title}
-                </h3>
-
-                <div
-                  className="mt-12 border-t-[3px] border-dotted"
-                  style={hrLineStyle}
-                />
+                <div className="w-full relative mb-6">
+                  <h3
+                    className={`
+                      ${dmSans.className}
+                      absolute left-0 bottom-[12px] flex items-center gap-2 text-sm sm:text-base font-semibold uppercase tracking-[0.2em] text-zinc-600/60 pointer-events-none select-none
+                    `}
+                  >
+                    <div className="w-2 h-2 bg-[#ff4500]" />
+                    {section.title}
+                  </h3>
+                  <div
+                    className="w-full border-t-[3px] border-dotted border-zinc-900/10"
+                  />
+                </div>
 
                 <div className="mt-auto pt-24">
                   <p
                     className={`
                         ${dmSans.className}
-                        text-xl sm:text-2xl leading-relaxed text-zinc-700
+                        text-2xl sm:text-3xl leading-relaxed text-zinc-700
                       `}
                   >
                     {section.items.join(" • ")}
@@ -140,7 +151,7 @@ function Skills() {
         <div className="relative z-10 mx-auto max-w-[1500px] px-6 mt-48 mb-16">
           <div className="w-full relative mb-6">
             <div
-              className={`${dmSans.className} absolute left-0 bottom-[12px] flex items-center gap-2 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-zinc-600/60 pointer-events-none select-none`}
+              className={`${dmSans.className} absolute left-0 bottom-[12px] flex items-center gap-2 text-sm sm:text-base font-semibold uppercase tracking-[0.2em] text-zinc-600/60 pointer-events-none select-none`}
             >
               <div className="w-2 h-2 bg-[#ff4500]" />
               TECHNOLOGY
@@ -163,7 +174,7 @@ function Skills() {
                 <p
                   className={`
                         ${dmSans.className}
-                        text-left text-base sm:text-lg leading-relaxed text-zinc-800
+                        text-left text-lg sm:text-xl leading-relaxed text-zinc-800
                       `}
                 >
                   A curated set of research, design, prototyping, and collaboration tools that support evidence-driven decisions and scalable digital systems.
@@ -173,7 +184,7 @@ function Skills() {
             <p
               className={`
                     ${dmSans.className}
-                    text-left text-3xl sm:text-4xl lg:text-5xl font-normal text-zinc-800 italic mt-8 sm:mt-0
+                    text-left text-4xl sm:text-5xl lg:text-6xl font-normal text-zinc-800 italic mt-8 sm:mt-0
                   `}
             >
               a cross-functional tool stack
@@ -221,7 +232,7 @@ function Skills() {
         {/* NN/g Certification Card */}
         <div className="relative z-10 mx-auto max-w-[1500px] px-6 mt-32">
           <div
-            className="relative overflow-hidden mx-auto mb-6 w-full rounded-3xl bg-stone-900/[0.05] p-6 pb-0 sm:p-8 sm:pb-0 md:p-10 md:pb-0 lg:p-12 lg:pb-0"
+            className="relative overflow-hidden mx-auto mb-6 w-full rounded-3xl bg-stone-900/5 p-6 pb-0 sm:p-8 sm:pb-0 md:p-10 md:pb-0 lg:p-12 lg:pb-0"
           >
             <div className="flex flex-col items-center gap-10 md:gap-14 pb-16">
               <motion.div
@@ -254,7 +265,7 @@ function Skills() {
                 {/* EYEBROW BLOCK AT THE TOP */}
                 <div className="w-full relative mt-4 mb-6">
                   <div
-                    className={`${dmSans.className} absolute left-0 bottom-[12px] flex items-center gap-2 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-zinc-600/60 pointer-events-none select-none`}
+                    className={`${dmSans.className} absolute left-0 bottom-[12px] flex items-center gap-2 text-sm sm:text-base font-semibold uppercase tracking-[0.2em] text-zinc-600/60 pointer-events-none select-none`}
                   >
                     <div className="w-2 h-2 bg-[#ff4500]" />
                     CERTIFICATION
@@ -276,7 +287,7 @@ function Skills() {
                   <p
                     className={`
                     ${dmSans.className}
-                    text-left mb-4 text-3xl sm:text-4xl lg:text-5xl font-normal text-zinc-800 italic
+                    text-left mb-4 text-4xl sm:text-5xl lg:text-6xl font-normal text-zinc-800 italic
                   `}
                   >
                     through Nielsen Norman Group
@@ -289,7 +300,7 @@ function Skills() {
                     <p
                       className={`
                       ${dmSans.className}
-                      text-left text-base sm:text-lg leading-relaxed text-zinc-800
+                      text-left text-lg sm:text-xl leading-relaxed text-zinc-800
                     `}
                     >
                       I completed 30+ hours of advanced UX training, including a focused research specialty track and passing all associated exams. This coursework strengthened and formalized my research practice, expanding both methodological depth and strategic thinking.
