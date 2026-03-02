@@ -1,7 +1,6 @@
 "use client";
 
 import handleScroll from "@/utils/handleScroll";
-import { motion } from "motion/react";
 import { Playfair_Display, DM_Sans } from "next/font/google";
 
 const playfair = Playfair_Display({
@@ -11,95 +10,74 @@ const playfair = Playfair_Display({
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["300", "400", "500", "600"],
 });
 
 function Home() {
   return (
-    <section id="home" className="scroll-mt-28 mb-80">
-      <div className="pt-20">
-        <div className="relative mx-auto w-full max-w-4xl px-6 sm:px-0">
-          {/* 3D BACKGROUND */}
+    <section id="home" className="scroll-mt-[60px] mb-40 bg-[#f4f3ec]">
+      <div className="pt-0">
+        <div className="relative mx-auto w-full max-w-[1920px] px-6">
+          {/* HERO CARD */}
+          <div className="relative overflow-hidden rounded-3xl bg-stone-900/5 min-h-[85vh] flex flex-col items-center justify-center p-8 sm:p-12">
+            {/* HERO CONTENT */}
+            <div
+              className={` ${dmSans.className} relative z-10 text-center text-zinc-900 w-full `}
+            >
+              {/* EYEBROW */}
+              <div className="flex items-center justify-center gap-2 text-xs sm:text-sm font-light uppercase tracking-[0.12em] text-zinc-600/60 mb-12">
+                Lead UX Designer
+              </div>
 
-          {/* HERO CONTENT */}
-          <div
-            className={` ${dmSans.className} relative z-10 rounded-[2rem] p-10
-              text-center text-[var(--foreground)] `}
-          >
-            {/* HEADLINE */}
-            <motion.h1
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className={` mt-3 text-5xl sm:text-6xl font-semibold
-                tracking-tight text-[var(--highlight)] `}
-            >
-              <motion.span
-                className={` relative ${playfair.className} text-white/90
-                  font-semibold `}
-                initial="hidden"
-                animate="visible"
-                variants={{
-                  hidden: { opacity: 0, y: 8 },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 0.6, ease: "easeOut" },
-                  },
-                }}
-              >
-                Anna Kahrs
-              </motion.span>
-            </motion.h1>
-            {/* SUBHEAD */}
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.18, duration: 0.6, ease: "easeOut" }}
-              className="mt-8 flex flex-col items-center justify-center gap-3 text-sm
-                sm:flex-row sm:text-base uppercase tracking-[0.28em] text-white/90
-                font-medium"
-            >
-              <span className="text-white/70">Lead UX Designer at</span>
-              <img
-                src="./ucsf-logo.svg"
-                alt="UCSF"
-                className="h-5 sm:h-6 opacity-90"
-              />
-            </motion.p>
-            {/* BUTTON ROW */}
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
-              className="mt-8 flex flex-wrap justify-center gap-3"
-            >
-              {/* PRIMARY BUTTON */}
-              <button
-                className="w-44 rounded-full bg-[var(--primary)] px-5 py-3
-                  text-sm font-semibold uppercase tracking-wide text-white
-                  transition hover:bg-[var(--primary-hover)] cursor-pointer"
-                onClick={() => handleScroll("#experience")}
-                type="button"
-              >
-                Experience
-              </button>
+              {/* HEADLINE */}
+              <h1 className="flex flex-col items-center mb-4">
+                <span
+                  className={`
+                    ${dmSans.className} 
+                    text-5xl sm:text-7xl lg:text-[7rem] xl:text-[8rem]
+                    font-light tracking-tighter text-zinc-900 leading-[0.85]
+                    whitespace-nowrap
+                  `}
+                >
+                  Designing clarity
+                </span>
+                <span
+                  className={`
+                    ${playfair.className} 
+                    text-4xl sm:text-6xl lg:text-[6rem] xl:text-[7rem]
+                    font-medium italic text-zinc-800 leading-tight mt-6
+                    whitespace-nowrap
+                  `}
+                >
+                  across complex systems
+                </span>
+              </h1>
 
-              {/* SECONDARY BUTTON */}
-              <button
-                onClick={() => handleScroll("#contact")}
-                className="w-44 rounded-full border border-[var(--white)]
-                  bg-transparent px-5 py-3 text-sm font-semibold uppercase
-                  tracking-wide text-[var(--foreground)] transition
-                  cursor-pointer hover:bg-[var(--secondary-light)]
-                  hover:text-white"
-                style={{
-                  ["--secondary-light" as any]: "rgba(71, 85, 105, 0.35)",
-                }}
-              >
-                Contact
-              </button>
-            </motion.div>
+              {/* BUTTON ROW */}
+              <div className="mt-16 flex flex-wrap justify-center gap-4">
+                {/* PRIMARY BUTTON */}
+                <button
+                  className="w-48 rounded-full bg-zinc-900 px-6 py-4
+                    text-sm font-semibold uppercase tracking-wide text-white
+                    hover:bg-zinc-800 cursor-pointer shadow-lg shadow-zinc-900/10"
+                  onClick={() => handleScroll("#experience")}
+                  type="button"
+                >
+                  See the Work
+                </button>
+
+                {/* SECONDARY BUTTON */}
+                <button
+                  onClick={() => window.open("/Anna_Kahrs_resume.pdf", "_blank")}
+                  className="w-48 rounded-full border border-zinc-900/10
+                    bg-white/40 backdrop-blur-md px-6 py-4 text-sm font-semibold uppercase
+                    tracking-wide text-zinc-900
+                    cursor-pointer hover:bg-white/60"
+                >
+                  View Resume
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

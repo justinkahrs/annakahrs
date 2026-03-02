@@ -85,23 +85,6 @@ export default function Quote() {
     load();
   }, []);
 
-  const featured = items[0];
-  const secondary = items.slice(1, 4);
-
-  const getMonthYear = (item?: RssItem) => {
-    if (!item || !item.pubDate) return "";
-    if (
-      !(item.pubDate instanceof Date) ||
-      Number.isNaN(item.pubDate.getTime())
-    ) {
-      return "";
-    }
-    return item.pubDate.toLocaleDateString("en-US", {
-      month: "long",
-      year: "numeric",
-    });
-  };
-
   const getFirstCategory = (item?: RssItem) => {
     if (!item || !item.categories || item.categories.length === 0) {
       return "Case Study";
@@ -109,386 +92,161 @@ export default function Quote() {
     return item.categories[0];
   };
 
+  const getExcerpt = (item?: RssItem) => {
+    if (!item?.description) {
+      return "Read the full post for details.";
+    }
+
+    const text = new DOMParser()
+      .parseFromString(item.description, "text/html")
+      .body.textContent?.replace(/\s+/g, " ")
+      .trim();
+
+    if (!text) {
+      return "Read the full post for details.";
+    }
+
+    return text.length > 170 ? `${text.slice(0, 167).trimEnd()}...` : text;
+  };
+
   return (
     <section
+      id="projects"
       className="relative right-[50%] left-[50%] -mt-32 -mr-[50vw] -ml-[50vw]
-        w-screen bg-[var(--background)] px-6 pb-40 pt-0 text-black sm:px-12"
+        w-screen bg-[#f4f3ec] px-6 pb-40 pt-24 text-black sm:px-12"
     >
-      {/* right-side gradient for the blue background */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-100"
-        style={{
-          background:
-            "radial-gradient(circle at 100% 20%, rgba(59,130,246,0.35), transparent 60%), radial-gradient(circle at 100% 80%, rgba(37,99,235,0.55), transparent 60%)",
-        }}
-      />
-
-      {/* RECOGNIZED FOR EXCELLENCE */}
-      <div
-        className="relative z-10 -mx-6 bg-[#f2e7ff] px-6 py-32 sm:-mx-12
-          sm:px-12 sm:py-40"
-        id="projects"
-      >
-        <div
-          className="mx-auto flex max-w-4xl flex-col items-center justify-center
-            gap-10 sm:flex-row"
-        >
-          {/* Badge */}
-          <img
-            src="/COE-badge.png"
-            alt="CASE Gold Circle of Excellence Award badge"
-            className="h-32 w-auto flex-shrink-0 sm:h-36"
-          />
-
-          {/* Text */}
+      <div className="relative mx-auto mt-40 max-w-[1500px] px-6">
+        {/* EYEBROW */}
+        <div className="w-full relative mb-6">
           <div
-            className="flex max-w-xl flex-col justify-center text-center
-              sm:text-left"
+            className={`${dmSans.className} absolute left-0 bottom-[12px] flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none`}
           >
-            <h3
-              className={` ${playfair.className} text-3xl sm:text-4xl
-                font-semibold tracking-tight text-[var(--highlight)] `}
-            >
-              Recognized for Excellence
-            </h3>
-
-            <p
-              className={` ${dmSans.className} mt-4 text-base sm:text-lg
-                leading-relaxed text-zinc-800 `}
-            >
-              <span className="font-semibold">
-                Work I contributed to has earned national recognition.
-              </span>{" "}
-              The UCSF Magazine website, where I led information architecture,
-              conducted user interviews, and shaped user-tested navigation, was
-              awarded the{" "}
-              <a
-                href="https://www.case.org/awards/circle-excellence/2022/ucsf-magazine-website"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline font-medium inline-flex items-center gap-1"
-              >
-                CASE Gold Circle of Excellence Award
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="h-4 w-4 opacity-80"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-                  />
-                </svg>
-              </a>
-              .
-            </p>
+            <div className="w-2 h-2 bg-[#ff4500]" />
+            SELECTED WORK
           </div>
+          <div className="w-full border-t-[3px] border-dotted border-zinc-900/10" />
         </div>
-      </div>
 
-      <div className="relative mx-auto mt-40 max-w-4xl">
-        {/* HEADER + BLURB */}
-        <div className="mx-auto mb-40 max-w-4xl">
-          <div
-            className="grid grid-cols-1 sm:grid-cols-2 gap-12 sm:gap-20
-              items-start text-center sm:text-left justify-items-center
-              sm:justify-items-start"
-          >
-            {/* LEFT — TITLES */}
-            <div className="flex flex-col items-center sm:items-start">
-              <motion.h3
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.4 }}
-                transition={{ duration: 0.6 }}
-                className={` ${dmSans.className} text-sm sm:text-base uppercase
-                  tracking-[0.24em] text-[var(--foreground)]/70 `}
-              >
-                Case Studies
-              </motion.h3>
+        {/* HEADER SECTION */}
+        <div className="mt-16 mb-24 pr-0">
+          <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-4 text-left">
+            <motion.h2
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className={`${playfair.className} pl-10 sm:pl-20 lg:pl-32 text-4xl sm:text-5xl lg:text-6xl font-medium text-zinc-900 italic tracking-tight`}
+            >
+              where the work
+            </motion.h2>
+            <motion.h3
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className={`${dmSans.className} text-4xl sm:text-5xl lg:text-6xl font-normal text-zinc-800 tracking-tight text-right md:ml-auto`}
+            >
+              comes to life
+            </motion.h3>
+          </div>
 
-              <motion.h2
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.4 }}
-                transition={{ duration: 0.7, delay: 0.05 }}
-                className={` ${playfair.className} mt-3 text-5xl sm:text-6xl
-                  font-semibold tracking-tight text-[var(--highlight)] `}
-              >
-                Work in Practice
-              </motion.h2>
-            </div>
-
-            {/* RIGHT — BLURB */}
-            <div className="max-w-md">
+          <div className="mt-12 flex flex-col lg:flex-row pl-10 sm:pl-20 lg:pl-32 gap-12 text-left">
+            <div className="max-w-md flex gap-6">
+              <span className={`${dmSans.className} text-xs font-bold text-zinc-400 mt-1.5`}>01</span>
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.4 }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
-                className={` ${dmSans.className} text-lg sm:text-xl
-                  leading-relaxed text-[var(--foreground)]/90 `}
+                className={`${dmSans.className} text-lg sm:text-xl leading-relaxed text-zinc-700`}
               >
-                When{" "}
-                <span className="font-semibold">
-                  <a
-                    href="https://userpilot.com/blog/ux-statistics/?utm_source=chatgpt.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline inline-flex items-center gap-1"
-                  >
-                    88%
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="h-4 w-4 opacity-90"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-                      />
-                    </svg>
-                  </a>{" "}
-                  of users do not return after a poor experience
-                </span>
-                , the stakes are real. I design with that in mind, focusing on
-                clarity, reducing friction, and supporting real tasks. The
-                projects below highlight how I approach that work from start to
-                finish.
-              </motion.p>
+This section holds both the work itself and the thinking behind it. Case studies, experiments, reflections, and the occasional strong opinion about how digital systems should behave.              </motion.p>
             </div>
           </div>
         </div>
 
-        {/* FEATURED + SECONDARY GRID */}
-        <div className="mt-10">
-          {loading ? (
-            <div className="mt-20 flex justify-center">
-              <span className="loading loading-spinner loading-lg text-black" />
-            </div>
-          ) : (
-            <div
-              className="grid grid-cols-1 gap-6
-                lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] items-stretch"
-            >
-              {/* LEFT: FEATURED PROJECT */}
-              <div className="h-full">
-                {featured && (
+        {/* CAROUSEL SECTION */}
+        <div className="relative overflow-visible">
+          <div
+            id="case-study-carousel"
+            className="flex gap-8 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-12 cursor-grab active:cursor-grabbing"
+            style={{
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+              scrollSnapType: 'x mandatory'
+            }}
+          >
+            {loading ? (
+              <div className="w-full flex justify-center py-20">
+                <span className="loading loading-spinner loading-lg text-zinc-900" />
+              </div>
+            ) : items.length > 0 ? (
+              items.map((item, idx) => (
+                <div key={idx} className="shrink-0 w-[78vw] sm:w-[440px] snap-start">
                   <a
-                    href={featured.link}
+                    href={item.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block h-full"
+                    className="block group/card"
                   >
-                    <article
-                      className="flex h-full flex-col overflow-hidden
-                        rounded-[2rem] border border-white/25 bg-white/5
-                        shadow-sm backdrop-blur-sm"
-                    >
-                      <div className="relative w-full overflow-hidden">
+                    <article className="flex flex-col">
+                      <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-zinc-100 mb-5 transition-transform duration-500 group-hover/card:scale-[1.02]">
                         <DicebearThumbnail
-                          seed={featured.title || featured.link || "featured"}
-                          size={500}
+                          seed={item.title || item.link}
+                          size={600}
                         />
+                        {/* Grayscale overlay that fades on hover */}
+                        <div className="absolute inset-0 bg-zinc-900/10 grayscale mix-blend-multiply opacity-100 transition-all duration-500 group-hover/card:grayscale-0 group-hover/card:opacity-0" />
                       </div>
 
-                      <div className="px-6 py-6 sm:px-8 sm:py-7">
-                        {/* Month + Year */}
-                        {getMonthYear(featured) && (
-                          <p
-                            className={` ${dmSans.className} text-xs
-                              tracking-[0.18em] uppercase text-white/70 `}
-                          >
-                            {getMonthYear(featured)}
-                          </p>
-                        )}
-
-                        {/* First chip only */}
-                        <div className="mt-2 mb-4 flex flex-wrap gap-2">
-                          <span
-                            className={` ${dmSans.className} inline-flex
-                              items-center rounded-full border border-white/30
-                              bg-white/10 px-3 py-1 text-[0.65rem]
-                              tracking-[0.18em] uppercase text-white/85 `}
-                          >
-                            {getFirstCategory(featured)}
-                          </span>
-                        </div>
-
-                        {/* Title */}
-                        <h3
-                          className={` ${playfair.className} text-2xl
-                            sm:text-3xl font-semibold text-white `}
-                        >
-                          {featured.title}
-                        </h3>
-
-                        {/* Blurb */}
-                        <p
-                          className={` ${dmSans.className} mt-3 text-sm
-                            sm:text-base leading-relaxed text-white/85 `}
-                        >
-                          {featured.description}
+                      <div className="flex flex-col text-left">
+                        <h4 className={`${dmSans.className} text-xl font-semibold text-zinc-900 mb-1 line-clamp-2`}>
+                          {item.title}
+                        </h4>
+                        <p className={`${dmSans.className} text-xs text-zinc-500 font-medium uppercase tracking-[0.15em]`}>
+                          {getFirstCategory(item)}
                         </p>
-
-                        {/* Author */}
-                        {featured.author && (
-                          <p
-                            className={` ${dmSans.className} mt-4 text-xs
-                              tracking-[0.18em] uppercase text-white/60 `}
-                          >
-                            {featured.author}
-                          </p>
-                        )}
+                        <p className={`${dmSans.className} mt-3 text-sm leading-relaxed text-zinc-700 line-clamp-3`}>
+                          {getExcerpt(item)}
+                        </p>
                       </div>
                     </article>
                   </a>
-                )}
-              </div>
+                </div>
+              ))
+            ) : (
+              <div className="text-zinc-400 py-20">No items found.</div>
+            )}
+          </div>
 
-              {/* RIGHT: SECONDARY PROJECTS / PLACEHOLDERS */}
-              <div className="flex h-full flex-col gap-4">
-                {[
-                  "Next case study",
-                  "Research in progress",
-                  "More work coming",
-                ].map((fallbackTitle, index) => {
-                  const item = secondary[index];
-
-                  if (item) {
-                    return (
-                      <a
-                        key={item.link || item.title || fallbackTitle}
-                        href={item.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block flex-1"
-                      >
-                        <article
-                          className="flex h-full flex-col rounded-[2rem] border
-                            border-white/25 bg-white/5 px-6 py-6 sm:px-8 sm:py-7
-                            shadow-sm backdrop-blur-sm"
-                        >
-                          {/* Month + Year */}
-                          {getMonthYear(item) && (
-                            <p
-                              className={` ${dmSans.className} text-xs
-                                tracking-[0.18em] uppercase text-white/70 `}
-                            >
-                              {getMonthYear(item)}
-                            </p>
-                          )}
-
-                          {/* First chip only */}
-                          <div className="mt-2 mb-4 flex flex-wrap gap-2">
-                            <span
-                              className={` ${dmSans.className} inline-flex
-                                items-center rounded-full border border-white/30
-                                bg-white/10 px-3 py-1 text-[0.65rem]
-                                tracking-[0.18em] uppercase text-white/85 `}
-                            >
-                              {getFirstCategory(item)}
-                            </span>
-                          </div>
-
-                          {/* Title */}
-                          <h3
-                            className={` ${playfair.className} mt-0 text-xl
-                              sm:text-2xl font-semibold text-white `}
-                          >
-                            {item.title}
-                          </h3>
-
-                          {/* Blurb */}
-                          <p
-                            className={` ${dmSans.className} mt-3 text-sm
-                              sm:text-base leading-relaxed text-white/80 `}
-                          >
-                            {item.description}
-                          </p>
-
-                          {/* Author */}
-                          {item.author && (
-                            <p
-                              className={` ${dmSans.className} mt-4 text-xs
-                                tracking-[0.18em] uppercase text-white/60 `}
-                            >
-                              {item.author}
-                            </p>
-                          )}
-                        </article>
-                      </a>
-                    );
-                  }
-
-                  // Fallback "Coming soon" cards
-                  return (
-                    <div
-                      key={fallbackTitle}
-                      className="flex-1 rounded-[2rem] border border-white/25
-                        bg-white/5 px-6 py-6 sm:px-8 sm:py-7 shadow-sm
-                        backdrop-blur-sm"
-                    >
-                      <div
-                        className={` ${dmSans.className} inline-flex
-                          items-center rounded-full border border-white/30
-                          bg-white/10 px-3 py-1 text-[0.65rem] tracking-[0.18em]
-                          uppercase text-white/85 `}
-                      >
-                        Coming soon
-                      </div>
-                      <h3
-                        className={` ${playfair.className} mt-4 text-xl
-                          sm:text-2xl font-semibold text-white `}
-                      >
-                        {fallbackTitle}
-                      </h3>
-                      <p
-                        className={` ${dmSans.className} mt-3 text-sm
-                          sm:text-base leading-relaxed text-white/80 `}
-                      >
-                        I&apos;m currently shaping this story capturing the
-                        research, decisions, and outcomes in a way that does the
-                        work justice.
-                      </p>
-                      <p
-                        className={` ${dmSans.className} mt-4 text-xs
-                          tracking-[0.18em] uppercase text-white/60 `}
-                      >
-                        Case study in progress
-                      </p>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* CTA */}
-        {items.length > 0 && (
-          <div className="mt-10 flex justify-center">
+          {/* ARROWS AT BOTTOM LEFT */}
+          <div className="flex gap-4 mt-8 pb-10">
             <button
-              aria-disabled="true"
-              disabled
-              className="w-44 rounded-full bg-[var(--primary)] px-5 py-3 text-sm
-                font-semibold uppercase tracking-wide text-white opacity-60
-                cursor-not-allowed select-none"
+              onClick={() => {
+                const carousel = document.getElementById('case-study-carousel');
+                if (carousel) carousel.scrollBy({ left: -500, behavior: 'smooth' });
+              }}
+              className="w-14 h-14 rounded-full border border-zinc-900/10 flex items-center justify-center hover:bg-zinc-900 hover:text-white transition-all duration-300"
+              aria-label="Previous"
             >
-              More soon
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+              </svg>
+            </button>
+            <button
+              onClick={() => {
+                const carousel = document.getElementById('case-study-carousel');
+                if (carousel) carousel.scrollBy({ left: 500, behavior: 'smooth' });
+              }}
+              className="w-14 h-14 rounded-full border border-zinc-900/10 flex items-center justify-center hover:bg-zinc-900 hover:text-white transition-all duration-300"
+              aria-label="Next"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
             </button>
           </div>
-        )}
+        </div>
       </div>
     </section>
   );

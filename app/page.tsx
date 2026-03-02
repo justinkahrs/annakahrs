@@ -76,16 +76,15 @@ export default function App() {
     };
   }, [pendingTarget]);
   return (
-    <div className="antialiased">
-      <ThreeBackground />
+    <div className="antialiased bg-[#f4f3ec]">
       <Nav
         active={active}
         setActive={setActive}
         setPendingTarget={setPendingTarget}
       />
       <main
-        className="mx-auto flex min-h-screen w-full max-w-4xl flex-col gap-0
-          px-6 pt-36 pb-24 sm:pt-40"
+        className="mx-auto flex min-h-screen w-full flex-col gap-0
+          px-0 pt-[60px] pb-24"
       >
         <Home />
         <Skills />

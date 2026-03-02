@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import handleScroll from "@/utils/handleScroll";
 import { Playfair_Display, DM_Sans } from "next/font/google";
@@ -20,6 +20,13 @@ type NavItem = {
   href: string;
 };
 
+type BrandNavItem = {
+  label: string;
+  blurb: string;
+  href: string;
+  icon: string;
+};
+
 const NAV: NavItem[] = [
   { label: "Skills", href: "#skills" },
   { label: "Experience", href: "#experience" },
@@ -27,6 +34,21 @@ const NAV: NavItem[] = [
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
   { label: "Blog", href: "https://blog.annakahrs.com" },
+];
+
+const BRAND_NAV: BrandNavItem[] = [
+  {
+    label: "Anna Kahrs Portfolio",
+    blurb: "Main site for UX work, case studies, and featured projects.",
+    href: "#home",
+    icon: "AC",
+  },
+  {
+    label: "Work in Practice",
+    blurb: "A blog with practical UX notes, process write-ups, and ideas.",
+    href: "https://blog.annakahrs.com",
+    icon: "WP",
+  },
 ];
 
 interface NavProps {
@@ -37,6 +59,10 @@ interface NavProps {
 
 function Nav({ active, setActive, setPendingTarget }: NavProps) {
   const [open, setOpen] = useState(false);
+  const [brandOpen, setBrandOpen] = useState(false);
+  const brandMenuRef = useRef<HTMLDivElement | null>(null);
+  const brandCloseTimerRef = useRef<number | null>(null);
+
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
@@ -45,9 +71,47 @@ function Nav({ active, setActive, setPendingTarget }: NavProps) {
     }
   }, [open]);
 
+  useEffect(() => {
+    const onPointerDown = (event: MouseEvent) => {
+      const target = event.target as Node;
+      if (!brandMenuRef.current?.contains(target)) {
+        setBrandOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onPointerDown);
+    return () => document.removeEventListener("mousedown", onPointerDown);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (brandCloseTimerRef.current) {
+        window.clearTimeout(brandCloseTimerRef.current);
+      }
+    };
+  }, []);
+
+  const openBrandMenu = () => {
+    if (brandCloseTimerRef.current) {
+      window.clearTimeout(brandCloseTimerRef.current);
+      brandCloseTimerRef.current = null;
+    }
+    setBrandOpen(true);
+  };
+
+  const closeBrandMenuSoon = () => {
+    if (brandCloseTimerRef.current) {
+      window.clearTimeout(brandCloseTimerRef.current);
+    }
+    brandCloseTimerRef.current = window.setTimeout(() => {
+      setBrandOpen(false);
+      brandCloseTimerRef.current = null;
+    }, 120);
+  };
+
   const handleNavClick = (href: string) => {
-    if (href.startsWith('http')){
-      return window.open(href, '_blank');
+    if (href.startsWith("http")) {
+      setBrandOpen(false);
+      return window.open(href, "_blank");
     }
     const id = href.replace("#", "");
     const el =
@@ -59,6 +123,7 @@ function Nav({ active, setActive, setPendingTarget }: NavProps) {
     setActive(href);
     handleScroll(href);
     setOpen(false);
+    setBrandOpen(false);
   };
 
   const handleHomeClick = () => {
@@ -71,27 +136,95 @@ function Nav({ active, setActive, setPendingTarget }: NavProps) {
     setActive("#home");
     handleScroll("#home");
     setOpen(false);
+    setBrandOpen(false);
   };
 
   return (
-    <nav
-      className="fixed top-0 inset-x-0 z-80 bg-black/30 backdrop-blur-2xl
-        border-b border-white/10"
-    >
+    <nav className="fixed top-0 inset-x-0 z-80 h-[60px]">
       <div
-        className="relative z-10 flex w-full items-center justify-between px-4
-          py-3"
+        className="relative z-10 flex h-full w-full max-w-[1920px] mx-auto items-center
+          justify-between px-6"
       >
-        {/* AK LOGO (flush left) */}
-        <button
-          type="button"
-          className={`${playfair.className} flex items-center justify-center w-9
-            aspect-square rounded-full bg-(--primary) text-white text-sm
-            font-semibold cursor-pointer`}
-          onClick={handleHomeClick}
+        <div
+          ref={brandMenuRef}
+          className="relative flex items-center gap-1.5"
+          onMouseEnter={openBrandMenu}
+          onMouseLeave={closeBrandMenuSoon}
         >
-          AK
-        </button>
+          {/* AK LOGO (flush left) */}
+          <button
+            type="button"
+            className={`${playfair.className} flex items-center justify-center w-9
+              aspect-square rounded-full bg-(--primary) text-white text-sm
+              font-semibold cursor-pointer`}
+            onClick={handleHomeClick}
+            aria-label="Go to home"
+          >
+            AK
+          </button>
+          <button
+            type="button"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-full
+              text-zinc-800/75 hover:text-zinc-900
+              transition-colors duration-150 opacity-100 outline-none ring-0"
+            aria-label="Toggle brand menu"
+            aria-expanded={brandOpen}
+            onMouseEnter={openBrandMenu}
+            onClick={() => setBrandOpen((prev) => !prev)}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.75}
+              stroke="currentColor"
+              className={`h-4 w-4 transition-transform duration-200 ${brandOpen ? "rotate-180" : ""}`}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+            </svg>
+          </button>
+
+          <AnimatePresence>
+            {brandOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.16 }}
+                className="absolute left-0 top-[3.1rem] w-[22rem] rounded-2xl border
+                  border-zinc-900/10 bg-[#f4f3ec] p-2 shadow-xl shadow-zinc-900/10"
+                onMouseEnter={openBrandMenu}
+                onMouseLeave={closeBrandMenuSoon}
+              >
+                {BRAND_NAV.map((item) => (
+                  <button
+                    key={item.label}
+                    type="button"
+                    onClick={() => handleNavClick(item.href)}
+                    className="flex w-full items-start gap-3 rounded-xl p-3 text-left
+                      hover:bg-zinc-900/5"
+                  >
+                    <span
+                      className={`${playfair.className} mt-0.5 inline-flex h-9 w-9 shrink-0
+                        items-center justify-center rounded-full bg-zinc-900 text-xs
+                        font-semibold text-white`}
+                    >
+                      {item.icon}
+                    </span>
+                    <span className="min-w-0">
+                      <span className={`${dmSans.className} block text-sm font-semibold text-zinc-900`}>
+                        {item.label}
+                      </span>
+                      <span className={`${dmSans.className} mt-1 block text-xs leading-relaxed text-zinc-600`}>
+                        {item.blurb}
+                      </span>
+                    </span>
+                  </button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
 
         {/* DESKTOP NAV (right aligned) */}
         <ul
@@ -103,7 +236,7 @@ function Nav({ active, setActive, setPendingTarget }: NavProps) {
               <button
                 type="button"
                 className="relative px-4 py-2 text-xs sm:text-sm font-semibold
-                  text-white/90 hover:text-(--highlight) transition"
+                  text-zinc-900/90 hover:text-(--highlight) transition"
                 onClick={() => handleNavClick(item.href)}
               >
                 <span className="relative inline-flex items-center gap-1">
@@ -144,9 +277,9 @@ function Nav({ active, setActive, setPendingTarget }: NavProps) {
         <button
           type="button"
           className="lg:hidden inline-flex items-center justify-center
-            rounded-full p-2 text-white/90 hover:text-white hover:bg-white/10
+            rounded-full p-2 text-zinc-900/90 hover:text-zinc-900 hover:bg-zinc-900/10
             focus-visible:outline-none focus-visible:ring-2
-            focus-visible:ring-white/40 ml-auto"
+            focus-visible:ring-zinc-900/40 ml-auto"
           onClick={() => setOpen((prev) => !prev)}
         >
           {open ? (
@@ -186,7 +319,7 @@ function Nav({ active, setActive, setPendingTarget }: NavProps) {
         {open && (
           <motion.div
             key="mobile-nav"
-            className="lg:hidden fixed top-0 bottom-0 w-full h-screen bg-black"
+            className="lg:hidden fixed top-0 bottom-0 w-full h-screen bg-[#f4f3ec]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -194,18 +327,18 @@ function Nav({ active, setActive, setPendingTarget }: NavProps) {
             onClick={() => setOpen(false)}
           >
             <div
-              className="px-6 pt-24 pb-12 bg-black"
+              className="px-6 pt-24 pb-12 bg-[#f4f3ec]"
               onClick={(event) => event.stopPropagation()}
             >
               <ul
                 className={`${dmSans.className} flex flex-col items-center py-24
-                gap-6 tracking-[0.2em] bg-black`}
+                gap-6 tracking-[0.2em] bg-[#f4f3ec]`}
               >
                 {NAV.map((item) => (
                   <li key={item.label}>
                     <button
                       type="button"
-                      className="uppercase text-lg font-semibold text-white/90
+                      className="uppercase text-lg font-semibold text-zinc-900/90
                         hover:text-(--highlight) transition p-8 flex items-center gap-2"
                       onClick={() => handleNavClick(item.href)}
                     >

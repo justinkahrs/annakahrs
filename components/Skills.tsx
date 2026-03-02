@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useRef } from "react";
 import TechMarquee from "./TechMarquee";
 import { Playfair_Display, DM_Sans, Dancing_Script } from "next/font/google";
 
@@ -47,28 +48,53 @@ const SKILL_SECTIONS = [
   },
 ];
 
+const ScrollWord = ({
+  word,
+  progress,
+  range,
+  className,
+}: {
+  word: string;
+  progress: any;
+  range: [number, number];
+  className?: string;
+}) => {
+  const opacity = useTransform(progress, range, [0.2, 1]);
+  return (
+    <motion.span
+      style={{ opacity }}
+      className={`inline-block mr-[0.25em] ${className || ""}`}
+    >
+      {word}
+    </motion.span>
+  );
+};
+
 function Skills() {
   const skillCards = SKILL_SECTIONS.filter(
     (section) => section.title !== "Relevant Tools",
   );
   const hrLineStyle = { borderColor: "rgba(0, 0, 0, 0.05)" };
 
+  const statementRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: statementRef,
+    offset: ["start 0.8", "start 0.2"],
+  });
+
+  const words1 =
+    "When workflows sprawl, navigation tangles, and platforms quietly compete with themselves, something feels off. That’s where I start paying attention.".split(
+      " ",
+    );
+  const words2 =
+    "I’m a UX designer and systems-focused thinker who listens closely, studies patterns, and helps teams untangle complexity. My work is about turning friction into clarity and helping digital spaces feel simpler, steadier, and easier to navigate.".split(
+      " ",
+    );
+
+  const totalWords = words1.length + words2.length;
+
   return (
     <section className="scroll-mt-28">
-      <style>
-        {`
-          @keyframes subtle-gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-          }
-          .animated-gradient-card {
-            background: linear-gradient(-45deg, #bbf7d0, #fef08a, #86efac, #fde68a, #4ade80, #fcd34d);
-            background-size: 400% 400%;
-            animation: subtle-gradient 15s ease infinite;
-          }
-        `}
-      </style>
       <div
         id="skills"
         className="
@@ -82,46 +108,80 @@ function Skills() {
         <div className="relative z-10 mx-auto max-w-[1500px] px-6">
           {/* EYEBROW BLOCK */}
           <div
-            className={`${dmSans.className} flex items-center gap-2 text-sm sm:text-base font-semibold uppercase tracking-[0.2em] text-zinc-600/60 pointer-events-none select-none pl-10 sm:pl-20 lg:pl-32 mb-6`}
+            className={`${dmSans.className} flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none pl-10 sm:pl-20 lg:pl-32 mb-6`}
           >
             <div className="w-2 h-2 bg-[#ff4500]" />
             FOCUS
           </div>
 
           {/* NEW STRATEGIC STATEMENT */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.6 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+          <div
+            ref={statementRef}
             className={`
               ${dmSans.className}
               mb-24 text-4xl sm:text-5xl lg:text-5xl text-zinc-900 leading-[1.2]
               pl-10 sm:pl-20 lg:pl-32 max-w-5xl
             `}
           >
-            <span className="block mb-8 font-medium">
-              When workflows sprawl, navigation tangles, and platforms quietly compete with themselves, something feels <span className="italic">off</span>. That’s where I start paying attention.
-            </span>
-            <span className="block text-zinc-700 font-normal">
-              I’m a UX designer and systems-focused thinker who listens closely, studies patterns, and helps teams untangle complexity. My work is about turning friction into clarity and helping digital spaces feel simpler, steadier, and easier to navigate.
-            </span>
-          </motion.p>
+            <div className="block mb-8 font-medium">
+              {words1.map((word, i) => {
+                const start = i / totalWords;
+                const end = (i + 1) / totalWords;
+                return (
+                  <ScrollWord
+                    key={i}
+                    word={word}
+                    progress={scrollYProgress}
+                    range={[start, end]}
+                    className={word.includes("off") ? "italic" : ""}
+                  />
+                );
+              })}
+            </div>
+
+            <div className="block text-zinc-700 font-normal">
+              {words2.map((word, i) => {
+                const globalIndex = words1.length + i;
+                const start = globalIndex / totalWords;
+                const end = (globalIndex + 1) / totalWords;
+                return (
+                  <ScrollWord
+                    key={i}
+                    word={word}
+                    progress={scrollYProgress}
+                    range={[start, end]}
+                  />
+                );
+              })}
+            </div>
+          </div>
         </div>
 
         {/* SKILL CARDS */}
         <div className="mx-auto mt-0 mb-20 max-w-[1500px] px-6">
-          <div className="animated-gradient-card rounded-3xl overflow-hidden p-8 sm:p-12 lg:p-20 flex flex-col items-end gap-12">
+          <div className="relative rounded-3xl overflow-hidden p-2 sm:p-4 lg:p-6 flex flex-col items-end gap-4 sm:gap-8 bg-[linear-gradient(-45deg,_#bbf7d0,_#fef08a,_#86efac,_#fde68a,_#4ade80,_#fcd34d)]">
+            {/* BACKGROUND TEXT - TOP LEFT */}
+            <div className="absolute top-2 left-4 sm:top-4 sm:left-6 lg:top-5 lg:left-7 z-0 pointer-events-none">
+              <h2
+                className={`
+                  ${dmSans.className}
+                  text-2xl sm:text-4xl lg:text-6xl text-zinc-900 leading-none tracking-tighter
+                `}
+              >
+                Where insight
+              </h2>
+            </div>
+
             {skillCards.map((section) => (
               <article
                 key={section.title}
-                className="bg-[#f4f3ec]/30 backdrop-blur-sm flex min-h-[320px] w-full max-w-4xl flex-col rounded-3xl px-7 py-8 sm:px-10 sm:py-12 border border-white/20"
+                className="bg-[#f4f3ec]/30 backdrop-blur-sm flex min-h-[320px] w-full max-w-4xl flex-col rounded-3xl px-7 py-8 sm:px-10 sm:py-12 border border-white/20 relative z-10"
               >
                 <div className="w-full relative mb-6">
                   <h3
                     className={`
                       ${dmSans.className}
-                      absolute left-0 bottom-[12px] flex items-center gap-2 text-sm sm:text-base font-semibold uppercase tracking-[0.2em] text-zinc-600/60 pointer-events-none select-none
+                      absolute left-0 bottom-[12px] flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none
                     `}
                   >
                     <div className="w-2 h-2 bg-[#ff4500]" />
@@ -144,14 +204,26 @@ function Skills() {
                 </div>
               </article>
             ))}
+
+            {/* BACKGROUND TEXT - BOTTOM LEFT */}
+            <div className="absolute bottom-2 left-4 sm:bottom-4 sm:left-6 lg:bottom-5 lg:left-7 z-0 pointer-events-none">
+              <h2
+                className={`
+                  ${playfair.className}
+                  text-2xl sm:text-4xl lg:text-6xl font-medium text-zinc-900 italic leading-none tracking-tight
+                `}
+              >
+                turns into action
+              </h2>
+            </div>
           </div>
         </div>
 
         {/* TOOL SECTION HEADING */}
-        <div className="relative z-10 mx-auto max-w-[1500px] px-6 mt-48 mb-16">
+        <div className="relative z-10 mx-auto max-w-[1500px] px-6 mt-48 mb-6">
           <div className="w-full relative mb-6">
             <div
-              className={`${dmSans.className} absolute left-0 bottom-[12px] flex items-center gap-2 text-sm sm:text-base font-semibold uppercase tracking-[0.2em] text-zinc-600/60 pointer-events-none select-none`}
+              className={`${dmSans.className} absolute left-0 bottom-[12px] flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none`}
             >
               <div className="w-2 h-2 bg-[#ff4500]" />
               TECHNOLOGY
@@ -179,6 +251,12 @@ function Skills() {
                 >
                   A curated set of research, design, prototyping, and collaboration tools that support evidence-driven decisions and scalable digital systems.
                 </p>
+
+                <div
+                  className={`${dmSans.className} mt-12 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none`}
+                >
+                  SELECTED TOOLS
+                </div>
               </div>
             </div>
             <p
@@ -265,7 +343,7 @@ function Skills() {
                 {/* EYEBROW BLOCK AT THE TOP */}
                 <div className="w-full relative mt-4 mb-6">
                   <div
-                    className={`${dmSans.className} absolute left-0 bottom-[12px] flex items-center gap-2 text-sm sm:text-base font-semibold uppercase tracking-[0.2em] text-zinc-600/60 pointer-events-none select-none`}
+                    className={`${dmSans.className} absolute left-0 bottom-[12px] flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none`}
                   >
                     <div className="w-2 h-2 bg-[#ff4500]" />
                     CERTIFICATION
@@ -283,7 +361,8 @@ function Skills() {
                     text-center text-2xl sm:text-4xl lg:text-6xl font-medium text-zinc-900 leading-tight mb-4
                   `}
                   >
-                    I earned UX research certification                 </h4>
+                    Certified in UX research
+                  </h4>
                   <p
                     className={`
                     ${dmSans.className}
@@ -306,6 +385,117 @@ function Skills() {
                       I completed 30+ hours of advanced UX training, including a focused research specialty track and passing all associated exams. This coursework strengthened and formalized my research practice, expanding both methodological depth and strategic thinking.
                       <br /><br />
                       The training emphasized connecting research rigor to real product decisions, reinforcing how analytics, qualitative insight, and operational structure work together to support scalable UX.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+
+        {/* Excellence Recognition Card - REVERSED */}
+        <div className="relative z-10 mx-auto max-w-[1500px] px-6 mt-8">
+          <div
+            className="relative overflow-hidden mx-auto mb-6 w-full rounded-3xl bg-stone-900/5 p-6 pb-0 sm:p-8 sm:pb-0 md:p-10 md:pb-0 lg:p-12 lg:pb-0"
+          >
+            <div className="flex flex-col items-center gap-10 md:gap-14 pb-16">
+              {/* IMAGE (RIGHT) */}
+              <motion.div
+                initial={{ opacity: 0, x: 20, y: 20, rotate: 5 }}
+                whileInView={{ opacity: 1, x: 0, y: 0, rotate: 15 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="absolute right-[10px] bottom-[-90px] z-0 sm:right-[-10px] sm:bottom-[-130px] lg:right-[-30px] lg:bottom-[-170px]"
+                style={{
+                  WebkitMaskImage:
+                    "linear-gradient(to bottom, transparent 5%, black 100%)",
+                  maskImage:
+                    "linear-gradient(to bottom, transparent 5%, black 100%)",
+                }}
+              >
+                <img
+                  src="/COE-badge.png"
+                  alt="CASE Gold Circle of Excellence Award badge"
+                  className="h-[250px] sm:h-[400px] md:h-[550px] lg:h-[700px] w-auto drop-shadow-2xl opacity-100"
+                />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+                className="relative z-10 w-full flex flex-col"
+              >
+                {/* EYEBROW BLOCK AT THE TOP - Mirrored to Right */}
+                <div className="w-full relative mt-4 mb-6">
+                  <div
+                    className={`${dmSans.className} absolute left-0 bottom-[12px] flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none`}
+                  >
+                    <div className="w-2 h-2 bg-[#ff4500]" />
+                    RECOGNITION
+                  </div>
+                  <div
+                    className="w-full border-t-[3px] border-dotted border-zinc-900/10"
+                  />
+                </div>
+
+                {/* HEADINGS */}
+                <div className="mb-8">
+                  <h4
+                    className={`
+                    ${playfair.className}
+                    text-center text-2xl sm:text-4xl lg:text-6xl font-medium text-zinc-900 leading-tight mb-4
+                  `}
+                  >
+                    Recognized for Excellence
+                  </h4>
+                  <p
+                    className={`
+                    ${dmSans.className}
+                    text-right mb-4 text-4xl sm:text-5xl lg:text-6xl font-normal text-zinc-800 italic
+                  `}
+                  >
+                    by national award committees
+                  </p>
+                </div>
+
+                {/* BOTTOM SECTION - Paragraph on Left */}
+                <div className="flex justify-start pt-0 pl-10 sm:pl-20 lg:pl-32">
+                  <div className="max-w-md">
+                    <p
+                      className={`
+                      ${dmSans.className}
+                      text-left text-lg sm:text-xl leading-relaxed text-zinc-800
+                    `}
+                    >
+                      Work I contributed to has earned national recognition. The UCSF Magazine website, where I led information architecture, conducted user interviews, and shaped user-tested navigation, was awarded the{" "}
+                      <a
+                        href="https://www.case.org/awards/circle-excellence/2022/ucsf-magazine-website"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline font-medium inline-flex items-center gap-1"
+                      >
+                        CASE Gold Circle of Excellence Award
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="h-4 w-4 opacity-80"
+                          aria-hidden="true"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                          />
+                        </svg>
+                      </a>
+                      .
+                      <br /><br />
+                      This award highlights the effectiveness of collaborative systems-thinking and a commitment to creating digital experiences that are both visually compelling and intuitively structured for complex audiences.
                     </p>
                   </div>
                 </div>

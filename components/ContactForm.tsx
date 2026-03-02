@@ -60,7 +60,7 @@ function ContactForm() {
           className="mt-4 bg-transparent p-4 text-center text-gray-100
             sm:col-span-2"
         >
-          <p className="text-2xl text-white">
+          <p className="text-2xl text-zinc-900">
             Thanks! I will be in contact soon.
           </p>
         </div>
@@ -72,7 +72,7 @@ function ContactForm() {
           <div className="sm:col-span-1">
             <label
               htmlFor="name"
-              className="block text-sm font-medium text-white"
+              className="block text-sm font-medium text-zinc-900"
             >
               Name
             </label>
@@ -83,8 +83,8 @@ function ContactForm() {
               autoComplete="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="mt-2 w-full border border-[var(--background)] bg-transparent
-                px-3 py-2 text-sm text-gray-100 outline-none
+              className="mt-2 w-full border border-zinc-900/10 bg-white/40
+                px-3 py-2 text-sm text-zinc-900 outline-none
                 focus:border-zinc-500"
               placeholder="Your name"
             />
@@ -93,7 +93,7 @@ function ContactForm() {
           <div className="sm:col-span-1">
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-white"
+              className="block text-sm font-medium text-zinc-900"
             >
               Email
             </label>
@@ -106,12 +106,11 @@ function ContactForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={`
-                mt-2 w-full bg-transparent px-3 py-2 text-sm text-gray-100 
+                mt-2 w-full bg-white/40 px-3 py-2 text-sm text-zinc-900 
                 outline-none focus:border-zinc-500 border
-                ${
-                  email && !isEmailValid(email)
-                    ? "border-red-400"
-                    : "border-[var(--background)]"
+                ${email && !isEmailValid(email)
+                  ? "border-red-400"
+                  : "border-zinc-900/10"
                 }
               `}
               placeholder="you@example.com"
@@ -121,7 +120,7 @@ function ContactForm() {
           <div className="sm:col-span-2">
             <label
               htmlFor="message"
-              className="block text-sm font-medium text-white"
+              className="block text-sm font-medium text-zinc-900"
             >
               Message
             </label>
@@ -132,8 +131,8 @@ function ContactForm() {
               required
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="mt-2 w-full border border-[var(--background)] bg-transparent
-                px-3 py-2 text-sm text-gray-100 outline-none
+              className="mt-2 w-full border border-zinc-900/10 bg-white/40
+                px-3 py-2 text-sm text-zinc-900 outline-none
                 focus:border-zinc-500"
               placeholder="Tell me about your project..."
             />
@@ -145,15 +144,10 @@ function ContactForm() {
               <button
                 type="submit"
                 disabled={!isFormValid}
-                className={`
-                  w-44 rounded-full border border-[var(--white)] bg-transparent
-                  px-5 py-3 text-sm font-semibold uppercase tracking-wide
-                  text-[var(--foreground)] transition
-                  cursor-pointer
-                  [--secondary-light:rgba(71,85,105,0.35)]
-                  hover:bg-[var(--secondary-light)] hover:text-white
-                  disabled:opacity-60 disabled:cursor-not-allowed
-                `}
+                className="w-48 rounded-full bg-zinc-900 px-6 py-4
+                    text-sm font-semibold uppercase tracking-wide text-white
+                    transition hover:bg-zinc-800 cursor-pointer shadow-lg shadow-zinc-900/10
+                    disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 Send Message
               </button>
