@@ -112,10 +112,10 @@ export default function Quote() {
   return (
     <section
       id="projects"
-      className="relative right-[50%] left-[50%] -mt-32 -mr-[50vw] -ml-[50vw]
+      className="relative right-[50%] left-[50%] -mr-[50vw] -ml-[50vw]
         w-screen bg-[#f4f3ec] px-6 pb-40 pt-24 text-black sm:px-12"
     >
-      <div className="relative mx-auto mt-40 max-w-[1500px] px-6">
+      <div className="relative mx-auto mt-20 max-w-[1500px] px-6">
         {/* EYEBROW */}
         <div className="w-full relative mb-6">
           <div

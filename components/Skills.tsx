@@ -100,7 +100,7 @@ function Skills() {
         className="
           relative right-1/2 left-1/2 -mx-[50vw]
           w-screen bg-[#f4f3ec]
-          px-6 pt-32 pb-0 sm:px-12 sm:pt-40 sm:pb-0
+          px-6 pt-28 pb-24 sm:px-12 sm:pt-44 sm:pb-28
           overflow-hidden
         "
       >
@@ -119,7 +119,7 @@ function Skills() {
             ref={statementRef}
             className={`
               ${dmSans.className}
-              mb-24 text-4xl sm:text-5xl lg:text-5xl text-zinc-900 leading-[1.2]
+              mb-28 sm:mb-44 text-4xl sm:text-5xl lg:text-5xl text-zinc-900 leading-[1.2]
               pl-10 sm:pl-20 lg:pl-32 max-w-5xl
             `}
           >
@@ -158,8 +158,8 @@ function Skills() {
         </div>
 
         {/* SKILL CARDS */}
-        <div className="mx-auto mt-0 mb-20 max-w-[1500px] px-6">
-          <div className="relative rounded-3xl overflow-hidden p-2 sm:p-4 lg:p-6 flex flex-col items-end gap-4 sm:gap-8 bg-[linear-gradient(-45deg,_#bbf7d0,_#fef08a,_#86efac,_#fde68a,_#4ade80,_#fcd34d)]">
+        <div className="mx-auto mt-0 mb-28 max-w-[1500px] px-6">
+          <div className="relative rounded-3xl overflow-hidden p-2 sm:p-4 lg:p-6 flex flex-col items-end gap-4 sm:gap-8 bg-stone-900/5">
             {/* BACKGROUND TEXT - TOP LEFT */}
             <div className="absolute top-2 left-4 sm:top-4 sm:left-6 lg:top-5 lg:left-7 z-0 pointer-events-none">
               <h2
@@ -196,7 +196,7 @@ function Skills() {
                   <p
                     className={`
                         ${dmSans.className}
-                        text-2xl sm:text-3xl leading-relaxed text-zinc-700
+                        text-2xl sm:text-3xl leading-[1.5] text-zinc-700
                       `}
                   >
                     {section.items.join(" • ")}
@@ -220,7 +220,7 @@ function Skills() {
         </div>
 
         {/* TOOL SECTION HEADING */}
-        <div className="relative z-10 mx-auto max-w-[1500px] px-6 mt-48 mb-6">
+        <div className="relative z-10 mx-auto max-w-[1500px] px-6 mt-28 mb-8">
           <div className="w-full relative mb-6">
             <div
               className={`${dmSans.className} absolute left-0 bottom-[12px] flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none`}
@@ -246,7 +246,7 @@ function Skills() {
                 <p
                   className={`
                         ${dmSans.className}
-                        text-left text-lg sm:text-xl leading-relaxed text-zinc-800
+                        text-left text-lg sm:text-xl leading-[1.5] text-zinc-800
                       `}
                 >
                   A curated set of research, design, prototyping, and collaboration tools that support evidence-driven decisions and scalable digital systems.
@@ -308,9 +308,9 @@ function Skills() {
         </div>
 
         {/* NN/g Certification Card */}
-        <div className="relative z-10 mx-auto max-w-[1500px] px-6 mt-32">
+        <div className="relative z-10 mx-auto max-w-[1500px] px-6 mt-0">
           <div
-            className="relative overflow-hidden mx-auto mb-6 w-full rounded-3xl bg-stone-900/5 p-6 pb-0 sm:p-8 sm:pb-0 md:p-10 md:pb-0 lg:p-12 lg:pb-0"
+            className="relative overflow-hidden mx-auto mb-0 w-full rounded-3xl bg-stone-900/5 p-6 pb-0 sm:p-8 sm:pb-0 md:p-10 md:pb-0 lg:p-12 lg:pb-0"
           >
             <div className="flex flex-col items-center gap-10 md:gap-14 pb-16">
               <motion.div
@@ -333,13 +333,7 @@ function Skills() {
                 />
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
-                className="relative z-10 w-full flex flex-col"
-              >
+              <div className="relative z-10 w-full flex flex-col">
                 {/* EYEBROW BLOCK AT THE TOP */}
                 <div className="w-full relative mt-4 mb-6">
                   <div
@@ -361,7 +355,7 @@ function Skills() {
                     text-center text-2xl sm:text-4xl lg:text-6xl font-medium text-zinc-900 leading-tight mb-4
                   `}
                   >
-                    Certified in UX research
+                    Certified in UX research through
                   </h4>
                   <p
                     className={`
@@ -369,7 +363,7 @@ function Skills() {
                     text-left mb-4 text-4xl sm:text-5xl lg:text-6xl font-normal text-zinc-800 italic
                   `}
                   >
-                    through Nielsen Norman Group
+                    Nielsen Norman Group
                   </p>
                 </div>
 
@@ -379,7 +373,7 @@ function Skills() {
                     <p
                       className={`
                       ${dmSans.className}
-                      text-left text-lg sm:text-xl leading-relaxed text-zinc-800
+                      text-left text-lg sm:text-xl leading-[1.5] text-zinc-800
                     `}
                     >
                       I completed 30+ hours of advanced UX training, including a focused research specialty track and passing all associated exams. This coursework strengthened and formalized my research practice, expanding both methodological depth and strategic thinking.
@@ -388,45 +382,18 @@ function Skills() {
                     </p>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Excellence Recognition Card - REVERSED */}
-        <div className="relative z-10 mx-auto max-w-[1500px] px-6 mt-8">
+        <div className="relative z-10 mx-auto max-w-[1500px] px-6 mt-28">
           <div
-            className="relative overflow-hidden mx-auto mb-6 w-full rounded-3xl bg-stone-900/5 p-6 pb-0 sm:p-8 sm:pb-0 md:p-10 md:pb-0 lg:p-12 lg:pb-0"
+            className="relative overflow-visible mx-auto mb-6 w-full p-0"
           >
             <div className="flex flex-col items-center gap-10 md:gap-14 pb-16">
-              {/* IMAGE (RIGHT) */}
-              <motion.div
-                initial={{ opacity: 0, x: 20, y: 20, rotate: 5 }}
-                whileInView={{ opacity: 1, x: 0, y: 0, rotate: 15 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="absolute right-[10px] bottom-[-90px] z-0 sm:right-[-10px] sm:bottom-[-130px] lg:right-[-30px] lg:bottom-[-170px]"
-                style={{
-                  WebkitMaskImage:
-                    "linear-gradient(to bottom, transparent 5%, black 100%)",
-                  maskImage:
-                    "linear-gradient(to bottom, transparent 5%, black 100%)",
-                }}
-              >
-                <img
-                  src="/COE-badge.png"
-                  alt="CASE Gold Circle of Excellence Award badge"
-                  className="h-[250px] sm:h-[400px] md:h-[550px] lg:h-[700px] w-auto drop-shadow-2xl opacity-100"
-                />
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
-                className="relative z-10 w-full flex flex-col"
-              >
+              <div className="relative z-10 w-full flex flex-col">
                 {/* EYEBROW BLOCK AT THE TOP - Mirrored to Right */}
                 <div className="w-full relative mt-4 mb-6">
                   <div
@@ -445,61 +412,90 @@ function Skills() {
                   <h4
                     className={`
                     ${playfair.className}
-                    text-center text-2xl sm:text-4xl lg:text-6xl font-medium text-zinc-900 leading-tight mb-4
+                    not-italic text-right text-2xl sm:text-4xl lg:text-6xl font-medium text-zinc-900 leading-tight mb-4
                   `}
                   >
-                    Recognized for Excellence
+                    Recognized for excellence by
                   </h4>
                   <p
                     className={`
                     ${dmSans.className}
-                    text-right mb-4 text-4xl sm:text-5xl lg:text-6xl font-normal text-zinc-800 italic
+                    not-italic text-right text-2xl sm:text-4xl lg:text-6xl font-normal text-zinc-800 leading-tight
                   `}
                   >
-                    by national award committees
+                    national and institutional award committees
                   </p>
                 </div>
 
-                {/* BOTTOM SECTION - Paragraph on Left */}
-                <div className="flex justify-start pt-0 pl-10 sm:pl-20 lg:pl-32">
-                  <div className="max-w-md">
-                    <p
-                      className={`
-                      ${dmSans.className}
-                      text-left text-lg sm:text-xl leading-relaxed text-zinc-800
-                    `}
-                    >
-                      Work I contributed to has earned national recognition. The UCSF Magazine website, where I led information architecture, conducted user interviews, and shaped user-tested navigation, was awarded the{" "}
-                      <a
-                        href="https://www.case.org/awards/circle-excellence/2022/ucsf-magazine-website"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="underline font-medium inline-flex items-center gap-1"
-                      >
-                        CASE Gold Circle of Excellence Award
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="h-4 w-4 opacity-80"
-                          aria-hidden="true"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-                          />
-                        </svg>
-                      </a>
-                      .
-                      <br /><br />
-                      This award highlights the effectiveness of collaborative systems-thinking and a commitment to creating digital experiences that are both visually compelling and intuitively structured for complex audiences.
-                    </p>
+                {/* AWARDS LIST */}
+                <div className="pt-0">
+                  <div className="grid gap-6 md:grid-cols-2">
+                    <article className="group h-[320px] [perspective:1200px]">
+                      <div className="relative h-full w-full transition-transform duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] group-focus-within:[transform:rotateY(180deg)]">
+                        <div className="absolute inset-0 rounded-xl bg-[#f4f3ec]/85 p-6 [backface-visibility:hidden]">
+                          <div className="flex h-full flex-col items-center justify-center text-center">
+                            <img
+                              src="/COE-badge.png"
+                              alt="CASE Gold Circle of Excellence Award badge"
+                              className="h-28 w-28 object-contain"
+                            />
+                            <h5 className={`${dmSans.className} mt-5 text-2xl font-semibold text-zinc-900`}>
+                              CASE Gold Circle of Excellence Award
+                            </h5>
+                          </div>
+                        </div>
+                        <div className="absolute inset-0 rounded-xl bg-zinc-900 p-6 text-white [backface-visibility:hidden] [transform:rotateY(180deg)]">
+                          <div className="flex h-full flex-col">
+                            <p className={`${dmSans.className} text-lg leading-[1.5]`}>
+                              Work I contributed to has earned national recognition. The UCSF Magazine website, where I led information architecture, conducted user interviews, and shaped user-tested navigation, received this award for excellence in digital experience.
+                            </p>
+                            <a
+                              href="https://www.case.org/awards/circle-excellence/2022/ucsf-magazine-website"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={`${dmSans.className} mt-auto inline-flex items-center gap-1 text-sm font-semibold underline`}
+                            >
+                              Read the announcement
+                              <span aria-hidden="true">→</span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+
+                    <article className="group h-[320px] [perspective:1200px]">
+                      <div className="relative h-full w-full transition-transform duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] group-focus-within:[transform:rotateY(180deg)]">
+                        <div className="absolute inset-0 rounded-xl bg-[#f4f3ec]/85 p-6 [backface-visibility:hidden]">
+                          <div className="flex h-full flex-col items-center justify-center text-center">
+                            <img
+                              src="https://en.wikipedia.org/wiki/Special:FilePath/Seal_of_the_University_of_California.svg"
+                              alt="Seal of the University of California"
+                              className="h-28 w-28 object-contain"
+                            />
+                            <h5 className={`${dmSans.className} mt-5 text-2xl font-semibold text-zinc-900`}>
+                              Silver Design Award, UC Tech 2025
+                            </h5>
+                          </div>
+                        </div>
+                        <div className="absolute inset-0 rounded-xl bg-zinc-900 p-6 text-white [backface-visibility:hidden] [transform:rotateY(180deg)]">
+                          <div className="flex h-full flex-col">
+                            <p className={`${dmSans.className} text-lg leading-[1.5]`}>
+                              As Lead UX Designer on the rebuild of the UCSF Industry Documents Library, I contributed to the redesign of a 22-million-document public health archive, improving accessibility, search performance, and usability at scale. The cross-functional team&apos;s work was recognized with the 2025 UC Tech Silver Design Award.
+                            </p>
+                            <a
+                              href="#"
+                              className={`${dmSans.className} mt-auto inline-flex items-center gap-1 text-sm font-semibold underline`}
+                            >
+                              Read the announcement
+                              <span aria-hidden="true">→</span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
           </div>
         </div>

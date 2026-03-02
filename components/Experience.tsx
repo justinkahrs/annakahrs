@@ -86,7 +86,7 @@ function Experience() {
                   text-left text-2xl sm:text-4xl lg:text-6xl font-medium 
                   text-zinc-900 leading-tight mb-4`}
               >
-                Shaped through years
+                Shaped through years of
               </motion.h2>
 
               <motion.h3
@@ -98,7 +98,7 @@ function Experience() {
                   text-center text-4xl sm:text-5xl lg:text-6xl font-normal 
                   tracking-tight leading-tight text-zinc-800 italic `}
               >
-                of research, design, and practice
+                research, design, and practice
               </motion.h3>
             </div>
 
@@ -136,7 +136,7 @@ function Experience() {
 
                     {/* RIGHT: Details (Pinned to Right) */}
                     <div className="flex justify-end lg:pr-32">
-                      <div className="max-w-md w-full">
+                      <div className="max-w-md w-full rounded-2xl bg-[#f4f3ec]/55 px-5 py-6">
                         <ul className={`${dmSans.className} space-y-4`}>
                           {job.details.map((detail, idx) => (
                             <li key={idx} className="flex gap-4 text-lg sm:text-xl leading-relaxed text-zinc-700">

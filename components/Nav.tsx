@@ -140,7 +140,7 @@ function Nav({ active, setActive, setPendingTarget }: NavProps) {
   };
 
   return (
-    <nav className="fixed top-0 inset-x-0 z-80 h-[60px]">
+    <nav className="fixed top-0 inset-x-0 z-80 h-[60px] bg-[#f4f3ec]">
       <div
         className="relative z-10 flex h-full w-full max-w-[1920px] mx-auto items-center
           justify-between px-6"

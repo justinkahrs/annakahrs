@@ -15,7 +15,7 @@ const dmSans = DM_Sans({
 
 function Home() {
   return (
-    <section id="home" className="scroll-mt-[60px] mb-40 bg-[#f4f3ec]">
+    <section id="home" className="scroll-mt-[60px] mb-0 bg-[#f4f3ec]">
       <div className="pt-0">
         <div className="relative mx-auto w-full max-w-[1920px] px-6">
           {/* HERO CARD */}
@@ -34,7 +34,7 @@ function Home() {
                 <span
                   className={`
                     ${dmSans.className} 
-                    text-5xl sm:text-7xl lg:text-[7rem] xl:text-[8rem]
+                    text-4xl sm:text-6xl lg:text-[6rem] xl:text-[7rem]
                     font-light tracking-tighter text-zinc-900 leading-[0.85]
                     whitespace-nowrap
                   `}
@@ -44,7 +44,7 @@ function Home() {
                 <span
                   className={`
                     ${playfair.className} 
-                    text-4xl sm:text-6xl lg:text-[6rem] xl:text-[7rem]
+                    text-3xl sm:text-5xl lg:text-[5rem] xl:text-[6rem]
                     font-medium italic text-zinc-800 leading-tight mt-6
                     whitespace-nowrap
                   `}
@@ -54,11 +54,11 @@ function Home() {
               </h1>
 
               {/* BUTTON ROW */}
-              <div className="mt-16 flex flex-wrap justify-center gap-4">
+              <div className="mt-16 flex flex-wrap justify-center gap-3">
                 {/* PRIMARY BUTTON */}
                 <button
-                  className="w-48 rounded-full bg-zinc-900 px-6 py-4
-                    text-sm font-semibold uppercase tracking-wide text-white
+                  className="rounded-xl bg-zinc-900 px-4 py-2.5
+                    text-sm font-semibold text-white
                     hover:bg-zinc-800 cursor-pointer shadow-lg shadow-zinc-900/10"
                   onClick={() => handleScroll("#experience")}
                   type="button"
@@ -69,10 +69,10 @@ function Home() {
                 {/* SECONDARY BUTTON */}
                 <button
                   onClick={() => window.open("/Anna_Kahrs_resume.pdf", "_blank")}
-                  className="w-48 rounded-full border border-zinc-900/10
-                    bg-white/40 backdrop-blur-md px-6 py-4 text-sm font-semibold uppercase
-                    tracking-wide text-zinc-900
-                    cursor-pointer hover:bg-white/60"
+                  className="rounded-xl border border-zinc-900/35
+                    bg-transparent px-4 py-2.5 text-sm font-semibold
+                    text-zinc-900
+                    cursor-pointer hover:bg-zinc-900/5"
                 >
                   View Resume
                 </button>
