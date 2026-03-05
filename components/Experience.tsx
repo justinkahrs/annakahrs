@@ -116,9 +116,9 @@ function Experience() {
                   className="relative"
                 >
                   {/* CONTENT GRID */}
-                  <div className="flex flex-col lg:grid lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-16">
+                  <div className="flex flex-col lg:flex-row justify-between items-start gap-12 lg:gap-24">
                     {/* LEFT: Role & Location */}
-                    <div>
+                    <div className="w-full lg:max-w-md shrink-0">
                       <div className={`${dmSans.className} flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none mb-3`}>
                         {job.period}
                       </div>
@@ -138,13 +138,13 @@ function Experience() {
                       )}
                     </div>
 
-                    {/* RIGHT: Details (Pinned to Right) */}
-                    <div className="flex justify-end lg:pr-32">
-                      <div className="max-w-md w-full rounded-2xl bg-[#f4f3ec]/55 px-5 py-6">
+                    {/* RIGHT: Details (Wider, no card color) */}
+                    <div className="relative w-full grow">
+                      <div className="px-6 py-6 sm:px-10">
                         <ul className={`${dmSans.className} space-y-4`}>
                           {job.details.map((detail, idx) => (
                             <li key={idx} className="flex gap-4 text-lg sm:text-xl leading-relaxed text-zinc-700">
-                              <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#ff4500]/30" />
+                              <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-900/10" />
                               {detail}
                             </li>
                           ))}

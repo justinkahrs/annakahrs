@@ -410,7 +410,7 @@ function Skills() {
                   />
                 </div>
 
-                {/* HEADINGS */}
+                {/* HEADINGS - Back to Right Aligned */}
                 <div className="mb-8">
                   <h4
                     className={`
@@ -430,72 +430,40 @@ function Skills() {
                   </p>
                 </div>
 
-                {/* AWARDS LIST */}
-                <div className="pt-0">
-                  <div className="grid gap-6 md:grid-cols-2">
-                    <article className="group h-[320px] [perspective:1200px]">
-                      <div className="relative h-full w-full transition-transform duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] group-focus-within:[transform:rotateY(180deg)]">
-                        <div className="absolute inset-0 rounded-xl bg-[#f4f3ec]/85 p-6 [backface-visibility:hidden]">
-                          <div className="flex h-full flex-col items-center justify-center text-center">
-                            <img
-                              src="/COE-badge.png"
-                              alt="CASE Gold Circle of Excellence Award badge"
-                              className="h-28 w-28 object-contain"
-                            />
-                            <h5 className={`${dmSans.className} mt-5 text-2xl font-semibold text-zinc-900`}>
-                              CASE Gold Circle of Excellence Award
-                            </h5>
-                          </div>
-                        </div>
-                        <div className="absolute inset-0 rounded-xl bg-zinc-900 p-6 text-white [backface-visibility:hidden] [transform:rotateY(180deg)]">
-                          <div className="flex h-full flex-col">
-                            <p className={`${dmSans.className} text-lg leading-[1.5]`}>
-                              Work I contributed to has earned national recognition. The UCSF Magazine website, where I led information architecture, conducted user interviews, and shaped user-tested navigation, received this award for excellence in digital experience.
-                            </p>
-                            <a
-                              href="https://www.case.org/awards/circle-excellence/2022/ucsf-magazine-website"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className={`${dmSans.className} mt-auto inline-flex items-center gap-1 text-sm font-semibold underline`}
-                            >
-                              Read the announcement
-                              <span aria-hidden="true">→</span>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </article>
+                <div className="flex flex-col lg:flex-row justify-between items-start gap-12 pt-0">
+                  {/* LEFT SIDE: CONSOLIDATED PARAGRAPH (Aligned with Eyebrow) */}
+                  <div className="flex flex-col pl-10 sm:pl-20 lg:pl-32 w-full order-2 lg:order-1">
+                    <div className="max-w-md">
+                      <p className={`${dmSans.className} text-lg sm:text-xl leading-[1.5] text-zinc-800`}>
+                        Work I contributed to has received national recognition for excellence in digital experience and design. My work has included leading information architecture, conducting user interviews, shaping user tested navigation, and serving as Lead UX Designer on the redesign of a large scale public health archive, improving accessibility, search performance, and usability across millions of documents.
+                      </p>
+                    </div>
+                  </div>
 
-                    <article className="group h-[320px] [perspective:1200px]">
-                      <div className="relative h-full w-full transition-transform duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] group-focus-within:[transform:rotateY(180deg)]">
-                        <div className="absolute inset-0 rounded-xl bg-[#f4f3ec]/85 p-6 [backface-visibility:hidden]">
-                          <div className="flex h-full flex-col items-center justify-center text-center">
-                            <img
-                              src="https://en.wikipedia.org/wiki/Special:FilePath/Seal_of_the_University_of_California.svg"
-                              alt="Seal of the University of California"
-                              className="h-28 w-28 object-contain"
-                            />
-                            <h5 className={`${dmSans.className} mt-5 text-2xl font-semibold text-zinc-900`}>
-                              Silver Design Award, UC Tech 2025
-                            </h5>
-                          </div>
-                        </div>
-                        <div className="absolute inset-0 rounded-xl bg-zinc-900 p-6 text-white [backface-visibility:hidden] [transform:rotateY(180deg)]">
-                          <div className="flex h-full flex-col">
-                            <p className={`${dmSans.className} text-lg leading-[1.5]`}>
-                              As Lead UX Designer on the rebuild of the UCSF Industry Documents Library, I contributed to the redesign of a 22-million-document public health archive, improving accessibility, search performance, and usability at scale. The cross-functional team&apos;s work was recognized with the 2025 UC Tech Silver Design Award.
-                            </p>
-                            <a
-                              href="#"
-                              className={`${dmSans.className} mt-auto inline-flex items-center gap-1 text-sm font-semibold underline`}
-                            >
-                              Read the announcement
-                              <span aria-hidden="true">→</span>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </article>
+                  {/* RIGHT SIDE: LOGOS SIDE-BY-SIDE ON THE EDGE */}
+                  <div className="flex flex-row gap-8 sm:gap-12 items-start order-1 lg:order-2">
+                    <a
+                      href="https://www.case.org/awards/circle-excellence/2022/ucsf-magazine-website"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="transition-transform hover:scale-105"
+                    >
+                      <img
+                        src="/case.png"
+                        alt="CASE Gold Circle of Excellence Award Announcement"
+                        className="h-72 sm:h-80 w-auto object-contain object-top"
+                      />
+                    </a>
+                    <a
+                      href="#"
+                      className="transition-transform hover:scale-105"
+                    >
+                      <img
+                        src="/uc-tech.png"
+                        alt="UC Tech Silver Design Award Announcement"
+                        className="h-72 sm:h-80 w-auto object-contain object-top"
+                      />
+                    </a>
                   </div>
                 </div>
               </div>

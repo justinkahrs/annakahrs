@@ -68,7 +68,7 @@ function Home() {
 
                 {/* SECONDARY BUTTON */}
                 <button
-                  onClick={() => window.open("/Anna_Kahrs_resume.pdf", "_blank")}
+                  onClick={() => handleScroll("#experience")}
                   className="rounded-xl border border-zinc-900/35
                     bg-transparent px-4 py-2.5 text-sm font-semibold
                     text-zinc-900
