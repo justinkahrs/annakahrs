@@ -26,7 +26,7 @@ function Home() {
             >
               {/* EYEBROW */}
               <div className="flex items-center justify-center gap-2 text-xs sm:text-sm font-light uppercase tracking-[0.12em] text-zinc-600/60 mb-12">
-                Lead UX Designer
+                Anna Kahrs • Lead UX Designer
               </div>
 
               {/* HEADLINE */}

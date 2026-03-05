@@ -29,6 +29,7 @@ const SKILL_SECTIONS = [
       "Prototyping",
       "Survey Design",
       "Service Design",
+      "Visual Design",
     ],
   },
   {
@@ -40,6 +41,8 @@ const SKILL_SECTIONS = [
       "Journey Mapping",
       "Personas",
       "Content Modeling",
+      "AI Prototyping",
+      "Systems Thinking",
     ],
   },
   {
@@ -175,7 +178,7 @@ function Skills() {
             {skillCards.map((section) => (
               <article
                 key={section.title}
-                className="bg-[#f4f3ec]/30 backdrop-blur-sm flex min-h-[320px] w-full max-w-4xl flex-col rounded-3xl px-7 py-8 sm:px-10 sm:py-12 border border-white/20 relative z-10"
+                className="bg-[#f4f3ec]/30 backdrop-blur-sm flex min-h-[320px] w-full md:w-2/3 lg:w-1/2 flex-col rounded-3xl px-7 py-8 sm:px-10 sm:py-12 border border-white/20 relative z-10"
               >
                 <div className="w-full relative mb-6">
                   <h3
@@ -184,7 +187,7 @@ function Skills() {
                       absolute left-0 bottom-[12px] flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none
                     `}
                   >
-                    <div className="w-2 h-2 bg-[#ff4500]" />
+
                     {section.title}
                   </h3>
                   <div
@@ -196,7 +199,7 @@ function Skills() {
                   <p
                     className={`
                         ${dmSans.className}
-                        text-2xl sm:text-3xl leading-[1.5] text-zinc-700
+                        text-lg sm:text-xl leading-[1.5] text-zinc-800
                       `}
                   >
                     {section.items.join(" • ")}
@@ -376,7 +379,7 @@ function Skills() {
                       text-left text-lg sm:text-xl leading-[1.5] text-zinc-800
                     `}
                     >
-                      I completed 30+ hours of advanced UX training, including a focused research specialty track and passing all associated exams. This coursework strengthened and formalized my research practice, expanding both methodological depth and strategic thinking.
+                      I completed 30+ hours of advanced UX training, including a focused research specialty track.
                       <br /><br />
                       The training emphasized connecting research rigor to real product decisions, reinforcing how analytics, qualitative insight, and operational structure work together to support scalable UX.
                     </p>
@@ -400,7 +403,7 @@ function Skills() {
                     className={`${dmSans.className} absolute left-0 bottom-[12px] flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none`}
                   >
                     <div className="w-2 h-2 bg-[#ff4500]" />
-                    RECOGNITION
+                    RECOGNITION & AWARDS
                   </div>
                   <div
                     className="w-full border-t-[3px] border-dotted border-zinc-900/10"

@@ -22,6 +22,7 @@ function Experience() {
       period: "December 2023 - Present",
       link: "https://www.ucsf.edu",
       location: "San Francisco, CA (Remote)",
+      description: "Top-ranked public health sciences university specializing in biomedical research, education, and clinical care.",
       details: [
         "Lead design system–level work for the enterprise Drupal platform, defining reusable patterns and standards across multiple sites.",
         "Guide information architecture strategy through content audits, user needs analysis, and collaborative working sessions with clients.",
@@ -48,6 +49,7 @@ function Experience() {
       period: "August 2017 - March 2018",
       link: "https://iu.edu",
       location: "Bloomington, IN",
+      description: "Media production studio supporting Indiana University’s teaching, research, and communications through video and digital storytelling.",
       details: [
         "Worked on information architecture for large university sites, shaping navigation and content structure.",
         "Supported workshops, stakeholder sessions, and user research that informed project direction.",
@@ -113,25 +115,27 @@ function Experience() {
                   viewport={{ once: true, amount: 0.2 }}
                   className="relative"
                 >
-                  {/* EYEBROW BLOCK (CLEAN) */}
-                  <div className="w-full relative mb-10">
-                    <div
-                      className={`${dmSans.className} flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none`}
-                    >
-                      {job.company} • {job.period}
-                    </div>
-                  </div>
-
                   {/* CONTENT GRID */}
                   <div className="flex flex-col lg:grid lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-16">
                     {/* LEFT: Role & Location */}
                     <div>
-                      <h4 className={`${playfair.className} text-3xl sm:text-4xl lg:text-5xl font-medium text-zinc-900 leading-tight mb-3`}>
+                      <div className={`${dmSans.className} flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none mb-3`}>
+                        {job.period}
+                      </div>
+                      <h4 className={`${playfair.className} text-3xl sm:text-4xl lg:text-5xl font-medium text-zinc-900 leading-tight mb-2`}>
                         {job.role}
                       </h4>
+                      <div className={`${dmSans.className} text-lg sm:text-xl font-medium text-zinc-800 mb-3`}>
+                        {job.company}
+                      </div>
                       <p className={`${dmSans.className} text-zinc-500 uppercase tracking-[0.15em] text-xs sm:text-sm`}>
                         {job.location}
                       </p>
+                      {job.description && (
+                        <p className={`${dmSans.className} mt-3 text-zinc-600 text-sm sm:text-base leading-relaxed lg:max-w-sm`}>
+                          {job.description}
+                        </p>
+                      )}
                     </div>
 
                     {/* RIGHT: Details (Pinned to Right) */}
