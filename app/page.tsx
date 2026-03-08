@@ -5,17 +5,15 @@ import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
 import Home from "@/components/Home";
 import About from "@/components/About";
-import Contact from "@/components/Contact";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import ThreeBackground from "@/components/ThreeBackground";
 
 export default function App() {
   const [active, setActive] = useState<string>("#home");
   const [pendingTarget, setPendingTarget] = useState<string | null>(null);
   const { scrollY } = useScroll();
   const updateActiveFromScroll = () => {
-    const ids = ["home", "skills", "experience", "projects", "about", "contact"] as const;
+    const ids = ["home", "skills", "experience", "projects", "about"] as const;
     // If a click initiated the scroll, freeze the active state to that target
     // and ignore all scroll-based calculations until the scroll ends.
     if (pendingTarget) {
@@ -31,7 +29,7 @@ export default function App() {
     const atBottom =
       Math.ceil(window.innerHeight + window.scrollY) >= doc.scrollHeight;
     if (atBottom) {
-      setActive("#contact");
+      setActive("#about");
       return;
     }
     // Normal behavior: choose the section closest to a mid-viewport anchor.
@@ -54,9 +52,6 @@ export default function App() {
     updateActiveFromScroll();
   });
   useEffect(() => {
-    updateActiveFromScroll();
-  }, []);
-  useEffect(() => {
     if (!pendingTarget) return;
     const onScrollEnd = () => {
       setPendingTarget(null);
@@ -76,9 +71,8 @@ export default function App() {
     };
   }, [pendingTarget]);
   return (
-    <div className="antialiased bg-[#f4f3ec]">
+    <div className="antialiased bg-[#f1edff]">
       <Nav
-        active={active}
         setActive={setActive}
         setPendingTarget={setPendingTarget}
       />
@@ -90,7 +84,6 @@ export default function App() {
         <Skills />
         <Experience />
         <About />
-        <Contact />
       </main>
       <Footer />
     </div>

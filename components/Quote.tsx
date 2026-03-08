@@ -113,7 +113,7 @@ export default function Quote() {
     <section
       id="projects"
       className="relative right-[50%] left-[50%] -mr-[50vw] -ml-[50vw]
-        w-screen bg-[#f4f3ec] px-6 pb-40 pt-24 text-black sm:px-12"
+        w-screen bg-[#f1edff] px-6 pb-8 pt-24 text-black sm:px-12"
     >
       <div className="relative mx-auto mt-20 max-w-[1500px] px-6">
         {/* EYEBROW */}
@@ -151,8 +151,7 @@ export default function Quote() {
           </div>
 
           <div className="mt-12 flex flex-col lg:flex-row pl-10 sm:pl-20 lg:pl-32 gap-12 text-left">
-            <div className="max-w-md flex gap-6">
-              <span className={`${dmSans.className} text-xs font-bold text-zinc-400 mt-1.5`}>01</span>
+            <div className="max-w-md">
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -220,13 +219,13 @@ This section holds both the work itself and the thinking behind it. Case studies
           </div>
 
           {/* ARROWS AT BOTTOM LEFT */}
-          <div className="flex gap-4 mt-8 pb-10">
+          <div className="flex gap-4 mt-8 pb-2">
             <button
               onClick={() => {
                 const carousel = document.getElementById('case-study-carousel');
                 if (carousel) carousel.scrollBy({ left: -500, behavior: 'smooth' });
               }}
-              className="w-14 h-14 rounded-full border border-zinc-900/10 flex items-center justify-center hover:bg-zinc-900 hover:text-white transition-all duration-300"
+              className="w-14 h-14 border border-zinc-900/5 flex items-center justify-center hover:bg-zinc-900 hover:text-white transition-all duration-300"
               aria-label="Previous"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -238,7 +237,7 @@ This section holds both the work itself and the thinking behind it. Case studies
                 const carousel = document.getElementById('case-study-carousel');
                 if (carousel) carousel.scrollBy({ left: 500, behavior: 'smooth' });
               }}
-              className="w-14 h-14 rounded-full border border-zinc-900/10 flex items-center justify-center hover:bg-zinc-900 hover:text-white transition-all duration-300"
+              className="w-14 h-14 border border-zinc-900/5 flex items-center justify-center hover:bg-zinc-900 hover:text-white transition-all duration-300"
               aria-label="Next"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

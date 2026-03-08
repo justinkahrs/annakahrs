@@ -144,9 +144,9 @@ function ContactForm() {
               <button
                 type="submit"
                 disabled={!isFormValid}
-                className="w-48 rounded-full bg-zinc-900 px-6 py-4
-                    text-sm font-semibold uppercase tracking-wide text-white
-                    transition hover:bg-zinc-800 cursor-pointer shadow-lg shadow-zinc-900/10
+                className="rounded-xl bg-zinc-900 px-4 py-2.5
+                    text-sm font-semibold text-white
+                    hover:bg-zinc-800 cursor-pointer shadow-lg shadow-zinc-900/10
                     disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 Send Message

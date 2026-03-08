@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
 import handleScroll from "@/utils/handleScroll";
 import { Playfair_Display, DM_Sans } from "next/font/google";
 
@@ -27,13 +28,13 @@ type BrandNavItem = {
   icon: string;
 };
 
+type ProjectNavGroup = {
+  heading: string;
+  items: Array<{ label: string; href: string; comingSoon?: boolean }>;
+};
+
 const NAV: NavItem[] = [
-  { label: "Skills", href: "#skills" },
-  { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
   { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
-  { label: "Blog", href: "https://blog.annakahrs.com" },
 ];
 
 const BRAND_NAV: BrandNavItem[] = [
@@ -51,17 +52,43 @@ const BRAND_NAV: BrandNavItem[] = [
   },
 ];
 
+const PROJECT_NAV: ProjectNavGroup[] = [
+  {
+    heading: "UX Research",
+    items: [{ label: "The Manager Journey", href: "/projects/the-manager-journey" }],
+  },
+  {
+    heading: "Visual Design",
+    items: [
+      {
+        label: "Digital A11y Chatbot",
+        href: "",
+        comingSoon: true,
+      },
+      {
+        label: "Staff Intranet",
+        href: "",
+        comingSoon: true,
+      },
+    ],
+  },
+];
+
 interface NavProps {
-  active: string;
   setActive: (href: string) => void;
   setPendingTarget: (href: string | null) => void;
 }
 
-function Nav({ active, setActive, setPendingTarget }: NavProps) {
+function Nav({ setActive, setPendingTarget }: NavProps) {
+  const pathname = usePathname();
+  const isProjectPage = pathname.startsWith("/projects/");
   const [open, setOpen] = useState(false);
   const [brandOpen, setBrandOpen] = useState(false);
+  const [projectOpen, setProjectOpen] = useState(false);
   const brandMenuRef = useRef<HTMLDivElement | null>(null);
+  const projectMenuRef = useRef<HTMLDivElement | null>(null);
   const brandCloseTimerRef = useRef<number | null>(null);
+  const projectCloseTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (open) {
@@ -77,6 +104,9 @@ function Nav({ active, setActive, setPendingTarget }: NavProps) {
       if (!brandMenuRef.current?.contains(target)) {
         setBrandOpen(false);
       }
+      if (!projectMenuRef.current?.contains(target)) {
+        setProjectOpen(false);
+      }
     };
     document.addEventListener("mousedown", onPointerDown);
     return () => document.removeEventListener("mousedown", onPointerDown);
@@ -86,6 +116,9 @@ function Nav({ active, setActive, setPendingTarget }: NavProps) {
     return () => {
       if (brandCloseTimerRef.current) {
         window.clearTimeout(brandCloseTimerRef.current);
+      }
+      if (projectCloseTimerRef.current) {
+        window.clearTimeout(projectCloseTimerRef.current);
       }
     };
   }, []);
@@ -108,10 +141,43 @@ function Nav({ active, setActive, setPendingTarget }: NavProps) {
     }, 120);
   };
 
+  const openProjectMenu = () => {
+    if (projectCloseTimerRef.current) {
+      window.clearTimeout(projectCloseTimerRef.current);
+      projectCloseTimerRef.current = null;
+    }
+    setProjectOpen(true);
+  };
+
+  const closeProjectMenuSoon = () => {
+    if (projectCloseTimerRef.current) {
+      window.clearTimeout(projectCloseTimerRef.current);
+    }
+    projectCloseTimerRef.current = window.setTimeout(() => {
+      setProjectOpen(false);
+      projectCloseTimerRef.current = null;
+    }, 120);
+  };
+
   const handleNavClick = (href: string) => {
     if (href.startsWith("http")) {
       setBrandOpen(false);
+      setProjectOpen(false);
       return window.open(href, "_blank");
+    }
+    if (href.startsWith("/")) {
+      setOpen(false);
+      setBrandOpen(false);
+      setProjectOpen(false);
+      window.location.assign(href);
+      return;
+    }
+    if (href.startsWith("#") && pathname !== "/") {
+      setOpen(false);
+      setBrandOpen(false);
+      setProjectOpen(false);
+      window.location.assign(`/${href}`);
+      return;
     }
     const id = href.replace("#", "");
     const el =
@@ -124,6 +190,7 @@ function Nav({ active, setActive, setPendingTarget }: NavProps) {
     handleScroll(href);
     setOpen(false);
     setBrandOpen(false);
+    setProjectOpen(false);
   };
 
   const handleHomeClick = () => {
@@ -137,149 +204,262 @@ function Nav({ active, setActive, setPendingTarget }: NavProps) {
     handleScroll("#home");
     setOpen(false);
     setBrandOpen(false);
+    setProjectOpen(false);
   };
 
   return (
-    <nav className="fixed top-0 inset-x-0 z-80 h-[60px] bg-[#f4f3ec]">
+    <nav
+      className={`fixed top-0 inset-x-0 z-80 h-[60px] ${isProjectPage ? "bg-[#020b1f]" : "bg-[#f1edff]"}`}
+    >
       <div
         className="relative z-10 flex h-full w-full max-w-[1920px] mx-auto items-center
           justify-between px-6"
       >
-        <div
-          ref={brandMenuRef}
-          className="relative flex items-center gap-1.5"
-          onMouseEnter={openBrandMenu}
-          onMouseLeave={closeBrandMenuSoon}
-        >
-          {/* AK LOGO (flush left) */}
-          <button
-            type="button"
-            className={`${playfair.className} flex items-center justify-center w-9
-              aspect-square rounded-full bg-(--primary) text-white text-sm
-              font-semibold cursor-pointer`}
-            onClick={handleHomeClick}
-            aria-label="Go to home"
-          >
-            AK
-          </button>
-          <button
-            type="button"
-            className="inline-flex h-8 w-8 items-center justify-center rounded-full
-              text-zinc-800/75 hover:text-zinc-900
-              transition-colors duration-150 opacity-100 outline-none ring-0"
-            aria-label="Toggle brand menu"
-            aria-expanded={brandOpen}
+        <div className="relative flex items-center gap-3">
+          <div
+            ref={brandMenuRef}
+            className="relative flex items-center gap-1.5"
             onMouseEnter={openBrandMenu}
-            onClick={() => setBrandOpen((prev) => !prev)}
+            onMouseLeave={closeBrandMenuSoon}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.75}
-              stroke="currentColor"
-              className={`h-4 w-4 transition-transform duration-200 ${brandOpen ? "rotate-180" : ""}`}
+            {/* AK LOGO (flush left) */}
+            <button
+              type="button"
+              className={`${playfair.className} flex items-center justify-center w-9
+                aspect-square rounded-full bg-(--primary) text-white text-sm
+                font-semibold cursor-pointer`}
+              onClick={handleHomeClick}
+              aria-label="Go to home"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-            </svg>
+              AK
+            </button>
+            <button
+              type="button"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-full
+                text-zinc-800/75 hover:text-zinc-900
+                transition-colors duration-150 opacity-100 outline-none ring-0"
+              style={{
+                color: isProjectPage ? "rgb(228 228 231 / 0.85)" : undefined,
+              }}
+              aria-label="Toggle brand menu"
+              aria-expanded={brandOpen}
+              onMouseEnter={openBrandMenu}
+              onClick={() => setBrandOpen((prev) => !prev)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.75}
+                stroke="currentColor"
+                className={`h-4 w-4 transition-transform duration-200 ${brandOpen ? "rotate-180" : ""}`}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+              </svg>
+            </button>
+
+            <AnimatePresence>
+              {brandOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.16 }}
+                  className={`absolute left-0 top-[3.1rem] w-[22rem] rounded-2xl border p-2 shadow-xl ${
+                    isProjectPage
+                      ? "border-zinc-200/15 bg-[#020b1f] shadow-black/40"
+                      : "border-zinc-900/10 bg-[#f1edff] shadow-zinc-900/10"
+                  }`}
+                  onMouseEnter={openBrandMenu}
+                  onMouseLeave={closeBrandMenuSoon}
+                >
+                  {BRAND_NAV.map((item) => (
+                    <button
+                      key={item.label}
+                      type="button"
+                      onClick={() => handleNavClick(item.href)}
+                      className={`flex w-full items-start gap-3 rounded-xl p-3 text-left ${
+                        isProjectPage ? "hover:bg-white/10" : "hover:bg-zinc-900/5"
+                      }`}
+                    >
+                      <span
+                        className={`${playfair.className} mt-0.5 inline-flex h-9 w-9 shrink-0
+                          items-center justify-center rounded-full bg-zinc-900 text-xs
+                          font-semibold text-white`}
+                      >
+                        {item.icon}
+                      </span>
+                      <span className="min-w-0">
+                        <span
+                          className={`${dmSans.className} block text-sm font-semibold ${
+                            isProjectPage ? "text-zinc-100" : "text-zinc-900"
+                          }`}
+                        >
+                          {item.label}
+                        </span>
+                        <span
+                          className={`${dmSans.className} mt-1 block text-xs leading-relaxed ${
+                            isProjectPage ? "text-zinc-400" : "text-zinc-600"
+                          }`}
+                        >
+                          {item.blurb}
+                        </span>
+                      </span>
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          <div
+            className={`hidden h-6 w-px lg:block ${isProjectPage ? "bg-zinc-200/20" : "bg-zinc-900/15"}`}
+          />
+
+          <button
+            type="button"
+            className={`${dmSans.className} hidden lg:inline-flex items-center rounded-full px-3 py-1.5 text-sm font-semibold tracking-[0.12em] transition ${
+              isProjectPage
+                ? "text-zinc-100/90 hover:text-white"
+                : "text-zinc-900/90 hover:text-(--highlight)"
+            }`}
+            onClick={() => (pathname === "/" ? handleHomeClick() : handleNavClick("/"))}
+          >
+            Home
           </button>
 
-          <AnimatePresence>
-            {brandOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: -6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.16 }}
-                className="absolute left-0 top-[3.1rem] w-[22rem] rounded-2xl border
-                  border-zinc-900/10 bg-[#f4f3ec] p-2 shadow-xl shadow-zinc-900/10"
-                onMouseEnter={openBrandMenu}
-                onMouseLeave={closeBrandMenuSoon}
+          <div
+            ref={projectMenuRef}
+            className="relative hidden lg:flex items-center"
+            onMouseEnter={openProjectMenu}
+            onMouseLeave={closeProjectMenuSoon}
+          >
+            <button
+              type="button"
+              className={`${dmSans.className} inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-sm font-semibold tracking-[0.12em] transition ${
+                isProjectPage
+                  ? "text-zinc-100/90 hover:text-white"
+                  : "text-zinc-900/90 hover:text-(--highlight)"
+              }`}
+              aria-label="Toggle projects menu"
+              aria-expanded={projectOpen}
+              onMouseEnter={openProjectMenu}
+              onClick={() => setProjectOpen((prev) => !prev)}
+            >
+              Projects
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.75}
+                stroke="currentColor"
+                className={`h-4 w-4 transition-transform duration-200 ${projectOpen ? "rotate-180" : ""}`}
               >
-                {BRAND_NAV.map((item) => (
-                  <button
-                    key={item.label}
-                    type="button"
-                    onClick={() => handleNavClick(item.href)}
-                    className="flex w-full items-start gap-3 rounded-xl p-3 text-left
-                      hover:bg-zinc-900/5"
-                  >
-                    <span
-                      className={`${playfair.className} mt-0.5 inline-flex h-9 w-9 shrink-0
-                        items-center justify-center rounded-full bg-zinc-900 text-xs
-                        font-semibold text-white`}
-                    >
-                      {item.icon}
-                    </span>
-                    <span className="min-w-0">
-                      <span className={`${dmSans.className} block text-sm font-semibold text-zinc-900`}>
-                        {item.label}
-                      </span>
-                      <span className={`${dmSans.className} mt-1 block text-xs leading-relaxed text-zinc-600`}>
-                        {item.blurb}
-                      </span>
-                    </span>
-                  </button>
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
+                <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+              </svg>
+            </button>
+
+            <AnimatePresence>
+              {projectOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.16 }}
+                  className={`absolute left-0 top-[3.1rem] w-[21rem] rounded-2xl border p-3 shadow-xl ${
+                    isProjectPage
+                      ? "border-zinc-200/15 bg-[#020b1f] shadow-black/40"
+                      : "border-zinc-900/10 bg-[#f1edff] shadow-zinc-900/10"
+                  }`}
+                  onMouseEnter={openProjectMenu}
+                  onMouseLeave={closeProjectMenuSoon}
+                >
+                  {PROJECT_NAV.map((group) => (
+                    <div key={group.heading} className="px-1 py-1">
+                      <p
+                        className={`${dmSans.className} mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] ${
+                          isProjectPage ? "text-zinc-400" : "text-zinc-500"
+                        }`}
+                      >
+                        {group.heading}
+                      </p>
+                      <div className="space-y-1">
+                        {group.items.map((item) => (
+                          <button
+                            key={item.label}
+                            type="button"
+                            onClick={() => {
+                              if (!item.comingSoon) handleNavClick(item.href);
+                            }}
+                            disabled={item.comingSoon}
+                            className={`${dmSans.className} block w-full rounded-lg px-3 py-2 text-left text-sm font-medium ${
+                              isProjectPage
+                                ? "text-zinc-100 hover:bg-white/10"
+                                : "text-zinc-900 hover:bg-zinc-900/5"
+                            } ${item.comingSoon ? "opacity-60 cursor-not-allowed hover:bg-transparent" : ""}`}
+                          >
+                            {item.label}
+                            {item.comingSoon ? " (Coming soon)" : ""}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          <button
+            type="button"
+            className={`${dmSans.className} hidden lg:inline-flex items-center rounded-full px-3 py-1.5 text-sm font-semibold tracking-[0.12em] transition ${
+              isProjectPage
+                ? "text-zinc-100/90 hover:text-white"
+                : "text-zinc-900/90 hover:text-(--highlight)"
+            }`}
+            onClick={() => handleNavClick("#about")}
+          >
+            About
+          </button>
         </div>
 
-        {/* DESKTOP NAV (right aligned) */}
-        <ul
-          className={`${dmSans.className} hidden lg:flex items-center gap-1
-            uppercase tracking-wide ml-auto`}
-        >
-          {NAV.map((item) => (
-            <li key={item.label}>
-              <button
-                type="button"
-                className="relative px-4 py-2 text-xs sm:text-sm font-semibold
-                  text-zinc-900/90 hover:text-(--highlight) transition"
-                onClick={() => handleNavClick(item.href)}
-              >
-                <span className="relative inline-flex items-center gap-1">
-                  {item.label}
-                  {item.href.startsWith("http") && (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="h-4 w-4 opacity-100"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-                      />
-                    </svg>
-                  )}
-                  {active === item.href && (
-                    <motion.div
-                      className="absolute -bottom-1 left-0 h-0.5 w-full
-                        origin-left bg-(--highlight)"
-                      initial={{ scaleX: 0 }}
-                      animate={{ scaleX: 1 }}
-                      transition={{ duration: 0.5, ease: "easeOut" }}
-                    />
-                  )}
-                </span>
-              </button>
-            </li>
-          ))}
-        </ul>
+        <div className="hidden lg:flex items-center gap-2">
+          <a
+            href="https://www.linkedin.com/in/annakahrs/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${dmSans.className} inline-flex items-center rounded-full px-3 py-1.5 text-sm font-semibold tracking-[0.12em] transition ${
+              isProjectPage
+                ? "text-zinc-100/90 hover:text-white"
+                : "text-zinc-900/90 hover:text-(--highlight)"
+            }`}
+          >
+            LinkedIn
+          </a>
+
+          <button
+            type="button"
+            className={`${dmSans.className} inline-flex rounded-xl px-4 py-2.5 text-sm font-semibold text-white shadow-lg transition cursor-pointer ${
+              isProjectPage
+                ? "bg-zinc-100 text-zinc-900 hover:bg-zinc-200 shadow-black/30"
+                : "bg-zinc-900 hover:bg-zinc-800 shadow-zinc-900/10"
+            }`}
+            onClick={() => handleNavClick("/contact")}
+          >
+            Contact
+          </button>
+        </div>
 
         {/* MOBILE HAMBURGER (right aligned) */}
         <button
           type="button"
           className="lg:hidden inline-flex items-center justify-center
-            rounded-full p-2 text-zinc-900/90 hover:text-zinc-900 hover:bg-zinc-900/10
+            rounded-full p-2 hover:text-zinc-900 hover:bg-zinc-900/10
             focus-visible:outline-none focus-visible:ring-2
             focus-visible:ring-zinc-900/40 ml-auto"
+          style={{
+            color: isProjectPage ? "rgb(244 244 245 / 0.9)" : undefined,
+          }}
           onClick={() => setOpen((prev) => !prev)}
         >
           {open ? (
@@ -319,7 +499,9 @@ function Nav({ active, setActive, setPendingTarget }: NavProps) {
         {open && (
           <motion.div
             key="mobile-nav"
-            className="lg:hidden fixed top-0 bottom-0 w-full h-screen bg-[#f4f3ec]"
+            className={`lg:hidden fixed top-0 bottom-0 w-full h-screen ${
+              isProjectPage ? "bg-[#020b1f]" : "bg-[#f1edff]"
+            }`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -327,19 +509,22 @@ function Nav({ active, setActive, setPendingTarget }: NavProps) {
             onClick={() => setOpen(false)}
           >
             <div
-              className="px-6 pt-24 pb-12 bg-[#f4f3ec]"
+              className={`px-6 pt-24 pb-12 ${isProjectPage ? "bg-[#020b1f]" : "bg-[#f1edff]"}`}
               onClick={(event) => event.stopPropagation()}
             >
               <ul
                 className={`${dmSans.className} flex flex-col items-center py-24
-                gap-6 tracking-[0.2em] bg-[#f4f3ec]`}
+                gap-6 tracking-[0.2em] ${isProjectPage ? "bg-[#020b1f]" : "bg-[#f1edff]"}`}
               >
                 {NAV.map((item) => (
                   <li key={item.label}>
                     <button
                       type="button"
-                      className="uppercase text-lg font-semibold text-zinc-900/90
-                        hover:text-(--highlight) transition p-8 flex items-center gap-2"
+                      className={`uppercase text-lg font-semibold transition p-8 flex items-center gap-2 ${
+                        isProjectPage
+                          ? "text-zinc-100/90 hover:text-white"
+                          : "text-zinc-900/90 hover:text-(--highlight)"
+                      }`}
                       onClick={() => handleNavClick(item.href)}
                     >
                       {item.label}
@@ -364,6 +549,19 @@ function Nav({ active, setActive, setPendingTarget }: NavProps) {
                   </li>
                 ))}
               </ul>
+              <div className="mt-6 flex justify-center">
+                <button
+                  type="button"
+                  className={`${dmSans.className} rounded-xl px-4 py-2.5 text-sm font-semibold text-white shadow-lg transition cursor-pointer ${
+                    isProjectPage
+                      ? "bg-zinc-100 text-zinc-900 hover:bg-zinc-200 shadow-black/30"
+                      : "bg-zinc-900 hover:bg-zinc-800 shadow-zinc-900/10"
+                  }`}
+                  onClick={() => handleNavClick("/contact")}
+                >
+                  Contact
+                </button>
+              </div>
             </div>
           </motion.div>
         )}

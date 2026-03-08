@@ -23,7 +23,7 @@ function Footer() {
             <LinkedInIcon className="h-5 w-5" />
           </a>
         </div>
-        <p className="text-sm text-zinc-200">
+        <p className="text-sm text-zinc-600">
           © {year} Made thoughtfully by Anna Kahrs. See, users do scroll.
         </p>
       </div>

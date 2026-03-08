@@ -15,7 +15,7 @@ const dmSans = DM_Sans({
 
 function Home() {
   return (
-    <section id="home" className="scroll-mt-[60px] mb-0 bg-[#f4f3ec]">
+    <section id="home" className="scroll-mt-[60px] mb-0 bg-[#f1edff]">
       <div className="pt-0">
         <div className="relative mx-auto w-full max-w-[1920px] px-6">
           {/* HERO CARD */}

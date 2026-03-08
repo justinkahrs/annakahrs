@@ -82,7 +82,7 @@ function Skills() {
   const statementRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: statementRef,
-    offset: ["start 0.8", "start 0.2"],
+    offset: ["start 0.55", "start 0.1"],
   });
 
   const words1 =
@@ -102,7 +102,7 @@ function Skills() {
         id="skills"
         className="
           relative right-1/2 left-1/2 -mx-[50vw]
-          w-screen bg-[#f4f3ec]
+          w-screen bg-[#f1edff]
           px-6 pt-28 pb-24 sm:px-12 sm:pt-44 sm:pb-28
           overflow-hidden
         "
@@ -178,7 +178,7 @@ function Skills() {
             {skillCards.map((section) => (
               <article
                 key={section.title}
-                className="bg-[#f4f3ec]/30 backdrop-blur-sm flex min-h-[320px] w-full md:w-2/3 lg:w-1/2 flex-col rounded-3xl px-7 py-8 sm:px-10 sm:py-12 border border-white/20 relative z-10"
+                className="bg-[#f1edff]/30 backdrop-blur-sm flex min-h-[320px] w-full md:w-2/3 lg:w-1/2 flex-col rounded-3xl px-7 py-8 sm:px-10 sm:py-12 border border-white/20 relative z-10"
               >
                 <div className="w-full relative mb-6">
                   <h3

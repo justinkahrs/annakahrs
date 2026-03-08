@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { Playfair_Display, DM_Sans } from "next/font/google";
 
@@ -48,58 +47,36 @@ const testimonials = [
 ];
 
 function About() {
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  // 🔁 auto-advance carousel
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % testimonials.length);
-    }, 12000); // 12 seconds
-
-    return () => clearInterval(interval);
-  }, []);
+  const marqueeItems = [...testimonials, ...testimonials];
 
   return (
-    <section id="about" className="scroll-mt-[60px] w-full bg-[#f4f3ec] pb-40">
-      <div className="relative mx-auto w-full max-w-[1920px] px-6">
+    <section id="about" className="scroll-mt-[60px] w-full bg-[#f1edff] pb-40">
+      <div className="relative mx-auto w-full max-w-[1500px] px-6">
         <div className="relative overflow-hidden rounded-3xl bg-stone-900/5 p-8 sm:p-12 lg:p-20">
-          <div className="mx-auto max-w-4xl">
-            {/* TOP: PHOTO + HEADING */}
-            <div className="flex flex-col items-center text-center gap-8">
-              {/* PHOTO */}
-              <div className="h-50 w-50">
-                <img
-                  src="/profile-kahrs.png"
-                  alt="Portrait of Anna"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-
-              {/* HEADING */}
-              <div>
-                <motion.h3
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.4 }}
-                  transition={{ duration: 0.6 }}
-                  className={` ${dmSans.className} mt-0 text-xs sm:text-sm
-                  uppercase tracking-[0.24em] text-zinc-500 `}
+          <div>
+            {/* TOP: HEADING */}
+            <div className="mb-8 flex w-full flex-col">
+              <div className="relative mb-6 mt-4 w-full">
+                <div
+                  className={`${dmSans.className} pointer-events-none absolute bottom-[12px] left-0 flex select-none items-center gap-2 text-xs font-medium uppercase tracking-[0.12em] text-zinc-600/60 sm:text-sm`}
                 >
+                  <div className="h-2 w-2 bg-[#ff4500]" />
                   ABOUT
-                </motion.h3>
-
-                <motion.h2
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.4 }}
-                  transition={{ duration: 0.7, delay: 0.05 }}
-                  className={` ${playfair.className} mt-1 text-4xl sm:text-5xl
-                  md:text-6xl font-semibold tracking-tight
-                  text-zinc-900 `}
-                >
-                  This is the part where I talk about myself.
-                </motion.h2>
+                </div>
+                <div className="w-full border-t-[3px] border-dotted border-zinc-900/10" />
               </div>
+
+              <motion.h2
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 0.7, delay: 0.05 }}
+                className={` ${playfair.className} mt-1 text-4xl sm:text-5xl
+                md:text-6xl font-semibold tracking-tight
+                text-zinc-900 `}
+              >
+                This is the part where I talk about myself
+              </motion.h2>
             </div>
 
             {/* BODY COPY */}
@@ -119,27 +96,19 @@ function About() {
                 the hidden decisions that make something feel “right” without
                 announcing themselves. In another life, that meant memorizing
                 art movement timelines and happily losing afternoons in dusty
-                archives.
+                archives. Now it means designing digital experiences that do not make you
+                think twice.
               </p>
 
               <p
                 className={` ${dmSans.className} text-base sm:text-lg
                 leading-relaxed text-zinc-600 `}
               >
-                Now it means designing digital experiences that do not make you
-                think twice. I care about the details a lot. The sort of lot you
+                I care about the details a lot. The sort of lot you
                 only notice when something feels unusually smooth. I like taking
                 complex systems and giving them a shape people can actually move
-                through. I like when a journey feels intuitive because every layer
+                through and companies can scale. I like when a journey feels intuitive because every layer
                 is in conversation with the next.
-              </p>
-
-              <p
-                className={` ${dmSans.className} text-base sm:text-lg
-                leading-relaxed text-zinc-600 `}
-              >
-                If something feels polished, it is because I fussed over it until
-                it could stand on its own.
               </p>
             </motion.div>
 
@@ -196,92 +165,52 @@ function About() {
               </div>
             </div>
 
-            {/* VOICES ABOUT MY WORK - CAROUSEL */}
-            <section className="mt-24 border-t border-zinc-200 pt-16">
-              <div className="text-center">
-                <motion.h3
-                  initial={{ opacity: 0, y: 8 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.4 }}
-                  transition={{ duration: 0.5 }}
-                  className={` ${dmSans.className} text-xs sm:text-sm uppercase
-                  tracking-[0.24em] text-zinc-500 `}
-                >
-                  WHAT OTHERS SAY
-                </motion.h3>
-
-                <motion.h2
-                  initial={{ opacity: 0, y: 8 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.4 }}
-                  transition={{ duration: 0.6, delay: 0.05 }}
-                  className={` ${playfair.className} mt-3 text-3xl sm:text-4xl
-                  font-semibold tracking-tight text-zinc-900 `}
-                >
-                  Voices about my work
-                </motion.h2>
-
-                <motion.p
-                  initial={{ opacity: 0, y: 8 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.4 }}
-                  transition={{ duration: 0.7, delay: 0.1 }}
-                  className={` ${dmSans.className} mx-auto mt-4 max-w-2xl text-sm
-                  sm:text-base leading-relaxed text-zinc-600 `}
-                >
-                  A few things collaborators and leaders have shared after working
-                  together on research, information architecture, and product
-                  decisions.
-                </motion.p>
-              </div>
-
-              {/* Carousel body */}
-              <div className="mt-10 flex justify-center">
-                <motion.article
-                  key={activeIndex}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className="w-full rounded-3xl border border-zinc-900/5
-                  bg-[#f4f3ec] px-6 py-8 sm:px-10 sm:py-12 shadow-sm flex flex-col
-                  justify-between"
-                >
-                  <p
-                    className={` ${dmSans.className} text-sm sm:text-base
-                    leading-relaxed text-zinc-800 `}
-                  >
-                    “{testimonials[activeIndex].quote}”
-                  </p>
-
-                  <div className="mt-5">
-                    <p
-                      className={` ${playfair.className} text-sm sm:text-base
-                      font-semibold text-zinc-900 `}
-                    >
-                      {testimonials[activeIndex].name}
-                    </p>
-                  </div>
-                </motion.article>
-              </div>
-
-              {/* Dots */}
-              <div className="mt-6 flex justify-center gap-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    onClick={() => setActiveIndex(index)}
-                    aria-label={`Go to testimonial ${index + 1}`}
-                    className={` h-1.5 w-1.5 rounded-full transition ${index === activeIndex
-                        ? "bg-zinc-900"
-                        : "bg-zinc-300"
-                      } `}
-                  />
-                ))}
-              </div>
-            </section>
           </div>
         </div>
+
+        <section className="mt-10 overflow-hidden">
+          <div className="mb-5 text-left">
+            <h3
+              className={` ${dmSans.className} text-xs sm:text-sm uppercase
+              tracking-[0.24em] text-zinc-500 `}
+            >
+              VOICES ABOUT MY WORK
+            </h3>
+          </div>
+
+          <motion.div
+            className="flex w-max items-start gap-4 will-change-transform"
+            initial={{ x: "0%" }}
+            animate={{ x: "-50%" }}
+            transition={{
+              duration: 36,
+              ease: "linear",
+              repeat: Infinity,
+              repeatType: "loop",
+            }}
+          >
+            {marqueeItems.map((item, index) => (
+              <article
+                key={`${item.name}-${index}`}
+                className={`max-w-[26rem] shrink-0 border border-zinc-900/5
+                bg-[#f1edff] p-5 ${
+                  index % 3 === 0
+                    ? "mt-0"
+                    : index % 3 === 1
+                      ? "mt-6"
+                      : "mt-12"
+                }`}
+              >
+                <p
+                  className={` ${dmSans.className} text-sm leading-relaxed
+                  text-zinc-800 `}
+                >
+                  “{item.quote}”
+                </p>
+              </article>
+            ))}
+          </motion.div>
+        </section>
       </div>
     </section>
   );

@@ -16,9 +16,9 @@ const dmSans = DM_Sans({
 
 function Contact() {
   return (
-    <section id="contact" className="scroll-mt-[60px] w-full bg-[#f4f3ec] pb-40">
+    <section id="contact" className="scroll-mt-[60px] w-full bg-[#f1edff] pb-40">
       <div className="relative mx-auto w-full max-w-[1920px] px-6">
-        <div className="relative overflow-hidden rounded-3xl bg-stone-900/5 p-8 sm:p-12 lg:p-20">
+        <div className="relative overflow-hidden rounded-3xl p-8 sm:p-12 lg:p-20">
           <div className="mx-auto max-w-4xl">
             {/* HEADINGS */}
             <div className="mb-16">
@@ -29,8 +29,8 @@ function Contact() {
                 transition={{ duration: 0.6 }}
                 className={`
                   ${dmSans.className}
-                  text-center text-xs sm:text-sm uppercase tracking-[0.24em]
-                  text-(--foreground)/70
+                  text-center text-4xl sm:text-5xl lg:text-6xl font-normal
+                  tracking-tight leading-tight text-zinc-800
                 `}
               >
                 Enough about me
@@ -43,11 +43,11 @@ function Contact() {
                 transition={{ duration: 0.65, delay: 0.05 }}
                 className={`
                   ${playfair.className}
-                  mt-2 text-center text-4xl sm:text-5xl font-semibold
+                  mt-2 text-center text-4xl sm:text-5xl lg:text-6xl font-semibold
                   tracking-tight text-zinc-900
                 `}
               >
-                Let&apos;s talk about you.
+                Let&apos;s talk about you
               </motion.h3>
             </div>
 

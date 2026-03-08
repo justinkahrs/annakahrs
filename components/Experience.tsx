@@ -59,7 +59,7 @@ function Experience() {
   ];
 
   return (
-    <section id="experience" className="scroll-mt-[60px] w-full bg-[#f4f3ec] pb-40">
+    <section id="experience" className="scroll-mt-[60px] w-full bg-[#f1edff] pb-40">
       <div className="relative mx-auto w-full max-w-[1500px] px-6">
         {/* MAIN EXPERIENCE CARD */}
         <div className="relative overflow-hidden rounded-3xl bg-stone-900/5 p-6 pb-12 sm:p-8 sm:pb-16 md:p-10 md:pb-20 lg:p-12 lg:pb-24">
