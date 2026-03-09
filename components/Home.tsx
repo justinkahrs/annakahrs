@@ -19,7 +19,19 @@ function Home() {
       <div className="pt-0">
         <div className="relative mx-auto w-full max-w-[1920px] px-6">
           {/* HERO CARD */}
-          <div className="relative overflow-hidden rounded-3xl bg-stone-900/5 min-h-[85vh] flex flex-col items-center justify-center p-8 sm:p-12">
+          <div className="relative overflow-hidden rounded-3xl bg-[#ece4fb] min-h-[85vh] flex flex-col items-center justify-center p-8 sm:p-12">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(92%_56%_at_50%_100%,rgba(255,94,64,0.26),rgba(255,94,64,0.09)_34%,rgba(186,255,231,0.14)_56%,rgba(236,228,251,0.92)_78%,rgba(236,228,251,1)_90%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_32%_at_50%_34%,rgba(214,188,255,0.34),rgba(214,188,255,0.08)_58%,transparent_75%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(112deg,rgba(171,138,255,0.22)_0%,transparent_24%,transparent_78%,rgba(255,104,73,0.14)_100%)]" />
+            <div className="pointer-events-none absolute inset-y-0 left-[21%] w-[23%] rotate-[8deg] bg-[linear-gradient(to_bottom,rgba(236,220,255,0.40),rgba(236,220,255,0.08)_55%,transparent)] blur-2xl" />
+            <div className="pointer-events-none absolute inset-y-0 right-[21%] w-[23%] -rotate-[8deg] bg-[linear-gradient(to_bottom,rgba(204,248,229,0.30),rgba(204,248,229,0.05)_55%,transparent)] blur-2xl" />
+            <div
+              className="pointer-events-none absolute inset-0 opacity-[0.12] mix-blend-multiply"
+              style={{
+                backgroundImage:
+                  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E\")",
+              }}
+            />
             {/* HERO CONTENT */}
             <div
               className={` ${dmSans.className} relative z-10 text-center text-zinc-900 w-full `}

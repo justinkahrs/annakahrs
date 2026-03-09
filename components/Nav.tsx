@@ -16,11 +16,6 @@ const dmSans = DM_Sans({
   weight: ["400", "500", "600"],
 });
 
-type NavItem = {
-  label: string;
-  href: string;
-};
-
 type BrandNavItem = {
   label: string;
   blurb: string;
@@ -32,10 +27,6 @@ type ProjectNavGroup = {
   heading: string;
   items: Array<{ label: string; href: string; comingSoon?: boolean }>;
 };
-
-const NAV: NavItem[] = [
-  { label: "About", href: "#about" },
-];
 
 const BRAND_NAV: BrandNavItem[] = [
   {
@@ -66,9 +57,8 @@ const PROJECT_NAV: ProjectNavGroup[] = [
         comingSoon: true,
       },
       {
-        label: "Staff Intranet",
-        href: "",
-        comingSoon: true,
+        label: "Staff Portal (MyAccess)",
+        href: "/projects/staff-portal",
       },
     ],
   },
@@ -410,17 +400,6 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
             </AnimatePresence>
           </div>
 
-          <button
-            type="button"
-            className={`${dmSans.className} hidden lg:inline-flex items-center rounded-full px-3 py-1.5 text-sm font-semibold tracking-[0.12em] transition ${
-              isProjectPage
-                ? "text-zinc-100/90 hover:text-white"
-                : "text-zinc-900/90 hover:text-(--highlight)"
-            }`}
-            onClick={() => handleNavClick("#about")}
-          >
-            About
-          </button>
         </div>
 
         <div className="hidden lg:flex items-center gap-2">
@@ -512,43 +491,6 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
               className={`px-6 pt-24 pb-12 ${isProjectPage ? "bg-[#020b1f]" : "bg-[#f1edff]"}`}
               onClick={(event) => event.stopPropagation()}
             >
-              <ul
-                className={`${dmSans.className} flex flex-col items-center py-24
-                gap-6 tracking-[0.2em] ${isProjectPage ? "bg-[#020b1f]" : "bg-[#f1edff]"}`}
-              >
-                {NAV.map((item) => (
-                  <li key={item.label}>
-                    <button
-                      type="button"
-                      className={`uppercase text-lg font-semibold transition p-8 flex items-center gap-2 ${
-                        isProjectPage
-                          ? "text-zinc-100/90 hover:text-white"
-                          : "text-zinc-900/90 hover:text-(--highlight)"
-                      }`}
-                      onClick={() => handleNavClick(item.href)}
-                    >
-                      {item.label}
-                      {item.href.startsWith("http") && (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="h-4 w-4 opacity-100"
-                          aria-hidden="true"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-                          />
-                        </svg>
-                      )}
-                    </button>
-                  </li>
-                ))}
-              </ul>
               <div className="mt-6 flex justify-center">
                 <button
                   type="button"

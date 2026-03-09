@@ -113,6 +113,44 @@ export default function ManagerJourneyPage() {
         setPendingTarget={setPendingTarget}
       />
       <main className="pt-[60px]">
+        <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-8 flex min-h-[78vh] w-screen items-center justify-center overflow-hidden bg-[#1a2028] px-6 py-20 sm:px-10">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(92%_56%_at_50%_100%,rgba(77,187,255,0.36),rgba(77,187,255,0.10)_34%,rgba(176,255,225,0.16)_56%,rgba(26,32,40,0.92)_76%,rgba(26,32,40,1)_88%)]" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_32%_at_50%_36%,rgba(210,236,255,0.28),rgba(210,236,255,0.06)_58%,transparent_75%)]" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(42%_28%_at_24%_50%,rgba(195,255,225,0.22),rgba(195,255,225,0.05)_60%,transparent_78%)]" />
+          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(112deg,rgba(146,219,255,0.24)_0%,transparent_24%,transparent_78%,rgba(170,255,227,0.20)_100%)]" />
+          <div className="pointer-events-none absolute inset-y-0 left-[20%] w-[24%] rotate-[8deg] bg-[linear-gradient(to_bottom,rgba(230,244,255,0.26),rgba(230,244,255,0.04)_55%,transparent)] blur-2xl" />
+          <div className="pointer-events-none absolute inset-y-0 right-[20%] w-[24%] -rotate-[8deg] bg-[linear-gradient(to_bottom,rgba(219,255,238,0.24),rgba(219,255,238,0.04)_55%,transparent)] blur-2xl" />
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.2] mix-blend-screen"
+            style={{
+              backgroundImage:
+                "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.20'/%3E%3C/svg%3E\")",
+            }}
+          />
+
+          <div className="relative mx-auto max-w-5xl text-center">
+            <p
+              className={`${dmSans.className} mb-7 text-[11px] uppercase tracking-[0.22em] text-zinc-300/75 sm:text-xs`}
+            >
+              The Manager Journey
+            </p>
+            <h1
+              className={`${playfair.className} text-5xl leading-[0.95] text-[#edf2f5] sm:text-6xl lg:text-8xl`}
+            >
+              Designing the manager experience
+              <br />
+              <span className={`${dmSans.className} text-[0.92em] font-light tracking-[-0.015em]`}>
+                across hiring, onboarding, and team growth
+              </span>
+            </h1>
+            <p
+              className={`${dmSans.className} mx-auto mt-8 max-w-3xl text-base leading-relaxed text-zinc-200/85 sm:text-lg`}
+            >
+              A service design direction that aligned systems, decisions, and handoffs into one clearer path for managers.
+            </p>
+          </div>
+        </section>
+
         <div className="mx-auto grid w-full max-w-[1920px] grid-cols-1 lg:grid-cols-[340px_minmax(0,1fr)]">
           <aside className="hidden h-screen px-10 pt-24 lg:sticky lg:top-0 lg:block">
             <ul className={`${dmSans.className} space-y-0`}>

@@ -162,7 +162,19 @@ function Skills() {
 
         {/* SKILL CARDS */}
         <div className="mx-auto mt-0 mb-28 max-w-[1500px] px-6">
-          <div className="relative rounded-3xl overflow-hidden p-2 sm:p-4 lg:p-6 flex flex-col items-end gap-4 sm:gap-8 bg-stone-900/5">
+          <div className="relative rounded-3xl overflow-hidden p-2 sm:p-4 lg:p-6 flex flex-col items-end gap-4 sm:gap-8 bg-[#ebe3f7]">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(95%_62%_at_18%_8%,rgba(184,255,232,0.22),rgba(184,255,232,0.06)_42%,transparent_66%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(88%_56%_at_84%_96%,rgba(255,97,66,0.20),rgba(255,97,66,0.07)_36%,rgba(170,145,245,0.14)_58%,rgba(235,227,247,0.96)_82%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(128deg,rgba(181,156,255,0.20)_0%,transparent_26%,transparent_72%,rgba(176,255,229,0.16)_100%)]" />
+            <div className="pointer-events-none absolute inset-y-0 left-[17%] w-[24%] rotate-[7deg] bg-[linear-gradient(to_bottom,rgba(245,234,255,0.30),rgba(245,234,255,0.05)_56%,transparent)] blur-2xl" />
+            <div className="pointer-events-none absolute inset-y-0 right-[17%] w-[24%] -rotate-[7deg] bg-[linear-gradient(to_bottom,rgba(219,255,241,0.28),rgba(219,255,241,0.04)_56%,transparent)] blur-2xl" />
+            <div
+              className="pointer-events-none absolute inset-0 opacity-[0.1] mix-blend-multiply"
+              style={{
+                backgroundImage:
+                  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.16'/%3E%3C/svg%3E\")",
+              }}
+            />
             {/* BACKGROUND TEXT - TOP LEFT */}
             <div className="absolute top-2 left-4 sm:top-4 sm:left-6 lg:top-5 lg:left-7 z-0 pointer-events-none">
               <h2
