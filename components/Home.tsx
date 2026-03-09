@@ -1,7 +1,12 @@
 "use client";
 
 import handleScroll from "@/utils/handleScroll";
+import gsap from "gsap";
+import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
 import { Playfair_Display, DM_Sans } from "next/font/google";
+import { useEffect, useRef } from "react";
+
+gsap.registerPlugin(ScrambleTextPlugin);
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -14,6 +19,28 @@ const dmSans = DM_Sans({
 });
 
 function Home() {
+  const systemsTextRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    if (!systemsTextRef.current) {
+      return;
+    }
+
+    const tween = gsap.to(systemsTextRef.current, {
+      delay: 0.5,
+      duration: 3,
+      ease: "none",
+      scrambleText: {
+        chars: "!<>-_\\/[]{}=+*^?#",
+        text: "across complex systems",
+      },
+    });
+
+    return () => {
+      tween.kill();
+    };
+  }, []);
+
   return (
     <section id="home" className="scroll-mt-[60px] mb-0 bg-[var(--background)]">
       <div className="pt-0">
@@ -63,6 +90,7 @@ function Home() {
                   Designing clarity
                 </span>
                 <span
+                  ref={systemsTextRef}
                   className={`
                     ${playfair.className} 
                     text-3xl sm:text-5xl lg:text-[5rem] xl:text-[6rem]

@@ -176,7 +176,7 @@ export default function StaffPortalPage() {
             <p
               className={`${dmSans.className} mb-7 text-[11px] uppercase tracking-[0.22em] text-zinc-300/75 sm:text-xs`}
             >
-              Staff Portal • In Progress
+              Visual Design • In Progress
             </p>
             <h1
               className={`${playfair.className} text-5xl leading-[0.95] text-[#f3ece6] sm:text-6xl lg:text-8xl`}
