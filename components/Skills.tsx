@@ -102,7 +102,7 @@ function Skills() {
         id="skills"
         className="
           relative right-1/2 left-1/2 -mx-[50vw]
-          w-screen bg-[#f1edff]
+          w-screen bg-[var(--background)]
           px-6 pt-28 pb-24 sm:px-12 sm:pt-44 sm:pb-28
           overflow-hidden
         "
@@ -113,7 +113,7 @@ function Skills() {
           <div
             className={`${dmSans.className} flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none pl-10 sm:pl-20 lg:pl-32 mb-6`}
           >
-            <div className="w-2 h-2 bg-[#ff4500]" />
+            <div className="w-2 h-2 bg-(--highlight)" />
             FOCUS
           </div>
 
@@ -162,10 +162,11 @@ function Skills() {
 
         {/* SKILL CARDS */}
         <div className="mx-auto mt-0 mb-28 max-w-[1500px] px-6">
-          <div className="relative rounded-3xl overflow-hidden p-2 sm:p-4 lg:p-6 flex flex-col items-end gap-4 sm:gap-8 bg-[#ebe3f7]">
+          <div className="relative rounded-3xl overflow-hidden p-2 sm:p-4 lg:p-6 flex flex-col items-end gap-4 sm:gap-8 bg-[var(--surface)]">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(95%_62%_at_18%_8%,rgba(184,255,232,0.22),rgba(184,255,232,0.06)_42%,transparent_66%)]" />
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(88%_56%_at_84%_96%,rgba(255,97,66,0.20),rgba(255,97,66,0.07)_36%,rgba(170,145,245,0.14)_58%,rgba(235,227,247,0.96)_82%)]" />
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(128deg,rgba(181,156,255,0.20)_0%,transparent_26%,transparent_72%,rgba(176,255,229,0.16)_100%)]" />
+            <div className="pointer-events-none absolute inset-0 opacity-[0.14] bg-[repeating-linear-gradient(135deg,rgba(24,24,27,0.18)_0,rgba(24,24,27,0.18)_1px,transparent_1px,transparent_14px)]" />
             <div className="pointer-events-none absolute inset-y-0 left-[17%] w-[24%] rotate-[7deg] bg-[linear-gradient(to_bottom,rgba(245,234,255,0.30),rgba(245,234,255,0.05)_56%,transparent)] blur-2xl" />
             <div className="pointer-events-none absolute inset-y-0 right-[17%] w-[24%] -rotate-[7deg] bg-[linear-gradient(to_bottom,rgba(219,255,241,0.28),rgba(219,255,241,0.04)_56%,transparent)] blur-2xl" />
             <div
@@ -190,7 +191,7 @@ function Skills() {
             {skillCards.map((section) => (
               <article
                 key={section.title}
-                className="bg-[#f1edff]/30 backdrop-blur-sm flex min-h-[320px] w-full md:w-2/3 lg:w-1/2 flex-col rounded-3xl px-7 py-8 sm:px-10 sm:py-12 border border-white/20 relative z-10"
+                className="bg-[var(--background)]/30 backdrop-blur-sm shadow-none flex min-h-[320px] w-full md:w-2/3 lg:w-1/2 flex-col rounded-3xl px-7 py-8 sm:px-10 sm:py-12 relative z-10"
               >
                 <div className="w-full relative mb-6">
                   <h3
@@ -240,7 +241,7 @@ function Skills() {
             <div
               className={`${dmSans.className} absolute left-0 bottom-[12px] flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none`}
             >
-              <div className="w-2 h-2 bg-[#ff4500]" />
+              <div className="w-2 h-2 bg-(--highlight)" />
               TECHNOLOGY
             </div>
             <div
@@ -327,7 +328,16 @@ function Skills() {
           <div
             className="relative overflow-hidden mx-auto mb-0 w-full rounded-3xl bg-stone-900/5 p-6 pb-0 sm:p-8 sm:pb-0 md:p-10 md:pb-0 lg:p-12 lg:pb-0"
           >
-            <div className="flex flex-col items-center gap-10 md:gap-14 pb-16">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 opacity-30"
+              style={{
+                backgroundImage:
+                  "radial-gradient(circle at 1px 1px, rgba(39,39,42,0.18) 1px, transparent 0)",
+                backgroundSize: "18px 18px",
+              }}
+            />
+            <div className="relative z-10 flex flex-col items-center gap-10 md:gap-14 pb-16">
               <motion.div
                 initial={{ opacity: 0, x: -20, y: 20, rotate: -5 }}
                 whileInView={{ opacity: 1, x: 0, y: 0, rotate: -15 }}
@@ -344,7 +354,7 @@ function Skills() {
                 <img
                   src="https://media.nngroup.com/nng-uxc-badge.png"
                   alt="NN/g UX Certification Badge"
-                  className="h-[250px] sm:h-[400px] md:h-[550px] lg:h-[700px] w-auto drop-shadow-2xl opacity-100"
+                  className="h-[250px] sm:h-[400px] md:h-[550px] lg:h-[700px] w-auto drop-shadow-2xl opacity-100 grayscale"
                 />
               </motion.div>
 
@@ -354,7 +364,7 @@ function Skills() {
                   <div
                     className={`${dmSans.className} absolute left-0 bottom-[12px] flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none`}
                   >
-                    <div className="w-2 h-2 bg-[#ff4500]" />
+                    <div className="w-2 h-2 bg-(--highlight)" />
                     CERTIFICATION
                   </div>
                   <div
@@ -391,7 +401,8 @@ function Skills() {
                       text-left text-lg sm:text-xl leading-[1.5] text-zinc-800
                     `}
                     >
-                      I completed 30+ hours of advanced UX training, including a focused research specialty track.
+                      I completed{" "}
+                      <span className="rounded-sm bg-[#bbf7d0]/70 pl-1 pr-0">30+ hours of advanced UX training</span>, including a focused research specialty track.
                       <br /><br />
                       The training emphasized connecting research rigor to real product decisions, reinforcing how analytics, qualitative insight, and operational structure work together to support scalable UX.
                     </p>
@@ -414,7 +425,7 @@ function Skills() {
                   <div
                     className={`${dmSans.className} absolute left-0 bottom-[12px] flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none`}
                   >
-                    <div className="w-2 h-2 bg-[#ff4500]" />
+                    <div className="w-2 h-2 bg-(--highlight)" />
                     RECOGNITION & AWARDS
                   </div>
                   <div
@@ -447,7 +458,11 @@ function Skills() {
                   <div className="flex flex-col pl-10 sm:pl-20 lg:pl-32 w-full order-2 lg:order-1">
                     <div className="max-w-md">
                       <p className={`${dmSans.className} text-lg sm:text-xl leading-[1.5] text-zinc-800`}>
-                        Work I contributed to has received national recognition for excellence in digital experience and design. My work has included leading information architecture, conducting user interviews, shaping user tested navigation, and serving as Lead UX Designer on the redesign of a large scale public health archive, improving accessibility, search performance, and usability across millions of documents.
+                        Work I contributed to has received national recognition for{" "}
+                        <span className="rounded-sm bg-[#bbf7d0]/70 px-1">
+                          excellence in digital experience and design
+                        </span>
+                        . My work has included leading information architecture, conducting user interviews, shaping user tested navigation, and serving as Lead UX Designer on the redesign of a large scale public health archive, improving accessibility, search performance, and usability across millions of documents.
                       </p>
                     </div>
                   </div>
@@ -467,7 +482,9 @@ function Skills() {
                       />
                     </a>
                     <a
-                      href="#"
+                      href="https://uctechnews.ucop.edu/news-the-industry-documents-library-team-wins-the-silver-design-award-at-the-2025-uc-tech-awards/"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="transition-transform hover:scale-105"
                     >
                       <img

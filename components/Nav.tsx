@@ -20,7 +20,6 @@ type BrandNavItem = {
   label: string;
   blurb: string;
   href: string;
-  icon: string;
 };
 
 type ProjectNavGroup = {
@@ -30,16 +29,14 @@ type ProjectNavGroup = {
 
 const BRAND_NAV: BrandNavItem[] = [
   {
-    label: "Anna Kahrs Portfolio",
-    blurb: "Main site for UX work, case studies, and featured projects.",
+    label: "Anna Kahrs's Portfolio",
+    blurb: "UX work, case studies, and featured projects.",
     href: "#home",
-    icon: "AC",
   },
   {
     label: "Work in Practice",
-    blurb: "A blog with practical UX notes, process write-ups, and ideas.",
+    blurb: "Practical UX notes, process write-ups, and ideas.",
     href: "https://blog.annakahrs.com",
-    icon: "WP",
   },
 ];
 
@@ -57,7 +54,7 @@ const PROJECT_NAV: ProjectNavGroup[] = [
         comingSoon: true,
       },
       {
-        label: "Staff Portal (MyAccess)",
+        label: "Staff Portal",
         href: "/projects/staff-portal",
       },
     ],
@@ -199,7 +196,7 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
 
   return (
     <nav
-      className={`fixed top-0 inset-x-0 z-80 h-[60px] ${isProjectPage ? "bg-[#020b1f]" : "bg-[#f1edff]"}`}
+      className={`fixed top-0 inset-x-0 z-80 h-[60px] ${isProjectPage ? "bg-[var(--project-bg)]" : "bg-[var(--background)]"}`}
     >
       <div
         className="relative z-10 flex h-full w-full max-w-[1920px] mx-auto items-center
@@ -257,8 +254,8 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
                   transition={{ duration: 0.16 }}
                   className={`absolute left-0 top-[3.1rem] w-[22rem] rounded-2xl border p-2 shadow-xl ${
                     isProjectPage
-                      ? "border-zinc-200/15 bg-[#020b1f] shadow-black/40"
-                      : "border-zinc-900/10 bg-[#f1edff] shadow-zinc-900/10"
+                      ? "border-zinc-200/15 bg-[var(--project-bg)] shadow-black/40"
+                      : "border-zinc-900/10 bg-[var(--background)] shadow-zinc-900/10"
                   }`}
                   onMouseEnter={openBrandMenu}
                   onMouseLeave={closeBrandMenuSoon}
@@ -268,17 +265,10 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
                       key={item.label}
                       type="button"
                       onClick={() => handleNavClick(item.href)}
-                      className={`flex w-full items-start gap-3 rounded-xl p-3 text-left ${
+                      className={`flex w-full items-start rounded-xl p-3 text-left ${
                         isProjectPage ? "hover:bg-white/10" : "hover:bg-zinc-900/5"
                       }`}
                     >
-                      <span
-                        className={`${playfair.className} mt-0.5 inline-flex h-9 w-9 shrink-0
-                          items-center justify-center rounded-full bg-zinc-900 text-xs
-                          font-semibold text-white`}
-                      >
-                        {item.icon}
-                      </span>
                       <span className="min-w-0">
                         <span
                           className={`${dmSans.className} block text-sm font-semibold ${
@@ -358,8 +348,8 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
                   transition={{ duration: 0.16 }}
                   className={`absolute left-0 top-[3.1rem] w-[21rem] rounded-2xl border p-3 shadow-xl ${
                     isProjectPage
-                      ? "border-zinc-200/15 bg-[#020b1f] shadow-black/40"
-                      : "border-zinc-900/10 bg-[#f1edff] shadow-zinc-900/10"
+                      ? "border-zinc-200/15 bg-[var(--project-bg)] shadow-black/40"
+                      : "border-zinc-900/10 bg-[var(--background)] shadow-zinc-900/10"
                   }`}
                   onMouseEnter={openProjectMenu}
                   onMouseLeave={closeProjectMenuSoon}
@@ -418,9 +408,9 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
 
           <button
             type="button"
-            className={`${dmSans.className} inline-flex rounded-xl px-4 py-2.5 text-sm font-semibold text-white shadow-lg transition cursor-pointer ${
+            className={`${dmSans.className} inline-flex rounded-xl px-4 py-2.5 text-sm font-semibold text-white transition cursor-pointer ${
               isProjectPage
-                ? "bg-zinc-100 text-zinc-900 hover:bg-zinc-200 shadow-black/30"
+                ? "bg-zinc-100 text-zinc-900 hover:bg-zinc-200"
                 : "bg-zinc-900 hover:bg-zinc-800 shadow-zinc-900/10"
             }`}
             onClick={() => handleNavClick("/contact")}
@@ -479,7 +469,7 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
           <motion.div
             key="mobile-nav"
             className={`lg:hidden fixed top-0 bottom-0 w-full h-screen ${
-              isProjectPage ? "bg-[#020b1f]" : "bg-[#f1edff]"
+              isProjectPage ? "bg-[var(--project-bg)]" : "bg-[var(--background)]"
             }`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -488,7 +478,7 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
             onClick={() => setOpen(false)}
           >
             <div
-              className={`px-6 pt-24 pb-12 ${isProjectPage ? "bg-[#020b1f]" : "bg-[#f1edff]"}`}
+              className={`px-6 pt-24 pb-12 ${isProjectPage ? "bg-[var(--project-bg)]" : "bg-[var(--background)]"}`}
               onClick={(event) => event.stopPropagation()}
             >
               <div className="mt-6 flex justify-center">

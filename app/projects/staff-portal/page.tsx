@@ -123,7 +123,7 @@ export default function StaffPortalPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#020b1f] text-zinc-100">
+    <div className="min-h-screen bg-[var(--project-bg)] text-zinc-100">
       <Nav
         setActive={setActiveNav}
         setPendingTarget={setPendingTarget}
@@ -203,7 +203,7 @@ export default function StaffPortalPage() {
           </aside>
 
           <section className="px-4 py-6 sm:px-8 lg:pr-8 lg:pl-0">
-            <div className="sticky top-[60px] z-20 mb-4 overflow-x-auto border-y border-zinc-200/15 bg-[#020b1f]/95 py-2 backdrop-blur lg:hidden">
+            <div className="sticky top-[60px] z-20 mb-4 overflow-x-auto border-y border-zinc-200/15 bg-[color:var(--project-bg)]/95 py-2 backdrop-blur lg:hidden">
               <div className={`${dmSans.className} flex w-max items-center gap-2 px-1`}>
                 {sections.map((section, index) => {
                   const isActive = activeId === section.id;
@@ -227,7 +227,7 @@ export default function StaffPortalPage() {
               </div>
             </div>
 
-            <div className="border border-zinc-900/15 bg-[#f1edff] text-zinc-900">
+            <div className="border border-zinc-900/15 bg-[var(--background)] text-zinc-900">
               {sections.map((section, index) => (
                 <section
                   id={section.id}
@@ -240,7 +240,7 @@ export default function StaffPortalPage() {
                     <div
                       className={`${dmSans.className} absolute bottom-[12px] left-0 flex items-center gap-2 text-xs font-medium uppercase tracking-[0.12em] text-zinc-600/60 sm:text-sm`}
                     >
-                      <span className="h-2 w-2 bg-[#ff4500]" />
+                      <span className="h-2 w-2 bg-(--highlight)" />
                       <span>{section.eyebrow}</span>
                       {section.disabled ? (
                         <span className="rounded-full border border-zinc-500/40 px-2 py-0.5 text-[10px] tracking-[0.08em] text-zinc-600">

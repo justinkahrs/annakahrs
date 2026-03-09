@@ -59,12 +59,21 @@ function Experience() {
   ];
 
   return (
-    <section id="experience" className="scroll-mt-[60px] w-full bg-[#f1edff] pb-40">
+    <section id="experience" className="scroll-mt-[60px] w-full bg-[var(--background)] pb-40">
       <div className="relative mx-auto w-full max-w-[1500px] px-6">
         {/* MAIN EXPERIENCE CARD */}
         <div className="relative overflow-hidden rounded-3xl bg-stone-900/5 p-6 pb-12 sm:p-8 sm:pb-16 md:p-10 md:pb-20 lg:p-12 lg:pb-24">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 opacity-30"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle at 1px 1px, rgba(39,39,42,0.18) 1px, transparent 0)",
+              backgroundSize: "18px 18px",
+            }}
+          />
 
-          <div className="pb-16">
+          <div className="relative z-10 pb-16">
             {/* HEADER */}
             <div className="mb-24 flex flex-col w-full">
               {/* TOP EYEBROW - MATCHES SKILLS.TSX */}
@@ -72,7 +81,7 @@ function Experience() {
                 <div
                   className={`${dmSans.className} absolute left-0 bottom-[12px] flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none`}
                 >
-                  <div className="w-2 h-2 bg-[#ff4500]" />
+                  <div className="w-2 h-2 bg-(--highlight)" />
                   EXPERIENCE
                 </div>
                 <div

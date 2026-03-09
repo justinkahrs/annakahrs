@@ -7,7 +7,12 @@
   --background: #f1edff;
   --foreground: #18181b;
 
-  --highlight: #ff4500;
+  --accent: #ff4500;
+  --highlight: var(--accent);
+
+  --surface: #f1edff;
+  --surface-soft: #f1edff;
+  --project-bg: #020b1f;
 
   --primary: #18181b;
   --primary-hover: #27272a;
@@ -18,14 +23,32 @@
   --inactive: #a1a1aa;
 
   --gradient-a: #bbf7d0;
-  --gradient-b: #fef08a;
-  --gradient-c: #86efac;
+  --gradient-b: #bbf7d0;
+  --gradient-c: #bbf7d0;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
   min-height: 100%;
+}
+
+@keyframes home-graph-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.2;
+  }
+}
+
+@keyframes footer-graph-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.34;
+  }
 }
 
 @keyframes marquee-scroll {

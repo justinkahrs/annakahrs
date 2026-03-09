@@ -16,7 +16,7 @@ const dmSans = DM_Sans({
 
 function Contact() {
   return (
-    <section id="contact" className="scroll-mt-[60px] w-full bg-[#f1edff] pb-40">
+    <section id="contact" className="scroll-mt-[60px] w-full bg-[var(--background)] pb-40">
       <div className="relative mx-auto w-full max-w-[1920px] px-6">
         <div className="relative overflow-hidden rounded-3xl p-8 sm:p-12 lg:p-20">
           <div className="mx-auto max-w-4xl">

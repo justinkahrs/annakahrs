@@ -1,28 +1,28 @@
 import { useMemo } from "react";
-import GitHubIcon from "./GitHubIcon";
-import LinkedInIcon from "./LinkedInIcon";
 
 function Footer() {
   const year = useMemo(() => new Date().getFullYear(), []);
 
   return (
-    <footer className="py-10 backdrop-blur">
+    <footer className="relative py-10 backdrop-blur">
       <div
-        className="mx-auto flex w-full max-w-4xl flex-col items-center
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 bottom-0 h-[52vh] w-screen -translate-x-1/2 opacity-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(24,24,27,0.18) 1px, transparent 1px), linear-gradient(90deg, rgba(24,24,27,0.18) 1px, transparent 1px)",
+          backgroundSize: "26px 26px",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, transparent 0%, transparent 42%, black 100%)",
+          maskImage:
+            "linear-gradient(to bottom, transparent 0%, transparent 42%, black 100%)",
+          animation: "footer-graph-fade-in 1.2s ease-out 0.2s forwards",
+        }}
+      />
+      <div
+        className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center
           justify-center gap-6 px-6 text-center"
       >
-        <div className="flex items-center justify-center gap-4">
-          <a
-            href="https://www.linkedin.com/in/annakahrs/"
-            aria-label="LinkedIn"
-            className="rounded-full bg-[var(--background)] p-2
-              hover:bg-zinc-200/60"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <LinkedInIcon className="h-5 w-5" />
-          </a>
-        </div>
         <p className="text-sm text-zinc-600">
           © {year} Made thoughtfully by Anna Kahrs. See, users do scroll.
         </p>

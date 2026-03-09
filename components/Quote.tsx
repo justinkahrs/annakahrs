@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Playfair_Display, DM_Sans } from "next/font/google";
-import DicebearThumbnail from "./DiceBear";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -113,7 +112,7 @@ export default function Quote() {
     <section
       id="projects"
       className="relative right-[50%] left-[50%] -mr-[50vw] -ml-[50vw]
-        w-screen bg-[#f1edff] px-6 pb-8 pt-24 text-black sm:px-12"
+        w-screen bg-[var(--background)] px-6 pb-8 pt-24 text-black sm:px-12"
     >
       <div className="relative mx-auto mt-20 max-w-[1500px] px-6">
         {/* EYEBROW */}
@@ -121,8 +120,8 @@ export default function Quote() {
           <div
             className={`${dmSans.className} absolute left-0 bottom-[12px] flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none`}
           >
-            <div className="w-2 h-2 bg-[#ff4500]" />
-            SELECTED WORK
+            <div className="w-2 h-2 bg-(--highlight)" />
+            IN PRACTICE
           </div>
           <div className="w-full border-t-[3px] border-dotted border-zinc-900/10" />
         </div>
@@ -137,7 +136,7 @@ export default function Quote() {
               transition={{ duration: 0.6 }}
               className={`${playfair.className} pl-10 sm:pl-20 lg:pl-32 text-4xl sm:text-5xl lg:text-6xl font-medium text-zinc-900 italic tracking-tight`}
             >
-              where the work
+              Observations and ideas
             </motion.h2>
             <motion.h3
               initial={{ opacity: 0, y: 12 }}
@@ -146,7 +145,7 @@ export default function Quote() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className={`${dmSans.className} text-4xl sm:text-5xl lg:text-6xl font-normal text-zinc-800 tracking-tight text-right md:ml-auto`}
             >
-              comes to life
+              from UX practice
             </motion.h3>
           </div>
 
@@ -159,7 +158,7 @@ export default function Quote() {
                 transition={{ duration: 0.8 }}
                 className={`${dmSans.className} text-lg sm:text-xl leading-relaxed text-zinc-700`}
               >
-This section holds both the work itself and the thinking behind it. Case studies, experiments, reflections, and the occasional strong opinion about how digital systems should behave.              </motion.p>
+Gathered along the way while designing products, running research, and building systems that try to make digital work a little more thoughtful.              </motion.p>
             </div>
           </div>
         </div>
@@ -184,16 +183,22 @@ This section holds both the work itself and the thinking behind it. Case studies
                 <div key={idx} className="shrink-0 w-[78vw] sm:w-[440px] snap-start">
                   <a
                     href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="block group/card"
                   >
                     <article className="flex flex-col">
                       <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-zinc-100 mb-5 transition-transform duration-500 group-hover/card:scale-[1.02]">
-                        <DicebearThumbnail
-                          seed={item.title || item.link}
-                          size={600}
-                        />
+                        {item.image ? (
+                          <img
+                            src={item.image}
+                            alt={item.title}
+                            className="h-full w-full object-cover"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center bg-zinc-200 text-xs font-medium uppercase tracking-[0.16em] text-zinc-500">
+                            Work in Practice
+                          </div>
+                        )}
                         {/* Grayscale overlay that fades on hover */}
                         <div className="absolute inset-0 bg-zinc-900/10 grayscale mix-blend-multiply opacity-100 transition-all duration-500 group-hover/card:grayscale-0 group-hover/card:opacity-0" />
                       </div>

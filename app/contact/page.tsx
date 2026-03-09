@@ -10,7 +10,7 @@ export default function ContactPage() {
   const [, setPendingTarget] = useState<string | null>(null);
 
   return (
-    <div className="antialiased bg-[#f1edff]">
+    <div className="antialiased bg-[var(--background)]">
       <Nav
         setActive={setActive}
         setPendingTarget={setPendingTarget}

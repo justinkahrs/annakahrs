@@ -107,7 +107,7 @@ export default function ManagerJourneyPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#020b1f] text-zinc-100">
+    <div className="min-h-screen bg-[var(--project-bg)] text-zinc-100">
       <Nav
         setActive={setActiveNav}
         setPendingTarget={setPendingTarget}
@@ -135,7 +135,7 @@ export default function ManagerJourneyPage() {
               The Manager Journey
             </p>
             <h1
-              className={`${playfair.className} text-5xl leading-[0.95] text-[#edf2f5] sm:text-6xl lg:text-8xl`}
+              className={`${playfair.className} text-5xl leading-[0.95] text-[#f1edff] sm:text-6xl lg:text-8xl`}
             >
               Designing the manager experience
               <br />
@@ -177,7 +177,7 @@ export default function ManagerJourneyPage() {
           </aside>
 
           <section className="px-4 py-6 sm:px-8 lg:pr-8 lg:pl-0">
-            <div className="sticky top-[60px] z-20 mb-4 overflow-x-auto border-y border-zinc-200/15 bg-[#020b1f]/95 py-2 backdrop-blur lg:hidden">
+            <div className="sticky top-[60px] z-20 mb-4 overflow-x-auto border-y border-zinc-200/15 bg-[color:var(--project-bg)]/95 py-2 backdrop-blur lg:hidden">
               <div className={`${dmSans.className} flex w-max items-center gap-2 px-1`}>
                 {sections.map((section, index) => {
                   const isActive = activeId === section.id;
@@ -198,7 +198,7 @@ export default function ManagerJourneyPage() {
               </div>
             </div>
 
-            <div className="border border-zinc-900/15 bg-[#f1edff] text-zinc-900">
+            <div className="border border-zinc-900/15 bg-[var(--background)] text-zinc-900">
               {sections.map((section, index) => (
                 <section
                   id={section.id}
@@ -208,7 +208,7 @@ export default function ManagerJourneyPage() {
                   <div
                     className={`${dmSans.className} mb-10 flex items-center gap-3 border-b border-zinc-900/15 pb-4 text-xs uppercase tracking-[0.2em] text-zinc-700`}
                   >
-                    <span className="h-2 w-2 bg-[#ff4500]" />
+                    <span className="h-2 w-2 bg-(--highlight)" />
                     <span>{section.eyebrow}</span>
                   </div>
 

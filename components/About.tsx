@@ -46,21 +46,48 @@ const testimonials = [
   },
 ];
 
+const testimonialPatterns = [
+  {
+    backgroundImage:
+      "radial-gradient(circle at 1px 1px, rgba(39,39,42,0.18) 1px, transparent 0)",
+    backgroundSize: "18px 18px",
+  },
+  {
+    backgroundImage:
+      "repeating-linear-gradient(135deg, rgba(39,39,42,0.14) 0, rgba(39,39,42,0.14) 1px, transparent 1px, transparent 10px)",
+    backgroundSize: "16px 16px",
+  },
+  {
+    backgroundImage:
+      "linear-gradient(90deg, rgba(39,39,42,0.12) 1px, transparent 1px), linear-gradient(rgba(39,39,42,0.12) 1px, transparent 1px)",
+    backgroundSize: "20px 20px",
+  },
+];
+
 function About() {
   const marqueeItems = [...testimonials, ...testimonials];
 
   return (
-    <section id="about" className="scroll-mt-[60px] w-full bg-[#f1edff] pb-40">
+    <section id="about" className="scroll-mt-[60px] w-full bg-[var(--background)] pb-40">
       <div className="relative mx-auto w-full max-w-[1500px] px-6">
         <div className="relative overflow-hidden rounded-3xl bg-stone-900/5 p-8 sm:p-12 lg:p-20">
-          <div>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 opacity-30"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle at 1px 1px, rgba(39,39,42,0.18) 1px, transparent 0)",
+              backgroundSize: "18px 18px",
+            }}
+          />
+          <div className="relative z-10">
             {/* TOP: HEADING */}
             <div className="mb-8 flex w-full flex-col">
               <div className="relative mb-6 mt-4 w-full">
                 <div
                   className={`${dmSans.className} pointer-events-none absolute bottom-[12px] left-0 flex select-none items-center gap-2 text-xs font-medium uppercase tracking-[0.12em] text-zinc-600/60 sm:text-sm`}
                 >
-                  <div className="h-2 w-2 bg-[#ff4500]" />
+                  <div className="h-2 w-2 bg-(--highlight)" />
                   ABOUT
                 </div>
                 <div className="w-full border-t-[3px] border-dotted border-zinc-900/10" />
@@ -136,7 +163,6 @@ function About() {
                     <li>Content is design</li>
                     <li>Users hate scrolling = myth</li>
                     <li>It is not about how many clicks</li>
-                    <li>UX is not graphic design</li>
                   </ul>
                 </div>
 
@@ -153,10 +179,9 @@ function About() {
                     className={` ${dmSans.className} mt-4 space-y-3 text-sm
                     sm:text-base text-zinc-600 `}
                   >
-                    <li>A thoughtful Jira ritual</li>
                     <li>Digging in my garden</li>
                     <li>Well written documentation</li>
-                    <li>Finding the perfect emoji</li>
+
                     <li>Categorizing things</li>
                     <li>Knitting, crocheting, and sewing</li>
                     <li>Hunting down thrift store gold</li>
@@ -193,7 +218,7 @@ function About() {
               <article
                 key={`${item.name}-${index}`}
                 className={`max-w-[26rem] shrink-0 border border-zinc-900/5
-                bg-[#f1edff] p-5 ${
+                relative overflow-hidden bg-[var(--background)] p-5 ${
                   index % 3 === 0
                     ? "mt-0"
                     : index % 3 === 1
@@ -201,9 +226,16 @@ function About() {
                       : "mt-12"
                 }`}
               >
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 opacity-35"
+                  style={
+                    testimonialPatterns[index % testimonialPatterns.length]
+                  }
+                />
                 <p
-                  className={` ${dmSans.className} text-sm leading-relaxed
-                  text-zinc-800 `}
+                  className={` ${dmSans.className} text-base sm:text-lg leading-relaxed
+                  relative z-10 text-zinc-800 `}
                 >
                   “{item.quote}”
                 </p>

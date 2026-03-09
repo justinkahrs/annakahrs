@@ -71,7 +71,7 @@ export default function App() {
     };
   }, [pendingTarget]);
   return (
-    <div className="antialiased bg-[#f1edff]">
+    <div className="antialiased bg-[var(--background)]">
       <Nav
         setActive={setActive}
         setPendingTarget={setPendingTarget}
