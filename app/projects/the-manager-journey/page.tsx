@@ -113,6 +113,34 @@ export default function ManagerJourneyPage() {
         setPendingTarget={setPendingTarget}
       />
       <main className="pt-[60px]">
+        <div className="mx-auto w-full max-w-[1920px] px-6 py-4 sm:px-10">
+          <nav
+            aria-label="Breadcrumb"
+            className={`${dmSans.className} flex items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-zinc-300/75 sm:text-xs`}
+          >
+            <a
+              href="/"
+              className="inline-flex items-center transition hover:text-zinc-100"
+              aria-label="Home"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.8}
+                className="h-3.5 w-3.5"
+                aria-hidden="true"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="m3.75 10.5 8.25-6.75 8.25 6.75M5.25 9.75V20.25h13.5V9.75M9.75 20.25v-6h4.5v6" />
+              </svg>
+            </a>
+            <span className="text-zinc-500">/</span>
+            <span aria-current="page" className="text-zinc-100">
+              The Manager Journey
+            </span>
+          </nav>
+        </div>
         <section className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-8 flex min-h-[78vh] w-screen items-center justify-center overflow-hidden bg-[#1a2028] px-6 py-20 sm:px-10">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(92%_56%_at_50%_100%,rgba(77,187,255,0.36),rgba(77,187,255,0.10)_34%,rgba(176,255,225,0.16)_56%,rgba(26,32,40,0.92)_76%,rgba(26,32,40,1)_88%)]" />
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_32%_at_50%_36%,rgba(210,236,255,0.28),rgba(210,236,255,0.06)_58%,transparent_75%)]" />

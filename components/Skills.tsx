@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import TechMarquee from "./TechMarquee";
 import { Playfair_Display, DM_Sans, Dancing_Script } from "next/font/google";
 
@@ -70,6 +70,74 @@ const ScrollWord = ({
     >
       {word}
     </motion.span>
+  );
+};
+
+const ScrollHighlightText = ({
+  text,
+  className,
+}: {
+  text: string;
+  className?: string;
+}) => {
+  const phraseRef = useRef<HTMLSpanElement>(null);
+  const [activeCount, setActiveCount] = useState(0);
+  const [locked, setLocked] = useState(false);
+  const timerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (locked || !phraseRef.current) return;
+
+    const node = phraseRef.current;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting || timerRef.current !== null || locked) {
+          return;
+        }
+
+        timerRef.current = window.setInterval(() => {
+          setActiveCount((prev) => {
+            const next = Math.min(text.length, prev + 1);
+            if (next >= text.length) {
+              if (timerRef.current !== null) {
+                window.clearInterval(timerRef.current);
+                timerRef.current = null;
+              }
+              setLocked(true);
+            }
+            return next;
+          });
+        }, 24);
+      },
+      { threshold: 0.35 },
+    );
+
+    observer.observe(node);
+
+    return () => {
+      observer.disconnect();
+      if (timerRef.current !== null) {
+        window.clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+    };
+  }, [locked, text]);
+
+  return (
+    <span ref={phraseRef} className={className}>
+      {text.split("").map((char, index) => {
+        const isSpace = char === " ";
+        const isActive = locked || (!isSpace && index < activeCount);
+        return (
+          <span
+            key={`${char}-${index}`}
+            className={isActive ? "rounded-sm bg-[#bbf7d0]/70" : undefined}
+          >
+            {isSpace ? "\u00A0" : char}
+          </span>
+        );
+      })}
+    </span>
   );
 };
 
@@ -402,7 +470,8 @@ function Skills() {
                     `}
                     >
                       I completed{" "}
-                      <span className="rounded-sm bg-[#bbf7d0]/70 pl-1 pr-0">30+ hours of advanced UX training</span>, including a focused research specialty track.
+                      <ScrollHighlightText text="30+ hours of advanced UX training" />
+                      {", including a focused research specialty track."}
                       <br /><br />
                       The training emphasized connecting research rigor to real product decisions, reinforcing how analytics, qualitative insight, and operational structure work together to support scalable UX.
                     </p>
@@ -459,10 +528,8 @@ function Skills() {
                     <div className="max-w-md">
                       <p className={`${dmSans.className} text-lg sm:text-xl leading-[1.5] text-zinc-800`}>
                         Work I contributed to has received national recognition for{" "}
-                        <span className="rounded-sm bg-[#bbf7d0]/70 px-1">
-                          excellence in digital experience and design
-                        </span>
-                        . My work has included leading information architecture, conducting user interviews, shaping user tested navigation, and serving as Lead UX Designer on the redesign of a large scale public health archive, improving accessibility, search performance, and usability across millions of documents.
+                        <ScrollHighlightText text="excellence in digital experience and design" />
+                        {". My work has included leading information architecture, conducting user interviews, shaping user tested navigation, and serving as Lead UX Designer on the redesign of a large scale public health archive, improving accessibility, search performance, and usability across millions of documents."}
                       </p>
                     </div>
                   </div>

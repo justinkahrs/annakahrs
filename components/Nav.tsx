@@ -271,11 +271,24 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
                     >
                       <span className="min-w-0">
                         <span
-                          className={`${dmSans.className} block text-sm font-semibold ${
+                          className={`${dmSans.className} flex items-center gap-2 text-sm font-semibold ${
                             isProjectPage ? "text-zinc-100" : "text-zinc-900"
                           }`}
                         >
                           {item.label}
+                          {item.label === "Anna Kahrs's Portfolio" && (
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth={1.8}
+                              className="h-3.5 w-3.5 shrink-0"
+                              aria-hidden="true"
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" d="m3.75 10.5 8.25-6.75 8.25 6.75M5.25 9.75V20.25h13.5V9.75M9.75 20.25v-6h4.5v6" />
+                            </svg>
+                          )}
                         </span>
                         <span
                           className={`${dmSans.className} mt-1 block text-xs leading-relaxed ${

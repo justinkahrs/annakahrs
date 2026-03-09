@@ -24,6 +24,13 @@ type RssItem = {
   author?: string;
 };
 
+const thumbnailLinePatterns = [
+  "repeating-linear-gradient(135deg, rgba(24,24,27,0.2) 0, rgba(24,24,27,0.2) 1px, transparent 1px, transparent 12px)",
+  "repeating-linear-gradient(45deg, rgba(24,24,27,0.18) 0, rgba(24,24,27,0.18) 1px, transparent 1px, transparent 10px)",
+  "repeating-linear-gradient(0deg, rgba(24,24,27,0.16) 0, rgba(24,24,27,0.16) 1px, transparent 1px, transparent 11px)",
+  "repeating-linear-gradient(90deg, rgba(24,24,27,0.16) 0, rgba(24,24,27,0.16) 1px, transparent 1px, transparent 11px)",
+];
+
 export default function Quote() {
   const [items, setItems] = useState<RssItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -199,14 +206,29 @@ Gathered along the way while designing products, running research, and building 
                             Work in Practice
                           </div>
                         )}
+                        <div
+                          aria-hidden="true"
+                          className="pointer-events-none absolute inset-0 opacity-35"
+                          style={{
+                            backgroundImage:
+                              thumbnailLinePatterns[
+                                idx % thumbnailLinePatterns.length
+                              ],
+                          }}
+                        />
+                        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-zinc-950/80 via-zinc-950/25 to-transparent" />
+                        <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+                          <h4
+                            className={`${dmSans.className} text-lg sm:text-xl font-semibold leading-tight text-white line-clamp-2`}
+                          >
+                            {item.title}
+                          </h4>
+                        </div>
                         {/* Grayscale overlay that fades on hover */}
                         <div className="absolute inset-0 bg-zinc-900/10 grayscale mix-blend-multiply opacity-100 transition-all duration-500 group-hover/card:grayscale-0 group-hover/card:opacity-0" />
                       </div>
 
                       <div className="flex flex-col text-left">
-                        <h4 className={`${dmSans.className} text-xl font-semibold text-zinc-900 mb-1 line-clamp-2`}>
-                          {item.title}
-                        </h4>
                         <p className={`${dmSans.className} text-xs text-zinc-500 font-medium uppercase tracking-[0.15em]`}>
                           {getFirstCategory(item)}
                         </p>

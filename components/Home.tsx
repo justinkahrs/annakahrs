@@ -66,7 +66,7 @@ function Home() {
                   className={`
                     ${playfair.className} 
                     text-3xl sm:text-5xl lg:text-[5rem] xl:text-[6rem]
-                    font-medium italic text-zinc-800 leading-tight mt-6
+                    font-medium italic tracking-[-0.02em] text-zinc-800 leading-tight mt-6
                     whitespace-nowrap
                   `}
                 >
@@ -80,7 +80,7 @@ function Home() {
                 <button
                   className="rounded-xl bg-zinc-900 px-4 py-2.5
                     text-sm font-semibold text-white
-                    hover:bg-zinc-800 cursor-pointer shadow-lg shadow-zinc-900/10"
+                    hover:bg-zinc-800 cursor-pointer"
                   onClick={() => handleScroll("#experience")}
                   type="button"
                 >
