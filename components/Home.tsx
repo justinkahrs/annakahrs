@@ -2,11 +2,8 @@
 
 import handleScroll from "@/utils/handleScroll";
 import gsap from "gsap";
-import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
 import { Playfair_Display, DM_Sans } from "next/font/google";
 import { useEffect, useRef } from "react";
-
-gsap.registerPlugin(ScrambleTextPlugin);
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -19,20 +16,57 @@ const dmSans = DM_Sans({
 });
 
 function Home() {
-  const systemsTextRef = useRef<HTMLSpanElement>(null);
+  const firstLineRef = useRef<HTMLSpanElement>(null);
+  const secondLineRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    if (!systemsTextRef.current) {
+    if (!firstLineRef.current || !secondLineRef.current) {
       return;
     }
 
-    const tween = gsap.to(systemsTextRef.current, {
+    const firstLineText = "Designing clarity";
+    const secondLineText = "across complex systems";
+    const fullText = `${firstLineText} ${secondLineText}`;
+    const glyphs = "!<>-_\\/[]{}=+*^?#";
+    const state = { reveal: 1 };
+    let lastRenderedReveal = -1;
+
+    const render = (revealCount: number) => {
+      const scrambled = fullText
+        .split("")
+        .map((char, index) => {
+          if (char === " " || index < revealCount) {
+            return char;
+          }
+
+          return glyphs[Math.floor(Math.random() * glyphs.length)];
+        })
+        .join("");
+
+      firstLineRef.current!.textContent = scrambled.slice(0, firstLineText.length);
+      secondLineRef.current!.textContent = scrambled.slice(firstLineText.length + 1);
+    };
+
+    render(1);
+
+    const tween = gsap.to(state, {
       delay: 0.5,
       duration: 3,
       ease: "none",
-      scrambleText: {
-        chars: "!<>-_\\/[]{}=+*^?#",
-        text: "across complex systems",
+      reveal: fullText.length,
+      snap: { reveal: 1 },
+      onUpdate: () => {
+        const nextReveal = Math.round(state.reveal);
+        if (nextReveal === lastRenderedReveal) {
+          return;
+        }
+
+        lastRenderedReveal = nextReveal;
+        render(nextReveal);
+      },
+      onComplete: () => {
+        firstLineRef.current!.textContent = firstLineText;
+        secondLineRef.current!.textContent = secondLineText;
       },
     });
 
@@ -43,8 +77,8 @@ function Home() {
 
   return (
     <section id="home" className="scroll-mt-[60px] mb-0 bg-[var(--background)]">
-      <div className="pt-0">
-        <div className="relative mx-auto w-full max-w-[1920px] px-6">
+      <div className="p-4 sm:p-0">
+        <div className="relative mx-auto w-full max-w-[1920px] px-0 sm:px-6">
           {/* HERO CARD */}
           <div className="relative overflow-hidden rounded-3xl bg-[var(--surface)] min-h-[85vh] flex flex-col items-center justify-center p-8 sm:p-12">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(92%_56%_at_50%_100%,rgba(255,94,64,0.26),rgba(255,94,64,0.09)_34%,rgba(186,255,231,0.14)_56%,rgba(236,228,251,0.92)_78%,rgba(236,228,251,1)_90%)]" />
@@ -86,17 +120,18 @@ function Home() {
                     font-light tracking-tighter text-zinc-900 leading-[0.85]
                     whitespace-nowrap
                   `}
+                  ref={firstLineRef}
                 >
                   Designing clarity
                 </span>
                 <span
-                  ref={systemsTextRef}
                   className={`
                     ${playfair.className} 
-                    text-3xl sm:text-5xl lg:text-[5rem] xl:text-[6rem]
-                    font-medium italic tracking-[-0.02em] text-zinc-800 leading-tight mt-6
-                    whitespace-nowrap
+                    text-4xl sm:text-5xl lg:text-[5rem] xl:text-[6rem]
+                    font-medium italic tracking-[-0.02em] text-zinc-800 leading-[1.02] sm:leading-[1.06] mt-2 sm:mt-6
+                    whitespace-normal sm:whitespace-nowrap
                   `}
+                  ref={secondLineRef}
                 >
                   across complex systems
                 </span>

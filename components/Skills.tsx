@@ -146,11 +146,29 @@ function Skills() {
     (section) => section.title !== "Relevant Tools",
   );
   const hrLineStyle = { borderColor: "rgba(0, 0, 0, 0.05)" };
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 639px)");
+    const updateIsMobile = () => {
+      setIsMobile(mediaQuery.matches);
+    };
+
+    updateIsMobile();
+    mediaQuery.addEventListener("change", updateIsMobile);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateIsMobile);
+    };
+  }, []);
 
   const statementRef = useRef<HTMLDivElement>(null);
+  const statementOffsets: [string, string] = isMobile
+    ? ["start 0.85", "end 0.2"]
+    : ["start 0.55", "start 0.1"];
   const { scrollYProgress } = useScroll({
     target: statementRef,
-    offset: ["start 0.55", "start 0.1"],
+    offset: statementOffsets,
   });
 
   const words1 =
@@ -171,15 +189,15 @@ function Skills() {
         className="
           relative right-1/2 left-1/2 -mx-[50vw]
           w-screen bg-[var(--background)]
-          px-6 pt-28 pb-24 sm:px-12 sm:pt-44 sm:pb-28
+          px-4 pt-28 pb-24 sm:px-12 sm:pt-44 sm:pb-28
           overflow-hidden
         "
       >
         {/* MAIN CONTENT */}
-        <div className="relative z-10 mx-auto max-w-[1500px] px-6">
+        <div className="relative z-10 mx-auto max-w-[1500px] px-0 sm:px-6">
           {/* EYEBROW BLOCK */}
           <div
-            className={`${dmSans.className} flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none pl-10 sm:pl-20 lg:pl-32 mb-6`}
+            className={`${dmSans.className} flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none pl-0 sm:pl-20 lg:pl-32 mb-6`}
           >
             <div className="w-2 h-2 bg-(--highlight)" />
             FOCUS
@@ -190,8 +208,8 @@ function Skills() {
             ref={statementRef}
             className={`
               ${dmSans.className}
-              mb-28 sm:mb-44 text-4xl sm:text-5xl lg:text-5xl text-zinc-900 leading-[1.2]
-              pl-10 sm:pl-20 lg:pl-32 max-w-5xl
+              mt-2 sm:mt-0 mb-28 sm:mb-44 text-4xl sm:text-5xl lg:text-5xl text-zinc-900 leading-[1.2]
+              pl-0 sm:pl-20 lg:pl-32 max-w-5xl
             `}
           >
             <div className="block mb-8 font-medium">
@@ -229,8 +247,8 @@ function Skills() {
         </div>
 
         {/* SKILL CARDS */}
-        <div className="mx-auto mt-0 mb-28 max-w-[1500px] px-6">
-          <div className="relative rounded-3xl overflow-hidden p-2 sm:p-4 lg:p-6 flex flex-col items-end gap-4 sm:gap-8 bg-[var(--surface)]">
+        <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen mt-0 mb-28 max-w-none px-0 sm:static sm:left-auto sm:right-auto sm:mx-auto sm:w-auto sm:max-w-[1500px] sm:px-6">
+          <div className="relative rounded-none sm:rounded-3xl overflow-hidden p-2 pb-8 sm:p-4 lg:p-6 flex flex-col items-end gap-6 sm:gap-8 bg-[var(--surface)]">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(95%_62%_at_18%_8%,rgba(184,255,232,0.22),rgba(184,255,232,0.06)_42%,transparent_66%)]" />
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(88%_56%_at_84%_96%,rgba(255,97,66,0.20),rgba(255,97,66,0.07)_36%,rgba(170,145,245,0.14)_58%,rgba(235,227,247,0.96)_82%)]" />
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(128deg,rgba(181,156,255,0.20)_0%,transparent_26%,transparent_72%,rgba(176,255,229,0.16)_100%)]" />
@@ -245,7 +263,7 @@ function Skills() {
               }}
             />
             {/* BACKGROUND TEXT - TOP LEFT */}
-            <div className="absolute top-2 left-4 sm:top-4 sm:left-6 lg:top-5 lg:left-7 z-0 pointer-events-none">
+            <div className="absolute top-2 left-4 sm:top-4 sm:left-6 lg:top-5 lg:left-7 z-0 pointer-events-none hidden sm:block">
               <h2
                 className={`
                   ${dmSans.className}
@@ -256,10 +274,29 @@ function Skills() {
               </h2>
             </div>
 
+            <div className="w-full px-4 py-6 sm:hidden relative z-10">
+              <h2
+                className={`
+                  ${dmSans.className}
+                  text-4xl text-zinc-900 leading-[1.2] tracking-tighter
+                `}
+              >
+                Where insight
+              </h2>
+              <h2
+                className={`
+                  ${playfair.className}
+                  text-4xl font-medium italic text-zinc-900 leading-[1.2] tracking-tight mt-2
+                `}
+              >
+                turns into action
+              </h2>
+            </div>
+
             {skillCards.map((section) => (
               <article
                 key={section.title}
-                className="bg-[var(--background)]/30 backdrop-blur-sm shadow-none flex min-h-[320px] w-full md:w-2/3 lg:w-1/2 flex-col rounded-3xl px-7 py-8 sm:px-10 sm:py-12 relative z-10"
+                className="bg-[var(--background)]/30 backdrop-blur-sm shadow-none flex min-h-[320px] w-[92%] sm:w-full md:w-2/3 lg:w-1/2 flex-col rounded-2xl sm:rounded-3xl px-7 py-8 sm:px-10 sm:py-12 relative z-10"
               >
                 <div className="w-full relative mb-6">
                   <h3
@@ -290,7 +327,7 @@ function Skills() {
             ))}
 
             {/* BACKGROUND TEXT - BOTTOM LEFT */}
-            <div className="absolute bottom-2 left-4 sm:bottom-4 sm:left-6 lg:bottom-5 lg:left-7 z-0 pointer-events-none">
+            <div className="absolute bottom-2 left-4 sm:bottom-4 sm:left-6 lg:bottom-5 lg:left-7 z-0 pointer-events-none hidden sm:block">
               <h2
                 className={`
                   ${playfair.className}
@@ -304,7 +341,7 @@ function Skills() {
         </div>
 
         {/* TOOL SECTION HEADING */}
-        <div className="relative z-10 mx-auto max-w-[1500px] px-6 mt-28 mb-8">
+        <div className="relative z-10 left-1/2 right-1/2 -mx-[50vw] w-screen mt-28 mb-8 px-4 sm:static sm:left-auto sm:right-auto sm:mx-auto sm:w-auto sm:max-w-[1500px] sm:px-6">
           <div className="w-full relative mb-6">
             <div
               className={`${dmSans.className} absolute left-0 bottom-[12px] flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none`}
@@ -317,27 +354,35 @@ function Skills() {
             />
           </div>
           <div className="flex flex-col sm:flex-row justify-between items-baseline gap-4 mb-8">
-            <div className="flex flex-col pl-10 sm:pl-20 lg:pl-32">
+            <div className="flex w-full sm:w-auto flex-col pl-0 sm:pl-20 lg:pl-32">
               <h4
                 className={`
                       ${playfair.className}
-                      text-left text-2xl sm:text-4xl lg:text-6xl font-medium text-zinc-900 leading-tight mb-4
+                      text-left text-4xl sm:text-4xl lg:text-6xl font-medium text-zinc-900 leading-tight mb-0 sm:mb-4
                     `}
               >
                 Powered by
               </h4>
-              <div className="max-w-md">
+              <p
+                className={`
+                    ${dmSans.className}
+                    text-left text-4xl font-normal text-zinc-800 italic leading-[1.05] mt-0 sm:hidden
+                  `}
+              >
+                a cross-functional tool stack
+              </p>
+              <div className="w-full max-w-none sm:max-w-md">
                 <p
                   className={`
                         ${dmSans.className}
-                        text-left text-lg sm:text-xl leading-[1.5] text-zinc-800
+                        mt-4 sm:mt-0 text-left text-lg sm:text-xl leading-[1.5] text-zinc-800
                       `}
                 >
                   A curated set of research, design, prototyping, and collaboration tools that support evidence-driven decisions and scalable digital systems.
                 </p>
 
                 <div
-                  className={`${dmSans.className} mt-12 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none`}
+                  className={`${dmSans.className} mt-6 pt-4 sm:mt-12 sm:pt-0 text-left text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none`}
                 >
                   SELECTED TOOLS
                 </div>
@@ -346,7 +391,7 @@ function Skills() {
             <p
               className={`
                     ${dmSans.className}
-                    text-left text-4xl sm:text-5xl lg:text-6xl font-normal text-zinc-800 italic mt-8 sm:mt-0
+                    hidden sm:block text-left sm:text-5xl lg:text-6xl font-normal text-zinc-800 italic mt-0
                   `}
             >
               a cross-functional tool stack
@@ -385,14 +430,14 @@ function Skills() {
                   "zendesk",
                 ]}
                 speedSeconds={42}
-                size={108}
+                size={isMobile ? 112 : 108}
               />
             </div>
           </div>
         </div>
 
         {/* NN/g Certification Card */}
-        <div className="relative z-10 mx-auto max-w-[1500px] px-6 mt-0">
+        <div className="relative z-10 mx-auto max-w-[1500px] px-0 sm:px-6 mt-0">
           <div
             className="relative overflow-hidden mx-auto mb-0 w-full rounded-3xl bg-stone-900/5 p-6 pb-0 sm:p-8 sm:pb-0 md:p-10 md:pb-0 lg:p-12 lg:pb-0"
           >
@@ -405,18 +450,20 @@ function Skills() {
                 backgroundSize: "18px 18px",
               }}
             />
-            <div className="relative z-10 flex flex-col items-center gap-10 md:gap-14 pb-16">
+            <div className="relative z-10 flex flex-col items-center gap-10 md:gap-14 pb-24 sm:pb-16">
               <motion.div
-                initial={{ opacity: 0, x: -20, y: 20, rotate: -5 }}
-                whileInView={{ opacity: 1, x: 0, y: 0, rotate: -15 }}
+                initial={{ opacity: 0, x: -20, y: 20, rotate: isMobile ? 0 : -5 }}
+                whileInView={{ opacity: 1, x: 0, y: 0, rotate: isMobile ? 0 : -15 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="absolute left-[10px] bottom-[-90px] z-0 sm:left-[-10px] sm:bottom-[-130px] lg:left-[-30px] lg:bottom-[-170px]"
+                className="absolute left-[10px] bottom-[-72px] z-0 sm:left-[-10px] sm:bottom-[-130px] lg:left-[-30px] lg:bottom-[-170px]"
                 style={{
-                  WebkitMaskImage:
-                    "linear-gradient(to bottom, transparent 5%, black 100%)",
-                  maskImage:
-                    "linear-gradient(to bottom, transparent 5%, black 100%)",
+                  WebkitMaskImage: isMobile
+                    ? "linear-gradient(to bottom, transparent 24%, rgba(0,0,0,0.96) 82%, black 100%)"
+                    : "linear-gradient(to bottom, transparent 5%, black 100%)",
+                  maskImage: isMobile
+                    ? "linear-gradient(to bottom, transparent 24%, rgba(0,0,0,0.96) 82%, black 100%)"
+                    : "linear-gradient(to bottom, transparent 5%, black 100%)",
                 }}
               >
                 <img
@@ -441,11 +488,11 @@ function Skills() {
                 </div>
 
                 {/* HEADINGS */}
-                <div className="mb-8">
+                <div className="mb-4 sm:mb-8">
                   <h4
                     className={`
                     ${playfair.className}
-                    text-center text-2xl sm:text-4xl lg:text-6xl font-medium text-zinc-900 leading-tight mb-4
+                    text-center text-4xl sm:text-4xl lg:text-6xl font-medium text-zinc-900 leading-tight mb-0 sm:mb-4
                   `}
                   >
                     Certified in UX research through
@@ -453,7 +500,7 @@ function Skills() {
                   <p
                     className={`
                     ${dmSans.className}
-                    text-left mb-4 text-4xl sm:text-5xl lg:text-6xl font-normal text-zinc-800 italic
+                    text-left mt-0 mb-0 sm:mb-4 text-4xl sm:text-5xl lg:text-6xl font-normal text-zinc-800 italic leading-[1.05] sm:leading-normal
                   `}
                   >
                     Nielsen Norman Group
@@ -461,16 +508,19 @@ function Skills() {
                 </div>
 
                 {/* BOTTOM SECTION - Paragraph on Right */}
-                <div className="flex justify-end pt-0 pr-10 sm:pr-20 lg:pr-32">
-                  <div className="max-w-md">
+                <div className="flex justify-end pt-0 pr-0 sm:pr-20 lg:pr-32">
+                  <div className="w-full max-w-none sm:max-w-md">
                     <p
                       className={`
                       ${dmSans.className}
                       text-left text-lg sm:text-xl leading-[1.5] text-zinc-800
-                    `}
+                      `}
                     >
                       I completed{" "}
-                      <ScrollHighlightText text="30+ hours of advanced UX training" />
+                      <ScrollHighlightText
+                        text="30+ hours of advanced UX training"
+                        className="whitespace-nowrap"
+                      />
                       {", including a focused research specialty track."}
                       <br /><br />
                       The training emphasized connecting research rigor to real product decisions, reinforcing how analytics, qualitative insight, and operational structure work together to support scalable UX.

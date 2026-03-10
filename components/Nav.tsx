@@ -196,7 +196,11 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
 
   return (
     <nav
-      className={`fixed top-0 inset-x-0 z-80 h-[60px] ${isProjectPage ? "bg-[var(--project-bg)]" : "bg-[var(--background)]"}`}
+      className={`fixed top-0 inset-x-0 z-80 h-[60px] border-b sm:border-b-0 ${
+        isProjectPage
+          ? "bg-[var(--project-bg)] border-zinc-200/15"
+          : "bg-[var(--background)] border-zinc-900/10"
+      }`}
     >
       <div
         className="relative z-10 flex h-full w-full max-w-[1920px] mx-auto items-center
