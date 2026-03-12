@@ -60,9 +60,9 @@ function Experience() {
 
   return (
     <section id="experience" className="scroll-mt-[60px] w-full bg-[var(--background)] pb-40">
-      <div className="relative mx-auto w-full max-w-[1500px] px-6">
+      <div className="relative mx-auto w-full max-w-[1500px] px-4 sm:px-6">
         {/* MAIN EXPERIENCE CARD */}
-        <div className="relative overflow-hidden rounded-3xl bg-stone-900/5 p-6 pb-12 sm:p-8 sm:pb-16 md:p-10 md:pb-20 lg:p-12 lg:pb-24">
+        <div className="relative -mt-6 mx-auto mb-0 w-full overflow-hidden rounded-3xl bg-stone-900/5 p-6 pb-0 sm:mt-0 sm:p-8 sm:pb-16 md:p-10 md:pb-20 lg:p-12 lg:pb-24">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 opacity-30"
@@ -73,7 +73,7 @@ function Experience() {
             }}
           />
 
-          <div className="relative z-10 pb-16">
+          <div className="relative z-10 pb-24 sm:pb-16">
             {/* HEADER */}
             <div className="mb-24 flex flex-col w-full">
               {/* TOP EYEBROW - MATCHES SKILLS.TSX */}
@@ -94,8 +94,8 @@ function Experience() {
                 viewport={{ once: true, amount: 0.6 }}
                 transition={{ duration: 0.6 }}
                 className={` ${playfair.className}
-                  text-left text-2xl sm:text-4xl lg:text-6xl font-medium 
-                  text-zinc-900 leading-tight mb-4`}
+                  text-left text-4xl font-medium
+                  text-zinc-900 leading-[1.05] mb-1 sm:text-4xl sm:leading-tight sm:mb-4 lg:text-6xl`}
               >
                 Shaped through years of
               </motion.h2>
@@ -106,8 +106,9 @@ function Experience() {
                 viewport={{ once: true, amount: 0.6 }}
                 transition={{ duration: 0.7, delay: 0.05 }}
                 className={` ${dmSans.className}
-                  text-center text-4xl sm:text-5xl lg:text-6xl font-normal 
-                  tracking-tight leading-tight text-zinc-800 italic `}
+                  text-left text-4xl font-normal
+                  sm:text-center sm:text-5xl lg:text-6xl
+                  tracking-tight leading-[1.05] text-zinc-800 italic sm:leading-tight `}
               >
                 research, design, and practice
               </motion.h3>

@@ -29,7 +29,8 @@ function Contact() {
                 transition={{ duration: 0.6 }}
                 className={`
                   ${dmSans.className}
-                  text-center text-4xl sm:text-5xl lg:text-6xl font-normal
+                  text-left text-4xl font-normal
+                  sm:text-center sm:text-5xl lg:text-6xl
                   tracking-tight leading-tight text-zinc-800
                 `}
               >
@@ -43,7 +44,8 @@ function Contact() {
                 transition={{ duration: 0.65, delay: 0.05 }}
                 className={`
                   ${playfair.className}
-                  mt-2 text-center text-4xl sm:text-5xl lg:text-6xl font-semibold
+                  mt-2 text-left text-4xl font-semibold
+                  sm:text-center sm:text-5xl lg:text-6xl
                   tracking-tight text-zinc-900
                 `}
               >

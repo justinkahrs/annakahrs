@@ -150,7 +150,7 @@ export default function Quote() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className={`${dmSans.className} text-4xl sm:text-5xl lg:text-6xl font-normal text-zinc-800 tracking-tight text-right md:ml-auto`}
+              className={`${dmSans.className} text-left text-4xl font-normal text-zinc-800 tracking-tight sm:text-5xl md:ml-auto md:text-right lg:text-6xl`}
             >
               from UX practice
             </motion.h3>

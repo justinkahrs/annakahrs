@@ -156,7 +156,7 @@ export default function ManagerJourneyPage() {
             }}
           />
 
-          <div className="relative mx-auto max-w-5xl text-center">
+          <div className="relative mx-auto max-w-5xl text-left sm:text-center">
             <p
               className={`${dmSans.className} mb-7 text-[11px] uppercase tracking-[0.22em] text-zinc-300/75 sm:text-xs`}
             >
@@ -172,7 +172,7 @@ export default function ManagerJourneyPage() {
               </span>
             </h1>
             <p
-              className={`${dmSans.className} mx-auto mt-8 max-w-3xl text-base leading-relaxed text-zinc-200/85 sm:text-lg`}
+              className={`${dmSans.className} mt-8 max-w-3xl text-base leading-relaxed text-zinc-200/85 sm:mx-auto sm:text-lg`}
             >
               A service design direction that aligned systems, decisions, and handoffs into one clearer path for managers.
             </p>

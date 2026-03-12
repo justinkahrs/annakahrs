@@ -248,7 +248,7 @@ function Skills() {
 
         {/* SKILL CARDS */}
         <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen mt-0 mb-28 max-w-none px-0 sm:static sm:left-auto sm:right-auto sm:mx-auto sm:w-auto sm:max-w-[1500px] sm:px-6">
-          <div className="relative rounded-none sm:rounded-3xl overflow-hidden p-2 pb-8 sm:p-4 lg:p-6 flex flex-col items-end gap-6 sm:gap-8 bg-[var(--surface)]">
+          <div className="relative flex flex-col items-end gap-6 overflow-hidden rounded-none bg-[var(--surface)] p-4 pb-8 sm:gap-8 sm:rounded-3xl sm:p-4 lg:p-6">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(95%_62%_at_18%_8%,rgba(184,255,232,0.22),rgba(184,255,232,0.06)_42%,transparent_66%)]" />
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(88%_56%_at_84%_96%,rgba(255,97,66,0.20),rgba(255,97,66,0.07)_36%,rgba(170,145,245,0.14)_58%,rgba(235,227,247,0.96)_82%)]" />
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(128deg,rgba(181,156,255,0.20)_0%,transparent_26%,transparent_72%,rgba(176,255,229,0.16)_100%)]" />
@@ -278,7 +278,7 @@ function Skills() {
               <h2
                 className={`
                   ${dmSans.className}
-                  text-4xl text-zinc-900 leading-[1.2] tracking-tighter
+                  text-4xl text-zinc-900 leading-[1.05] tracking-tighter mb-1
                 `}
               >
                 Where insight
@@ -286,7 +286,7 @@ function Skills() {
               <h2
                 className={`
                   ${playfair.className}
-                  text-4xl font-medium italic text-zinc-900 leading-[1.2] tracking-tight mt-2
+                  mt-0 text-4xl font-medium italic tracking-tight text-zinc-900 leading-[1.05]
                 `}
               >
                 turns into action
@@ -296,7 +296,7 @@ function Skills() {
             {skillCards.map((section) => (
               <article
                 key={section.title}
-                className="bg-[var(--background)]/30 backdrop-blur-sm shadow-none flex min-h-[320px] w-[92%] sm:w-full md:w-2/3 lg:w-1/2 flex-col rounded-2xl sm:rounded-3xl px-7 py-8 sm:px-10 sm:py-12 relative z-10"
+                className="relative z-10 flex min-h-[320px] w-full flex-col rounded-3xl bg-[var(--background)]/30 px-6 py-8 shadow-none backdrop-blur-sm sm:w-full sm:rounded-3xl sm:px-10 sm:py-12 md:w-2/3 lg:w-1/2"
               >
                 <div className="w-full relative mb-6">
                   <h3
@@ -492,7 +492,7 @@ function Skills() {
                   <h4
                     className={`
                     ${playfair.className}
-                    text-center text-4xl sm:text-4xl lg:text-6xl font-medium text-zinc-900 leading-tight mb-0 sm:mb-4
+                    text-left text-4xl font-medium text-zinc-900 leading-[1.05] mb-1 sm:text-center sm:text-4xl sm:leading-tight sm:mb-4 lg:text-6xl
                   `}
                   >
                     Certified in UX research through
@@ -500,7 +500,7 @@ function Skills() {
                   <p
                     className={`
                     ${dmSans.className}
-                    text-left mt-0 mb-0 sm:mb-4 text-4xl sm:text-5xl lg:text-6xl font-normal text-zinc-800 italic leading-[1.05] sm:leading-normal
+                    text-left mt-0 mb-0 text-4xl sm:text-5xl lg:text-6xl font-normal text-zinc-800 italic leading-[1.05]
                   `}
                   >
                     Nielsen Norman Group
@@ -533,11 +533,11 @@ function Skills() {
         </div>
 
         {/* Excellence Recognition Card - REVERSED */}
-        <div className="relative z-10 mx-auto max-w-[1500px] px-6 mt-28">
+        <div className="relative z-10 left-1/2 right-1/2 -mx-[50vw] mt-28 w-screen px-4 sm:static sm:left-auto sm:right-auto sm:mx-auto sm:w-auto sm:max-w-[1500px] sm:px-6">
           <div
             className="relative overflow-visible mx-auto mb-6 w-full p-0"
           >
-            <div className="flex flex-col items-center gap-10 md:gap-14 pb-16">
+            <div className="flex flex-col items-center gap-10 pb-4 sm:pb-16 md:gap-14">
               <div className="relative z-10 w-full flex flex-col">
                 {/* EYEBROW BLOCK AT THE TOP - Mirrored to Right */}
                 <div className="w-full relative mt-4 mb-6">
@@ -557,7 +557,7 @@ function Skills() {
                   <h4
                     className={`
                     ${playfair.className}
-                    not-italic text-right text-2xl sm:text-4xl lg:text-6xl font-medium text-zinc-900 leading-tight mb-4
+                    not-italic text-left text-4xl font-medium text-zinc-900 leading-[1.05] mb-1 sm:text-right sm:text-4xl sm:leading-tight sm:mb-4 lg:text-6xl
                   `}
                   >
                     Recognized for excellence by
@@ -565,17 +565,17 @@ function Skills() {
                   <p
                     className={`
                     ${dmSans.className}
-                    not-italic text-right text-2xl sm:text-4xl lg:text-6xl font-normal text-zinc-800 leading-tight
+                    not-italic text-left text-4xl font-normal text-zinc-800 leading-[1.05] sm:text-right sm:text-4xl sm:leading-tight lg:text-6xl
                   `}
                   >
                     national and institutional award committees
                   </p>
                 </div>
 
-                <div className="flex flex-col lg:flex-row justify-between items-start gap-12 pt-0">
+                <div className="flex flex-col items-start gap-0 pt-0 sm:gap-8 lg:flex-row lg:justify-between lg:gap-12">
                   {/* LEFT SIDE: CONSOLIDATED PARAGRAPH (Aligned with Eyebrow) */}
-                  <div className="flex flex-col pl-10 sm:pl-20 lg:pl-32 w-full order-2 lg:order-1">
-                    <div className="max-w-md">
+                  <div className="order-2 -mt-32 flex w-full flex-col pl-0 sm:mt-0 sm:pl-20 lg:pl-32 lg:order-1">
+                    <div className="w-full max-w-none sm:max-w-md">
                       <p className={`${dmSans.className} text-lg sm:text-xl leading-[1.5] text-zinc-800`}>
                         Work I contributed to has received national recognition for{" "}
                         <ScrollHighlightText text="excellence in digital experience and design" />
@@ -585,7 +585,7 @@ function Skills() {
                   </div>
 
                   {/* RIGHT SIDE: LOGOS SIDE-BY-SIDE ON THE EDGE */}
-                  <div className="flex flex-row gap-8 sm:gap-12 items-start order-1 lg:order-2">
+                  <div className="order-1 flex flex-row items-start gap-8 sm:gap-12 lg:order-2">
                     <a
                       href="https://www.case.org/awards/circle-excellence/2022/ucsf-magazine-website"
                       target="_blank"
