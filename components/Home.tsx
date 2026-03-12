@@ -80,7 +80,7 @@ function Home() {
       <div className="p-4 sm:p-0">
         <div className="relative mx-auto w-full max-w-[1920px] px-0 sm:px-6">
           {/* HERO CARD */}
-          <div className="relative flex min-h-[980px] flex-col items-center justify-center overflow-hidden rounded-3xl bg-[var(--surface)] px-6 py-8 sm:min-h-[85vh] sm:p-12">
+          <div className="relative flex min-h-[568px] flex-col items-center justify-center overflow-hidden rounded-3xl bg-[var(--surface)] px-6 py-24 sm:min-h-[85vh] sm:p-12">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(92%_56%_at_50%_100%,rgba(255,94,64,0.26),rgba(255,94,64,0.09)_34%,rgba(186,255,231,0.14)_56%,rgba(236,228,251,0.92)_78%,rgba(236,228,251,1)_90%)]" />
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_32%_at_50%_34%,rgba(214,188,255,0.34),rgba(214,188,255,0.08)_58%,transparent_75%)]" />
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(112deg,rgba(171,138,255,0.22)_0%,transparent_24%,transparent_78%,rgba(255,104,73,0.14)_100%)]" />

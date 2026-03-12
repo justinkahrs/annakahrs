@@ -115,7 +115,7 @@ function Experience() {
             </div>
 
             {/* JOBS LIST */}
-            <div className="space-y-32">
+            <div className="space-y-24 sm:space-y-32">
               {jobs.map((job, i) => (
                 <motion.div
                   key={i}
@@ -150,7 +150,7 @@ function Experience() {
 
                     {/* RIGHT: Details (Wider, no card color) */}
                     <div className="relative w-full grow">
-                      <div className="px-6 py-6 sm:px-10">
+                      <div className="px-0 py-6 sm:px-10">
                         <ul className={`${dmSans.className} space-y-4`}>
                           {job.details.map((detail, idx) => (
                             <li key={idx} className="flex gap-4 text-lg sm:text-xl leading-relaxed text-zinc-700">

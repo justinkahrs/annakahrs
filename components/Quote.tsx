@@ -119,9 +119,9 @@ export default function Quote() {
     <section
       id="projects"
       className="relative right-[50%] left-[50%] -mr-[50vw] -ml-[50vw]
-        w-screen bg-[var(--background)] px-6 pb-8 pt-24 text-black sm:px-12"
+        w-screen bg-[var(--background)] px-4 pb-8 pt-24 text-black sm:px-12"
     >
-      <div className="relative mx-auto mt-20 max-w-[1500px] px-6">
+      <div className="relative mx-auto mt-20 max-w-[1500px] px-0 sm:px-6">
         {/* EYEBROW */}
         <div className="w-full relative mb-6">
           <div
@@ -134,14 +134,14 @@ export default function Quote() {
         </div>
 
         {/* HEADER SECTION */}
-        <div className="mt-16 mb-24 pr-0">
-          <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-4 text-left">
+        <div className="mb-24 pr-0 sm:mt-16">
+          <div className="flex flex-col gap-1 text-left md:flex-row md:items-baseline md:justify-between md:gap-4">
             <motion.h2
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className={`${playfair.className} pl-10 sm:pl-20 lg:pl-32 text-4xl sm:text-5xl lg:text-6xl font-medium text-zinc-900 italic tracking-tight`}
+              className={`${playfair.className} text-left text-4xl font-medium text-zinc-900 leading-[1.05] sm:pl-20 sm:text-5xl sm:leading-tight lg:pl-32 lg:text-6xl`}
             >
               Observations and ideas
             </motion.h2>
@@ -150,13 +150,13 @@ export default function Quote() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className={`${dmSans.className} text-left text-4xl font-normal text-zinc-800 tracking-tight sm:text-5xl md:ml-auto md:text-right lg:text-6xl`}
+              className={`${dmSans.className} text-left text-4xl font-normal text-zinc-800 italic leading-[1.05] tracking-tight sm:text-5xl md:ml-auto md:text-right lg:text-6xl`}
             >
               from UX practice
             </motion.h3>
           </div>
 
-          <div className="mt-12 flex flex-col lg:flex-row pl-10 sm:pl-20 lg:pl-32 gap-12 text-left">
+          <div className="mt-6 flex flex-col gap-12 text-left sm:mt-12 sm:pl-20 lg:flex-row lg:pl-32">
             <div className="max-w-md">
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
