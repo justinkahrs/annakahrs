@@ -2,7 +2,6 @@
 
 import { motion } from "motion/react";
 import { Playfair_Display, DM_Sans } from "next/font/google";
-import Quote from "./Quote";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -168,8 +167,6 @@ function Experience() {
           </div>
         </div>
       </div>
-
-      <Quote />
     </section>
   );
 }

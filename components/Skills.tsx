@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import TechMarquee from "./TechMarquee";
+import Quote from "./Quote";
 import { Playfair_Display, DM_Sans, Dancing_Script } from "next/font/google";
 
 const playfair = Playfair_Display({
@@ -245,6 +246,8 @@ function Skills() {
             </div>
           </div>
         </div>
+
+        <Quote />
 
         {/* SKILL CARDS */}
         <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen mt-0 mb-28 max-w-none px-0 sm:static sm:left-auto sm:right-auto sm:mx-auto sm:w-auto sm:max-w-[1500px] sm:px-6">

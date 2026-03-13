@@ -24,11 +24,13 @@ type RssItem = {
   author?: string;
 };
 
-const thumbnailLinePatterns = [
-  "repeating-linear-gradient(135deg, rgba(24,24,27,0.2) 0, rgba(24,24,27,0.2) 1px, transparent 1px, transparent 12px)",
-  "repeating-linear-gradient(45deg, rgba(24,24,27,0.18) 0, rgba(24,24,27,0.18) 1px, transparent 1px, transparent 10px)",
-  "repeating-linear-gradient(0deg, rgba(24,24,27,0.16) 0, rgba(24,24,27,0.16) 1px, transparent 1px, transparent 11px)",
-  "repeating-linear-gradient(90deg, rgba(24,24,27,0.16) 0, rgba(24,24,27,0.16) 1px, transparent 1px, transparent 11px)",
+const thumbnailDotPattern =
+  "radial-gradient(circle at 1px 1px, rgba(39,39,42,0.18) 1.2px, transparent 0)";
+const thumbnailGradients = [
+  "radial-gradient(circle at top left, rgba(187,247,208,0.95), rgba(187,247,208,0.58) 34%, rgba(248,250,252,0.84) 100%)",
+  "radial-gradient(circle at top right, rgba(220,252,231,0.94), rgba(187,247,208,0.5) 36%, rgba(248,250,252,0.82) 100%)",
+  "radial-gradient(circle at 20% 30%, rgba(187,247,208,0.9), rgba(240,253,244,0.72) 38%, rgba(248,250,252,0.82) 100%)",
+  "radial-gradient(circle at 80% 20%, rgba(209,250,229,0.94), rgba(187,247,208,0.48) 35%, rgba(248,250,252,0.84) 100%)",
 ];
 
 export default function Quote() {
@@ -172,6 +174,33 @@ Gathered along the way while designing products, running research, and building 
 
         {/* CAROUSEL SECTION */}
         <div className="relative overflow-visible">
+          <div className="mb-6 hidden justify-end gap-4 md:flex">
+            <button
+              onClick={() => {
+                const carousel = document.getElementById('case-study-carousel');
+                if (carousel) carousel.scrollBy({ left: -500, behavior: 'smooth' });
+              }}
+              className="flex h-14 w-14 items-center justify-center border border-zinc-900/5 transition-all duration-300 hover:bg-zinc-900 hover:text-white"
+              aria-label="Previous"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+              </svg>
+            </button>
+            <button
+              onClick={() => {
+                const carousel = document.getElementById('case-study-carousel');
+                if (carousel) carousel.scrollBy({ left: 500, behavior: 'smooth' });
+              }}
+              className="flex h-14 w-14 items-center justify-center border border-zinc-900/5 transition-all duration-300 hover:bg-zinc-900 hover:text-white"
+              aria-label="Next"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </button>
+          </div>
+
           <div
             id="case-study-carousel"
             className="flex gap-8 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-12 cursor-grab active:cursor-grabbing"
@@ -193,7 +222,7 @@ Gathered along the way while designing products, running research, and building 
                     className="block group/card"
                   >
                     <article className="flex flex-col">
-                      <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-zinc-100 mb-5 transition-transform duration-500 group-hover/card:scale-[1.02]">
+                      <div className="relative mb-5 aspect-[5/3] overflow-hidden rounded-3xl bg-[#e7f8ea] transition-transform duration-500 group-hover/card:scale-[1.02]">
                         {item.image ? (
                           <img
                             src={item.image}
@@ -202,30 +231,47 @@ Gathered along the way while designing products, running research, and building 
                             loading="lazy"
                           />
                         ) : (
-                          <div className="flex h-full w-full items-center justify-center bg-zinc-200 text-xs font-medium uppercase tracking-[0.16em] text-zinc-500">
-                            Work in Practice
-                          </div>
+                          <div
+                            className="absolute inset-0"
+                            style={{
+                              backgroundImage:
+                                thumbnailGradients[
+                                  idx % thumbnailGradients.length
+                                ],
+                            }}
+                          />
                         )}
                         <div
                           aria-hidden="true"
-                          className="pointer-events-none absolute inset-0 opacity-35"
+                          className="pointer-events-none absolute inset-0 opacity-30"
                           style={{
-                            backgroundImage:
-                              thumbnailLinePatterns[
-                                idx % thumbnailLinePatterns.length
-                              ],
+                            backgroundImage: thumbnailDotPattern,
+                            backgroundSize: "18px 18px",
                           }}
                         />
-                        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-zinc-950/80 via-zinc-950/25 to-transparent" />
+                        <div
+                          aria-hidden="true"
+                          className={`pointer-events-none absolute inset-0 ${
+                            item.image
+                              ? "bg-[linear-gradient(145deg,rgba(187,247,208,0.16),rgba(248,250,252,0.04)_52%,rgba(187,247,208,0.20))] mix-blend-screen"
+                              : "bg-[linear-gradient(145deg,rgba(255,255,255,0.16),rgba(255,255,255,0.04)_52%,rgba(255,255,255,0.28))]"
+                          }`}
+                        />
+                        {!item.image ? (
+                          <div
+                            aria-hidden="true"
+                            className="pointer-events-none absolute -left-[10%] top-[12%] h-36 w-36 rounded-full bg-white/45 blur-3xl"
+                          />
+                        ) : null}
                         <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-                          <h4
-                            className={`${dmSans.className} text-lg sm:text-xl font-semibold leading-tight text-white line-clamp-2`}
-                          >
-                            {item.title}
-                          </h4>
+                          <div className="max-w-[85%] border border-white/50 bg-[#f3fff5]/88 px-4 py-3 backdrop-blur-sm">
+                            <h4
+                              className={`${dmSans.className} text-lg font-semibold leading-tight text-zinc-900 sm:text-xl line-clamp-2`}
+                            >
+                              {item.title}
+                            </h4>
+                          </div>
                         </div>
-                        {/* Grayscale overlay that fades on hover */}
-                        <div className="absolute inset-0 bg-zinc-900/10 grayscale mix-blend-multiply opacity-100 transition-all duration-500 group-hover/card:grayscale-0 group-hover/card:opacity-0" />
                       </div>
 
                       <div className="flex flex-col text-left">
@@ -246,16 +292,16 @@ Gathered along the way while designing products, running research, and building 
           </div>
 
           {/* ARROWS AT BOTTOM LEFT */}
-          <div className="flex gap-4 mt-8 pb-2">
+          <div className="mt-8 flex gap-4 pb-2 md:hidden">
             <button
               onClick={() => {
                 const carousel = document.getElementById('case-study-carousel');
                 if (carousel) carousel.scrollBy({ left: -500, behavior: 'smooth' });
               }}
-              className="w-14 h-14 border border-zinc-900/5 flex items-center justify-center hover:bg-zinc-900 hover:text-white transition-all duration-300"
+              className="flex h-14 w-14 items-center justify-center border border-zinc-900/5 transition-all duration-300 hover:bg-zinc-900 hover:text-white"
               aria-label="Previous"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
               </svg>
             </button>
@@ -264,10 +310,10 @@ Gathered along the way while designing products, running research, and building 
                 const carousel = document.getElementById('case-study-carousel');
                 if (carousel) carousel.scrollBy({ left: 500, behavior: 'smooth' });
               }}
-              className="w-14 h-14 border border-zinc-900/5 flex items-center justify-center hover:bg-zinc-900 hover:text-white transition-all duration-300"
+              className="flex h-14 w-14 items-center justify-center border border-zinc-900/5 transition-all duration-300 hover:bg-zinc-900 hover:text-white"
               aria-label="Next"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
               </svg>
             </button>
