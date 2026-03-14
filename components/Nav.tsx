@@ -16,29 +16,12 @@ const dmSans = DM_Sans({
   weight: ["400", "500", "600"],
 });
 
-type BrandNavItem = {
-  label: string;
-  blurb: string;
-  href: string;
-};
-
 type ProjectNavGroup = {
   heading: string;
   items: Array<{ label: string; href: string; comingSoon?: boolean }>;
 };
 
-const BRAND_NAV: BrandNavItem[] = [
-  {
-    label: "Anna Kahrs's Portfolio",
-    blurb: "UX work, case studies, and featured projects.",
-    href: "#home",
-  },
-  {
-    label: "Work in Practice",
-    blurb: "Practical UX notes, process write-ups, and ideas.",
-    href: "https://blog.annakahrs.com",
-  },
-];
+
 
 const PROJECT_NAV: ProjectNavGroup[] = [
   {
@@ -62,19 +45,16 @@ const PROJECT_NAV: ProjectNavGroup[] = [
 ];
 
 interface NavProps {
-  setActive: (href: string) => void;
-  setPendingTarget: (href: string | null) => void;
+  setActive?: (href: string) => void;
+  setPendingTarget?: (href: string | null) => void;
 }
 
 function Nav({ setActive, setPendingTarget }: NavProps) {
   const pathname = usePathname();
   const isProjectPage = pathname.startsWith("/projects/");
   const [open, setOpen] = useState(false);
-  const [brandOpen, setBrandOpen] = useState(false);
   const [projectOpen, setProjectOpen] = useState(false);
-  const brandMenuRef = useRef<HTMLDivElement | null>(null);
   const projectMenuRef = useRef<HTMLDivElement | null>(null);
-  const brandCloseTimerRef = useRef<number | null>(null);
   const projectCloseTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -88,9 +68,6 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
   useEffect(() => {
     const onPointerDown = (event: MouseEvent) => {
       const target = event.target as Node;
-      if (!brandMenuRef.current?.contains(target)) {
-        setBrandOpen(false);
-      }
       if (!projectMenuRef.current?.contains(target)) {
         setProjectOpen(false);
       }
@@ -101,32 +78,13 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
 
   useEffect(() => {
     return () => {
-      if (brandCloseTimerRef.current) {
-        window.clearTimeout(brandCloseTimerRef.current);
-      }
       if (projectCloseTimerRef.current) {
         window.clearTimeout(projectCloseTimerRef.current);
       }
     };
   }, []);
 
-  const openBrandMenu = () => {
-    if (brandCloseTimerRef.current) {
-      window.clearTimeout(brandCloseTimerRef.current);
-      brandCloseTimerRef.current = null;
-    }
-    setBrandOpen(true);
-  };
 
-  const closeBrandMenuSoon = () => {
-    if (brandCloseTimerRef.current) {
-      window.clearTimeout(brandCloseTimerRef.current);
-    }
-    brandCloseTimerRef.current = window.setTimeout(() => {
-      setBrandOpen(false);
-      brandCloseTimerRef.current = null;
-    }, 120);
-  };
 
   const openProjectMenu = () => {
     if (projectCloseTimerRef.current) {
@@ -148,20 +106,16 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
 
   const handleNavClick = (href: string) => {
     if (href.startsWith("http")) {
-      setBrandOpen(false);
-      setProjectOpen(false);
       return window.open(href, "_blank");
     }
     if (href.startsWith("/")) {
       setOpen(false);
-      setBrandOpen(false);
       setProjectOpen(false);
       window.location.assign(href);
       return;
     }
     if (href.startsWith("#") && pathname !== "/") {
       setOpen(false);
-      setBrandOpen(false);
       setProjectOpen(false);
       window.location.assign(`/${href}`);
       return;
@@ -171,26 +125,30 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
       typeof document !== "undefined" ? document.getElementById(id) : null;
 
     if (el) {
-      setPendingTarget(href);
+      setPendingTarget?.(href);
     }
-    setActive(href);
+    setActive?.(href);
     handleScroll(href);
     setOpen(false);
-    setBrandOpen(false);
     setProjectOpen(false);
   };
 
   const handleHomeClick = () => {
+    if (pathname !== "/") {
+      setOpen(false);
+      setProjectOpen(false);
+      window.location.assign("/");
+      return;
+    }
     const el =
       typeof document !== "undefined" ? document.getElementById("home") : null;
 
     if (el) {
-      setPendingTarget("#home");
+      setPendingTarget?.("#home");
     }
-    setActive("#home");
+    setActive?.("#home");
     handleScroll("#home");
     setOpen(false);
-    setBrandOpen(false);
     setProjectOpen(false);
   };
 
@@ -198,8 +156,8 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
     <nav
       className={`fixed top-0 inset-x-0 z-80 h-[60px] border-b sm:border-b-0 ${
         isProjectPage
-          ? "bg-[var(--project-bg)] border-zinc-200/15"
-          : "bg-[var(--background)] border-zinc-900/10"
+          ? "bg-(--project-bg) border-zinc-200/15"
+          : "bg-(--background) border-zinc-900/10"
       }`}
     >
       <div
@@ -207,107 +165,17 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
           justify-between px-6"
       >
         <div className="relative flex items-center gap-3">
-          <div
-            ref={brandMenuRef}
-            className="relative flex items-center gap-1.5"
-            onMouseEnter={openBrandMenu}
-            onMouseLeave={closeBrandMenuSoon}
+          {/* AK LOGO (flush left) */}
+          <button
+            type="button"
+            className={`${playfair.className} flex items-center justify-center w-9
+              aspect-square rounded-full bg-(--primary) text-white text-sm
+              font-semibold cursor-pointer shrink-0`}
+            onClick={handleHomeClick}
+            aria-label="Go to home"
           >
-            {/* AK LOGO (flush left) */}
-            <button
-              type="button"
-              className={`${playfair.className} flex items-center justify-center w-9
-                aspect-square rounded-full bg-(--primary) text-white text-sm
-                font-semibold cursor-pointer`}
-              onClick={handleHomeClick}
-              aria-label="Go to home"
-            >
-              AK
-            </button>
-            <button
-              type="button"
-              className="inline-flex h-8 w-8 items-center justify-center rounded-full
-                text-zinc-800/75 hover:text-zinc-900
-                transition-colors duration-150 opacity-100 outline-none ring-0"
-              style={{
-                color: isProjectPage ? "rgb(228 228 231 / 0.85)" : undefined,
-              }}
-              aria-label="Toggle brand menu"
-              aria-expanded={brandOpen}
-              onMouseEnter={openBrandMenu}
-              onClick={() => setBrandOpen((prev) => !prev)}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.75}
-                stroke="currentColor"
-                className={`h-4 w-4 transition-transform duration-200 ${brandOpen ? "rotate-180" : ""}`}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-              </svg>
-            </button>
-
-            <AnimatePresence>
-              {brandOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: -6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.16 }}
-                  className={`absolute left-0 top-[3.1rem] w-[22rem] rounded-2xl border p-2 shadow-xl ${
-                    isProjectPage
-                      ? "border-zinc-200/15 bg-[var(--project-bg)] shadow-black/40"
-                      : "border-zinc-900/10 bg-[var(--background)] shadow-zinc-900/10"
-                  }`}
-                  onMouseEnter={openBrandMenu}
-                  onMouseLeave={closeBrandMenuSoon}
-                >
-                  {BRAND_NAV.map((item) => (
-                    <button
-                      key={item.label}
-                      type="button"
-                      onClick={() => handleNavClick(item.href)}
-                      className={`flex w-full items-start rounded-xl p-3 text-left ${
-                        isProjectPage ? "hover:bg-white/10" : "hover:bg-zinc-900/5"
-                      }`}
-                    >
-                      <span className="min-w-0">
-                        <span
-                          className={`${dmSans.className} flex items-center gap-2 text-sm font-semibold ${
-                            isProjectPage ? "text-zinc-100" : "text-zinc-900"
-                          }`}
-                        >
-                          {item.label}
-                          {item.label === "Anna Kahrs's Portfolio" && (
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth={1.8}
-                              className="h-3.5 w-3.5 shrink-0"
-                              aria-hidden="true"
-                            >
-                              <path strokeLinecap="round" strokeLinejoin="round" d="m3.75 10.5 8.25-6.75 8.25 6.75M5.25 9.75V20.25h13.5V9.75M9.75 20.25v-6h4.5v6" />
-                            </svg>
-                          )}
-                        </span>
-                        <span
-                          className={`${dmSans.className} mt-1 block text-xs leading-relaxed ${
-                            isProjectPage ? "text-zinc-400" : "text-zinc-600"
-                          }`}
-                        >
-                          {item.blurb}
-                        </span>
-                      </span>
-                    </button>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+            AK
+          </button>
 
           <div
             className={`hidden h-6 w-px lg:block ${isProjectPage ? "bg-zinc-200/20" : "bg-zinc-900/15"}`}
@@ -363,10 +231,10 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -6 }}
                   transition={{ duration: 0.16 }}
-                  className={`absolute left-0 top-[3.1rem] w-[21rem] rounded-2xl border p-3 shadow-xl ${
+                  className={`absolute left-0 top-[3.1rem] w-84 rounded-2xl border p-3 shadow-xl ${
                     isProjectPage
-                      ? "border-zinc-200/15 bg-[var(--project-bg)] shadow-black/40"
-                      : "border-zinc-900/10 bg-[var(--background)] shadow-zinc-900/10"
+                      ? "border-zinc-200/15 bg-(--project-bg) shadow-black/40"
+                      : "border-zinc-900/10 bg-(--background) shadow-zinc-900/10"
                   }`}
                   onMouseEnter={openProjectMenu}
                   onMouseLeave={closeProjectMenuSoon}
@@ -407,6 +275,17 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
             </AnimatePresence>
           </div>
 
+          <button
+            type="button"
+            className={`${dmSans.className} hidden lg:inline-flex items-center rounded-full px-3 py-1.5 text-sm font-semibold tracking-[0.12em] transition ${
+              isProjectPage
+                ? "text-zinc-100/90 hover:text-white"
+                : "text-zinc-900/90 hover:text-(--highlight)"
+            }`}
+            onClick={() => handleNavClick("/blog")}
+          >
+            Blog
+          </button>
         </div>
 
         <div className="hidden lg:flex items-center gap-2">
@@ -486,7 +365,7 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
           <motion.div
             key="mobile-nav"
             className={`lg:hidden fixed top-0 bottom-0 w-full h-screen ${
-              isProjectPage ? "bg-[var(--project-bg)]" : "bg-[var(--background)]"
+              isProjectPage ? "bg-(--project-bg)" : "bg-(--background)"
             }`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -495,7 +374,7 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
             onClick={() => setOpen(false)}
           >
             <div
-              className={`px-6 pt-24 pb-12 ${isProjectPage ? "bg-[var(--project-bg)]" : "bg-[var(--background)]"}`}
+              className={`px-6 pt-24 pb-12 ${isProjectPage ? "bg-(--project-bg)" : "bg-(--background)"}`}
               onClick={(event) => event.stopPropagation()}
             >
               <div className="mt-6 flex justify-center">
