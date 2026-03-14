@@ -164,9 +164,9 @@ function Skills() {
   }, []);
 
   const statementRef = useRef<HTMLDivElement>(null);
-  const statementOffsets: [string, string] = isMobile
+  const statementOffsets = (isMobile
     ? ["start 0.85", "end 0.2"]
-    : ["start 0.55", "start 0.1"];
+    : ["start 0.55", "start 0.1"]) as any;
   const { scrollYProgress } = useScroll({
     target: statementRef,
     offset: statementOffsets,
@@ -189,7 +189,7 @@ function Skills() {
         id="skills"
         className="
           relative right-1/2 left-1/2 -mx-[50vw]
-          w-screen bg-[var(--background)]
+          w-screen bg-(--background)
           px-4 pt-28 pb-24 sm:px-12 sm:pt-44 sm:pb-28
           overflow-hidden
         "
@@ -251,7 +251,7 @@ function Skills() {
 
         {/* SKILL CARDS */}
         <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen mt-0 mb-28 max-w-none px-0 sm:static sm:left-auto sm:right-auto sm:mx-auto sm:w-auto sm:max-w-[1500px] sm:px-6">
-          <div className="relative flex flex-col items-end gap-6 overflow-hidden rounded-none bg-[var(--surface)] p-4 pb-8 sm:gap-8 sm:rounded-3xl sm:p-4 lg:p-6">
+          <div className="relative flex flex-col items-end gap-6 overflow-hidden rounded-none bg-(--surface) p-4 pb-8 sm:gap-8 sm:rounded-3xl sm:p-4 lg:p-6">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(95%_62%_at_18%_8%,rgba(184,255,232,0.22),rgba(184,255,232,0.06)_42%,transparent_66%)]" />
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(88%_56%_at_84%_96%,rgba(255,97,66,0.20),rgba(255,97,66,0.07)_36%,rgba(170,145,245,0.14)_58%,rgba(235,227,247,0.96)_82%)]" />
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(128deg,rgba(181,156,255,0.20)_0%,transparent_26%,transparent_72%,rgba(176,255,229,0.16)_100%)]" />
@@ -299,7 +299,7 @@ function Skills() {
             {skillCards.map((section) => (
               <article
                 key={section.title}
-                className="relative z-10 flex min-h-[320px] w-full flex-col rounded-3xl bg-[var(--background)]/30 px-6 py-8 shadow-none backdrop-blur-sm sm:w-full sm:rounded-3xl sm:px-10 sm:py-12 md:w-2/3 lg:w-1/2"
+                className="relative z-10 flex min-h-[320px] w-full flex-col rounded-3xl bg-(--background)/30 px-6 py-8 shadow-none backdrop-blur-sm sm:w-full sm:rounded-3xl sm:px-10 sm:py-12 md:w-2/3 lg:w-1/2"
               >
                 <div className="w-full relative mb-6">
                   <h3
