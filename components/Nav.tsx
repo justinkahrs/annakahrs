@@ -26,7 +26,7 @@ type ProjectNavGroup = {
 const PROJECT_NAV: ProjectNavGroup[] = [
   {
     heading: "UX Research",
-    items: [{ label: "The Manager Journey", href: "/projects/the-manager-journey" }],
+    items: [{ label: "The Manager Journey", href: "", comingSoon: true }],
   },
   {
     heading: "Visual Design",
@@ -38,7 +38,8 @@ const PROJECT_NAV: ProjectNavGroup[] = [
       },
       {
         label: "Staff Portal",
-        href: "/projects/staff-portal",
+        href: "",
+        comingSoon: true,
       },
     ],
   },
@@ -264,7 +265,7 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
                             } ${item.comingSoon ? "opacity-60 cursor-not-allowed hover:bg-transparent" : ""}`}
                           >
                             {item.label}
-                            {item.comingSoon ? " (Coming soon)" : ""}
+                            {item.comingSoon ? " (Coming Soon)" : ""}
                           </button>
                         ))}
                       </div>
