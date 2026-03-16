@@ -113,6 +113,12 @@ export default async function BlogPostPage({ params }: Props) {
                       </span>
                     )}
                   </span>
+                ),
+                a: (props) => (
+                  <a 
+                    className="underline decoration-dotted decoration-zinc-900/30 hover:decoration-zinc-900 underline-offset-4 transition-colors" 
+                    {...props} 
+                  />
                 )
               }}
             />
