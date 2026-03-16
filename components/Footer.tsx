@@ -26,6 +26,9 @@ function Footer() {
         <p className="text-sm text-zinc-600">
           © {year} Made thoughtfully by Anna Kahrs. See, users do scroll.
         </p>
+        <p className="mt-2 text-[11px] text-zinc-400 uppercase tracking-widest font-medium">
+          Views expressed here are my own and do not represent my employer.
+        </p>
       </div>
     </footer>
   );

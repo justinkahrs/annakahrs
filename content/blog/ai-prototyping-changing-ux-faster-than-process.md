@@ -66,12 +66,11 @@ That small shift highlighted something important. Our feedback processes are dee
 ## The design lifecycle might be changing
 
 Most designers are familiar with the common stages of design thinking:
-
-1.  Empathize
-2.  Define
-3.  Ideate
-4.  Prototype
-5.  Test
+*   Empathize
+*   Define
+*   Ideate
+*   Prototype
+*   Test
 
 AI-assisted workflows blur the boundaries between several of these steps. When a prototype can be generated quickly from a loose structure, the transition from ideation to prototyping collapses. Designers can move directly from rough thinking to interactive artifacts. On the surface, that seems like pure efficiency. But it also introduces a new challenge in that prototypes can now appear before teams have aligned on the problem, the system, or the structure. And once a prototype exists, the conversation naturally gravitates toward it.
 

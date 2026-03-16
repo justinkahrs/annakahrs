@@ -25,10 +25,6 @@ export default async function BlogPage() {
           {/* Header Section */}
           <section className="mb-20">
             <div className="max-w-4xl pt-4">
-            <div className={`${dmSans.className} flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none mb-6`}>
-              <div className="w-2 h-2 bg-(--highlight)" />
-              Thinking & Practice
-            </div>
             
             <h1 className={`${playfair.className} text-6xl leading-[0.95] text-zinc-900 sm:text-7xl lg:text-8xl mb-8`}>
               Work in Practice
@@ -79,7 +75,7 @@ export default async function BlogPage() {
                   </p>
                   
                   <div className="mt-auto flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest group-hover:gap-4 transition-all duration-300">
-                    Read Case Study
+                    Read It
                     <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
