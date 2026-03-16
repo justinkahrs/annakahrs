@@ -91,7 +91,7 @@ export default async function BlogPostPage({ params }: Props) {
             
             <div className="flex items-center gap-4 text-zinc-400 mt-6 pt-6 border-t border-dotted border-zinc-900/10">
                <time className={`${dmSans.className} text-[10px] uppercase tracking-widest`}>
-                {new Date(metadata.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                {new Date(metadata.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}
               </time>
               <span className="h-px w-6 bg-zinc-900/10" />
               <span className={`${dmSans.className} text-[10px] uppercase tracking-widest`}>

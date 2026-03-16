@@ -62,7 +62,7 @@ export default async function BlogPage() {
                     </span>
                     <span className="h-px w-8 bg-zinc-900/10" />
                     <time className={`${dmSans.className} text-[10px] uppercase tracking-widest text-zinc-400`}>
-                      {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                      {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}
                     </time>
                   </div>
                   
