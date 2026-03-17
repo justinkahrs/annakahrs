@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { usePathname } from "next/navigation";
 import handleScroll from "@/utils/handleScroll";
 import { Playfair_Display, DM_Sans } from "next/font/google";
@@ -155,7 +155,7 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
 
   return (
     <nav
-      className={`fixed top-0 inset-x-0 z-80 h-[60px] border-b sm:border-b-0 ${
+      className={`fixed top-0 inset-x-0 z-100 h-[60px] border-b sm:border-b-0 ${
         isProjectPage
           ? "bg-(--project-bg) border-zinc-200/15"
           : "bg-(--background) border-zinc-900/10"
@@ -319,12 +319,12 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
         {/* MOBILE HAMBURGER (right aligned) */}
         <button
           type="button"
-          className="lg:hidden inline-flex items-center justify-center
+          className="lg:hidden relative z-110 inline-flex items-center justify-center
             rounded-full p-2 hover:text-zinc-900 hover:bg-zinc-900/10
             focus-visible:outline-none focus-visible:ring-2
             focus-visible:ring-zinc-900/40 ml-auto"
           style={{
-            color: isProjectPage ? "rgb(244 244 245 / 0.9)" : undefined,
+            color: isProjectPage && !open ? "rgb(244 244 245 / 0.9)" : undefined,
           }}
           onClick={() => setOpen((prev) => !prev)}
         >
@@ -361,12 +361,13 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
           )}
         </button>
       </div>
+
       <AnimatePresence>
         {open && (
           <motion.div
             key="mobile-nav"
-            className={`lg:hidden fixed top-0 bottom-0 w-full h-screen ${
-              isProjectPage ? "bg-(--project-bg)" : "bg-(--background)"
+            className={`lg:hidden fixed inset-0 w-full h-screen z-90 backdrop-blur-md ${
+              isProjectPage ? "bg-(--project-bg)/95" : "bg-(--background)/95"
             }`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -375,16 +376,53 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
             onClick={() => setOpen(false)}
           >
             <div
-              className={`px-6 pt-24 pb-12 ${isProjectPage ? "bg-(--project-bg)" : "bg-(--background)"}`}
+              className="flex h-full w-full flex-col items-center justify-center px-6"
               onClick={(event) => event.stopPropagation()}
             >
-              <div className="mt-6 flex justify-center">
+              <div className="flex flex-col items-center gap-7 sm:gap-9 -mt-16 sm:-mt-24">
                 <button
                   type="button"
-                  className={`${dmSans.className} rounded-xl px-4 py-2.5 text-sm font-semibold text-white shadow-lg transition cursor-pointer ${
+                  className={`${playfair.className} text-4xl sm:text-6xl font-semibold transition hover:text-(--highlight) ${
+                    isProjectPage ? "text-zinc-100" : "text-zinc-900"
+                  }`}
+                  onClick={() => handleHomeClick()}
+                >
+                  Home
+                </button>
+                <button
+                  type="button"
+                  className={`${playfair.className} text-4xl sm:text-6xl font-semibold transition hover:text-(--highlight) ${
+                    isProjectPage ? "text-zinc-100" : "text-zinc-900"
+                  }`}
+                  onClick={() => handleNavClick("#projects")}
+                >
+                  Projects
+                </button>
+                <button
+                  type="button"
+                  className={`${playfair.className} text-4xl sm:text-6xl font-semibold transition hover:text-(--highlight) ${
+                    isProjectPage ? "text-zinc-100" : "text-zinc-900"
+                  }`}
+                  onClick={() => handleNavClick("/blog")}
+                >
+                  Blog
+                </button>
+                <a
+                  href="https://www.linkedin.com/in/annakahrs/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${playfair.className} text-4xl sm:text-6xl font-semibold transition hover:text-(--highlight) ${
+                    isProjectPage ? "text-zinc-100" : "text-zinc-900"
+                  }`}
+                >
+                  LinkedIn
+                </a>
+                <button
+                  type="button"
+                  className={`${dmSans.className} mt-10 rounded-xl px-7 py-3 text-lg font-semibold transition cursor-pointer ${
                     isProjectPage
-                      ? "bg-zinc-100 text-zinc-900 hover:bg-zinc-200 shadow-black/30"
-                      : "bg-zinc-900 hover:bg-zinc-800 shadow-zinc-900/10"
+                      ? "bg-white text-zinc-900 hover:bg-zinc-100 shadow-xl shadow-black/20"
+                      : "bg-zinc-900 text-white hover:bg-zinc-800 shadow-lg shadow-zinc-900/10"
                   }`}
                   onClick={() => handleNavClick("/contact")}
                 >

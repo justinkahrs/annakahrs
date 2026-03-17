@@ -66,7 +66,7 @@ It was the Frank Grimes episode (“Homer’s Enemy”), where Grimes joins the 
 
 ![Frank Grimes and Homer Simpson](/frank-grimes.jpg)
 
-<span className="text-sm text-zinc-500 mt-[-2rem] block text-center mb-12">Image credit: The Simpsons, Season 8 Episode 23 “Homer’s Enemy,” 20th Century Fox Television.</span>
+<span className="text-sm text-zinc-500 -mt-8 block text-center mb-12">Image credit: The Simpsons, Season 8 Episode 23 “Homer’s Enemy,” 20th Century Fox Television.</span>
 
 To Grimes, the ecosystem is shocking. To everyone else, it is invisible.
 
