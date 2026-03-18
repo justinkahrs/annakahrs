@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Playfair_Display, DM_Sans } from "next/font/google";
+import Link from "next/link";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -14,14 +15,13 @@ const dmSans = DM_Sans({
   weight: ["400", "500", "600"],
 });
 
-type RssItem = {
+type BlogPost = {
   title: string;
-  link: string;
-  description: string;
-  pubDate: Date | null;
+  date: string;
+  excerpt: string;
+  slug: string;
   image?: string;
-  categories?: string[];
-  author?: string;
+  category?: string;
 };
 
 const thumbnailDotPattern =
@@ -34,292 +34,157 @@ const thumbnailGradients = [
 ];
 
 export default function Quote() {
-  const [items, setItems] = useState<RssItem[]>([]);
+  const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function load() {
       try {
-        const res = await fetch("/api/rss", { cache: "no-store" });
-        const xmlText = await res.text();
-        const doc = new DOMParser().parseFromString(xmlText, "application/xml");
-        const parsed: RssItem[] = Array.from(doc.querySelectorAll("item")).map(
-          (it) => {
-            const title = it.querySelector("title")?.textContent?.trim() || "";
-            const link = it.querySelector("link")?.textContent?.trim() || "";
-            const description =
-              it.querySelector("description")?.textContent?.trim() || "";
-            const pubDateStr =
-              it.querySelector("pubDate")?.textContent?.trim() || "";
-            const pubDate = pubDateStr ? new Date(pubDateStr) : null;
-            const mediaEl =
-              it.querySelector("media\\:content") ||
-              it.querySelector("enclosure");
-            const image = mediaEl?.getAttribute("url") || undefined;
-            const categories = Array.from(it.querySelectorAll("category"))
-              .map((el) => el.textContent?.trim() || "")
-              .filter(Boolean);
-            const author =
-              it.querySelector("dc\\:creator")?.textContent?.trim() ||
-              it.querySelector("creator")?.textContent?.trim() ||
-              it.querySelector("author")?.textContent?.trim() ||
-              "";
-
-            return {
-              title,
-              link,
-              description,
-              pubDate,
-              image,
-              categories,
-              author,
-            };
-          },
-        );
-        parsed.sort((a, b) => {
-          const ta = a.pubDate ? a.pubDate.getTime() : 0;
-          const tb = b.pubDate ? b.pubDate.getTime() : 0;
-          return tb - ta;
-        });
-
-        setItems(parsed);
-        setLoading(false);
-      } catch {
-        setItems([]);
+        const res = await fetch("/api/blog");
+        if (!res.ok) throw new Error("Failed to fetch");
+        const data = await res.json();
+        setPosts(data);
+      } catch (error) {
+        console.error("Error loading blog posts:", error);
+        setPosts([]);
+      } finally {
         setLoading(false);
       }
     }
-
     load();
   }, []);
 
-  const getFirstCategory = (item?: RssItem) => {
-    if (!item || !item.categories || item.categories.length === 0) {
-      return "Case Study";
-    }
-    return item.categories[0];
+  const getFirstCategory = (post?: BlogPost) => {
+    return post?.category || "Case Study";
   };
 
-  const getExcerpt = (item?: RssItem) => {
-    if (!item?.description) {
+  const getExcerpt = (post?: BlogPost) => {
+    if (!post?.excerpt) {
       return "Read the full post for details.";
     }
-
-    const text = new DOMParser()
-      .parseFromString(item.description, "text/html")
-      .body.textContent?.replace(/\s+/g, " ")
-      .trim();
-
-    if (!text) {
-      return "Read the full post for details.";
-    }
-
-    return text.length > 170 ? `${text.slice(0, 167).trimEnd()}...` : text;
+    return post.excerpt.length > 200 ? `${post.excerpt.slice(0, 197).trimEnd()}...` : post.excerpt;
   };
 
   return (
     <section
       id="projects"
       className="relative right-[50%] left-[50%] -mr-[50vw] -ml-[50vw]
-        w-screen bg-[var(--background)] px-4 pb-8 pt-24 text-black sm:px-12"
+        w-screen bg-(--background) px-4 pb-8 pt-8 text-black sm:px-12"
     >
-      <div className="relative mx-auto mt-20 max-w-[1500px] px-0 sm:px-6">
+      <div className="relative mx-auto mt-8 max-w-[1500px] px-0 sm:px-6">
         {/* EYEBROW */}
         <div className="w-full relative mb-6">
           <div
             className={`${dmSans.className} absolute left-0 bottom-[12px] flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none`}
           >
             <div className="w-2 h-2 bg-(--highlight)" />
-            IN PRACTICE
+            FEATURED POST
           </div>
           <div className="w-full border-t-[3px] border-dotted border-zinc-900/10" />
         </div>
 
-        {/* HEADER SECTION */}
-        <div className="mb-24 pr-0 sm:mt-16">
-          <div className="flex flex-col gap-1 text-left md:flex-row md:items-baseline md:justify-between md:gap-4">
-            <motion.h2
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className={`${playfair.className} text-left text-4xl font-medium text-zinc-900 leading-[1.05] sm:pl-20 sm:text-5xl sm:leading-tight lg:pl-32 lg:text-6xl`}
-            >
-              Observations and ideas
-            </motion.h2>
-            <motion.h3
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className={`${dmSans.className} text-left text-4xl font-normal text-zinc-800 italic leading-[1.05] tracking-tight sm:text-5xl md:ml-auto md:text-right lg:text-6xl`}
-            >
-              from UX practice
-            </motion.h3>
-          </div>
-
-          <div className="mt-6 flex flex-col gap-12 text-left sm:mt-12 sm:pl-20 lg:flex-row lg:pl-32">
-            <div className="max-w-md">
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className={`${dmSans.className} text-lg sm:text-xl leading-relaxed text-zinc-700`}
-              >
-Gathered along the way while designing products, running research, and building systems that try to make digital work a little more thoughtful.              </motion.p>
-            </div>
-          </div>
-        </div>
-
-        {/* CAROUSEL SECTION */}
-        <div className="relative overflow-visible">
-          <div className="mb-6 hidden justify-end gap-4 md:flex">
-            <button
-              onClick={() => {
-                const carousel = document.getElementById('case-study-carousel');
-                if (carousel) carousel.scrollBy({ left: -500, behavior: 'smooth' });
-              }}
-              className="flex h-14 w-14 items-center justify-center border border-zinc-900/5 transition-all duration-300 hover:bg-zinc-900 hover:text-white"
-              aria-label="Previous"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-              </svg>
-            </button>
-            <button
-              onClick={() => {
-                const carousel = document.getElementById('case-study-carousel');
-                if (carousel) carousel.scrollBy({ left: 500, behavior: 'smooth' });
-              }}
-              className="flex h-14 w-14 items-center justify-center border border-zinc-900/5 transition-all duration-300 hover:bg-zinc-900 hover:text-white"
-              aria-label="Next"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-              </svg>
-            </button>
-          </div>
-
-          <div
-            id="case-study-carousel"
-            className="flex gap-8 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-12 cursor-grab active:cursor-grabbing"
-            style={{
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-              scrollSnapType: 'x mandatory'
-            }}
-          >
-            {loading ? (
-              <div className="w-full flex justify-center py-20">
-                <span className="loading loading-spinner loading-lg text-zinc-900" />
-              </div>
-            ) : items.length > 0 ? (
-              items.map((item, idx) => (
-                <div key={idx} className="shrink-0 w-[78vw] sm:w-[440px] snap-start">
-                  <a
-                    href={item.link}
-                    className="block group/card"
-                  >
-                    <article className="flex flex-col">
-                      <div className="relative mb-5 aspect-[5/3] overflow-hidden rounded-3xl bg-[#e7f8ea] transition-transform duration-500 group-hover/card:scale-[1.02]">
-                        {item.image ? (
-                          <img
-                            src={item.image}
-                            alt={item.title}
-                            className="h-full w-full object-cover"
-                            loading="lazy"
-                          />
-                        ) : (
-                          <div
-                            className="absolute inset-0"
-                            style={{
-                              backgroundImage:
-                                thumbnailGradients[
-                                  idx % thumbnailGradients.length
-                                ],
-                            }}
-                          />
-                        )}
-                        <div
-                          aria-hidden="true"
-                          className="pointer-events-none absolute inset-0 opacity-30"
-                          style={{
-                            backgroundImage: thumbnailDotPattern,
-                            backgroundSize: "18px 18px",
-                          }}
-                        />
-                        <div
-                          aria-hidden="true"
-                          className={`pointer-events-none absolute inset-0 ${
-                            item.image
-                              ? "bg-[linear-gradient(145deg,rgba(187,247,208,0.16),rgba(248,250,252,0.04)_52%,rgba(187,247,208,0.20))] mix-blend-screen"
-                              : "bg-[linear-gradient(145deg,rgba(255,255,255,0.16),rgba(255,255,255,0.04)_52%,rgba(255,255,255,0.28))]"
-                          }`}
-                        />
-                        {!item.image ? (
-                          <div
-                            aria-hidden="true"
-                            className="pointer-events-none absolute -left-[10%] top-[12%] h-36 w-36 rounded-full bg-white/45 blur-3xl"
-                          />
-                        ) : null}
-                        <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-                          <div className="max-w-[85%] border border-white/50 bg-[#f3fff5]/88 px-4 py-3 backdrop-blur-sm">
-                            <h4
-                              className={`${dmSans.className} text-lg font-semibold leading-tight text-zinc-900 sm:text-xl line-clamp-2`}
-                            >
-                              {item.title}
-                            </h4>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col text-left">
-                        <p className={`${dmSans.className} text-xs text-zinc-500 font-medium uppercase tracking-[0.15em]`}>
-                          {getFirstCategory(item)}
-                        </p>
-                        <p className={`${dmSans.className} mt-3 text-sm leading-relaxed text-zinc-700 line-clamp-3`}>
-                          {getExcerpt(item)}
-                        </p>
-                      </div>
-                    </article>
-                  </a>
-                </div>
-              ))
-            ) : (
-              <div className="text-zinc-400 py-20">No items found.</div>
-            )}
-          </div>
-
-          {/* ARROWS AT BOTTOM LEFT */}
-          <div className="mt-8 flex gap-4 pb-2 md:hidden">
-            <button
-              onClick={() => {
-                const carousel = document.getElementById('case-study-carousel');
-                if (carousel) carousel.scrollBy({ left: -500, behavior: 'smooth' });
-              }}
-              className="flex h-14 w-14 items-center justify-center border border-zinc-900/5 transition-all duration-300 hover:bg-zinc-900 hover:text-white"
-              aria-label="Previous"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-              </svg>
-            </button>
-            <button
-              onClick={() => {
-                const carousel = document.getElementById('case-study-carousel');
-                if (carousel) carousel.scrollBy({ left: 500, behavior: 'smooth' });
-              }}
-              className="flex h-14 w-14 items-center justify-center border border-zinc-900/5 transition-all duration-300 hover:bg-zinc-900 hover:text-white"
-              aria-label="Next"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-              </svg>
-            </button>
-          </div>
-        </div>
       </div>
+      
+      {/* FEATURED POST SECTION (FULL BLEED) */}
+        <div className="relative mt-12 -mx-4 sm:-mx-12 overflow-hidden">
+          {loading ? (
+            <div className="w-full flex justify-center py-20">
+              <span className="loading loading-spinner loading-lg text-zinc-900" />
+            </div>
+          ) : posts.length > 0 ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1 }}
+              className="group relative"
+            >
+              <a
+                href={`/blog/${posts[0].slug}`}
+                className="relative block py-24 transition-all duration-500 sm:py-32 lg:py-44"
+              >
+                {/* Background Layer (Full Bleed) */}
+                <div className="absolute inset-0 z-0">
+                  {posts[0].image ? (
+                    <img
+                      src={posts[0].image}
+                      alt={posts[0].title}
+                      className="h-full w-full object-cover opacity-[0.07] transition-transform duration-1000 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div
+                      className="h-full w-full"
+                      style={{
+                        backgroundImage: thumbnailGradients[0],
+                      }}
+                    />
+                  )}
+
+                  {/* Decorative overlays */}
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 opacity-20"
+                    style={{
+                      backgroundImage: thumbnailDotPattern,
+                      backgroundSize: "24px 24px",
+                    }}
+                  />
+                  <div
+                    aria-hidden="true"
+                    className={`pointer-events-none absolute inset-0 ${
+                      posts[0].image
+                        ? "bg-linear-to-tr from-emerald-500/10 via-transparent to-emerald-500/5 mix-blend-overlay"
+                        : "bg-linear-to-tr from-white/40 via-transparent to-white/20"
+                    }`}
+                  />
+                  {/* Subtle edge masks */}
+                  <div className="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-(--background) to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-(--background) to-transparent" />
+                </div>
+
+                {/* Content Container (Constrained) */}
+                <div className="relative z-10 mx-auto max-w-4xl px-6">
+                  {/* Badge */}
+                  <div className="mb-10 flex items-center gap-3">
+                    <span className={`${dmSans.className} text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-600`}>
+                      Latest Insight
+                    </span>
+                    <div className="h-px w-8 bg-emerald-600/20" />
+                    <span className={`${dmSans.className} text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500`}>
+                      {getFirstCategory(posts[0])}
+                    </span>
+                  </div>
+
+                  <h3 className={`${playfair.className} mb-8 text-5xl font-semibold leading-[1.05] text-zinc-900 sm:text-7xl lg:text-8xl`}>
+                    {posts[0].title}
+                  </h3>
+
+                  <p className={`${dmSans.className} mb-12 max-w-2xl text-lg leading-relaxed text-zinc-700 sm:text-xl lg:text-2xl`}>
+                    {getExcerpt(posts[0])}
+                  </p>
+
+                  <div className="flex items-center gap-4">
+                    <div className={`${dmSans.className} group/btn flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-zinc-900 transition-colors hover:text-emerald-600`}>
+                      Explore Post
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </motion.div>
+          ) : (
+            <div className="text-zinc-400 py-20 text-center">No posts available at the moment.</div>
+          )}
+        </div>
     </section>
   );
 }

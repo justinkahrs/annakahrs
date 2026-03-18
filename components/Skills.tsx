@@ -196,13 +196,6 @@ function Skills() {
       >
         {/* MAIN CONTENT */}
         <div className="relative z-10 mx-auto max-w-[1500px] px-0 sm:px-6">
-          {/* EYEBROW BLOCK */}
-          <div
-            className={`${dmSans.className} flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none pl-0 sm:pl-20 lg:pl-32 mb-6`}
-          >
-            <div className="w-2 h-2 bg-(--highlight)" />
-            FOCUS
-          </div>
 
           {/* NEW STRATEGIC STATEMENT */}
           <div
@@ -210,7 +203,7 @@ function Skills() {
             className={`
               ${dmSans.className}
               mt-2 sm:mt-0 mb-28 sm:mb-44 text-4xl sm:text-5xl lg:text-5xl text-zinc-900 leading-[1.2]
-              pl-0 sm:pl-20 lg:pl-32 max-w-5xl
+              mx-auto max-w-4xl px-6
             `}
           >
             <div className="block mb-8 font-medium">
