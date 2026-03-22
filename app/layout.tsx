@@ -18,12 +18,18 @@ export const metadata: Metadata = {
     siteName: "Anna Kahrs",
     images: [
       {
-        url: "/1024x1024.png",
-        width: 1024,
-        height: 1024,
-        alt: "Hire this gal!",
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Anna Kahrs — Designing clarity across complex systems",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Anna Kahrs",
+    description: "Lead UX Designer",
+    images: ["/opengraph-image"],
   },
 };
 
