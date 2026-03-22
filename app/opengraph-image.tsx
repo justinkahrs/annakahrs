@@ -21,7 +21,7 @@ export default function OpenGraphImage() {
           overflow: "hidden",
           background: "#f1edff",
           color: "#18181b",
-          fontFamily: "sans-serif",
+          fontFamily: "Roboto, Arial, sans-serif",
         }}
       >
         <div
@@ -61,28 +61,6 @@ export default function OpenGraphImage() {
 
         <div
           style={{
-            position: "absolute",
-            top: 48,
-            left: 56,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 76,
-            height: 76,
-            borderRadius: "9999px",
-            background: "#18181b",
-            color: "#ffffff",
-            fontFamily: "Georgia, serif",
-            fontSize: 34,
-            fontWeight: 700,
-            letterSpacing: "-0.04em",
-          }}
-        >
-          AK
-        </div>
-
-        <div
-          style={{
             position: "relative",
             zIndex: 1,
             display: "flex",
@@ -96,25 +74,53 @@ export default function OpenGraphImage() {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 14,
-              marginTop: 8,
-              marginLeft: 110,
-              color: "rgba(24,24,27,0.62)",
-              fontSize: 24,
-              fontWeight: 500,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
+              gap: 26,
+              minHeight: 76,
             }}
           >
             <div
               style={{
-                width: 12,
-                height: 12,
-                background: "#ff4500",
                 display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 76,
+                height: 76,
+                borderRadius: "9999px",
+                background: "#18181b",
+                color: "#ffffff",
+                fontFamily: "Georgia, Times New Roman, serif",
+                fontSize: 34,
+                fontWeight: 700,
+                letterSpacing: "-0.04em",
+                flexShrink: 0,
               }}
-            />
-            Anna Kahrs • Lead UX Designer
+            >
+              AK
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 14,
+                color: "rgba(24,24,27,0.62)",
+                fontFamily: "Roboto, Arial, sans-serif",
+                fontSize: 24,
+                fontWeight: 500,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+              }}
+            >
+              <div
+                style={{
+                  width: 12,
+                  height: 12,
+                  background: "#ff4500",
+                  display: "flex",
+                  flexShrink: 0,
+                }}
+              />
+              Anna Kahrs • Lead UX Designer
+            </div>
           </div>
 
           <div
@@ -132,6 +138,7 @@ export default function OpenGraphImage() {
                 lineHeight: 0.9,
                 fontWeight: 300,
                 letterSpacing: "-0.08em",
+                fontFamily: "Roboto, Arial, sans-serif",
               }}
             >
               Designing clarity
@@ -140,7 +147,7 @@ export default function OpenGraphImage() {
               style={{
                 display: "flex",
                 marginTop: 12,
-                fontFamily: "Georgia, serif",
+                fontFamily: "Georgia, Times New Roman, serif",
                 fontSize: 88,
                 lineHeight: 0.98,
                 fontStyle: "italic",
@@ -166,6 +173,7 @@ export default function OpenGraphImage() {
                 flexDirection: "column",
                 maxWidth: 760,
                 color: "rgba(24,24,27,0.72)",
+                fontFamily: "Roboto, Arial, sans-serif",
               }}
             >
               <div
@@ -199,6 +207,7 @@ export default function OpenGraphImage() {
                 color: "#ffffff",
                 fontSize: 24,
                 fontWeight: 700,
+                fontFamily: "Roboto, Arial, sans-serif",
                 textTransform: "uppercase",
                 letterSpacing: "0.12em",
               }}
