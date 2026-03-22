@@ -47,7 +47,11 @@ export default async function BlogPage() {
                 <div className="mb-6 aspect-video overflow-hidden bg-zinc-100 relative rounded-lg">
                   {/* Image Placeholder or Actual Image */}
                   {post.image ? (
-                    <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <img
+                      src={post.image}
+                      alt={post.imageAlt || post.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-zinc-400 font-medium">
                       <span className={`${dmSans.className} text-xs uppercase tracking-widest`}>{post.category || "General"}</span>

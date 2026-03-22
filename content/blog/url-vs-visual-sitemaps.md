@@ -1,8 +1,20 @@
 ---
-title: "URL Sitemaps vs Visual Sitemaps: What They Are and When to Use Them"
-date: "2026-02-12"
-excerpt: "A clear guide to the difference between URL sitemaps and visual sitemaps, when to use each, and why both matter in information architecture."
-category: "Information Architecture"
+title: 'URL Sitemaps vs Visual Sitemaps: What They Are and When to Use Them'
+date: '2026-02-12'
+excerpt: >-
+  A clear guide to the difference between URL sitemaps and visual sitemaps, when
+  to use each, and why both matter in information architecture.
+category: Information Architecture
+image: /blog/url-vs-visual-sitemaps/san-jose-electric-light-tower.jpg
+imageAlt: >-
+  San Jose Electric Light Tower. Old book illustration selected to complement
+  the post "Innovation".
+imageSource: >-
+  https://www.oldbookillustrations.com/illustrations/san-jose-electric-reflector/
+imageCitation: >-
+  "San Jose Electric Light Tower", by Unknown, in Les nouvelles conquêtes de la
+  science, vol. 1, Wood Engraving, via Old Book Illustrations. Source:
+  https://www.oldbookillustrations.com/illustrations/san-jose-electric-reflector/
 ---
 
 A clear guide to the difference between URL sitemaps and visual sitemaps, when to use each, and why both matter in information architecture.

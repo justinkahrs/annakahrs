@@ -33,6 +33,11 @@ body {
   min-height: 100%;
 }
 
+::selection {
+  color: #ffffff;
+  background-color: var(--accent);
+}
+
 @keyframes home-graph-fade-in {
   from {
     opacity: 0;

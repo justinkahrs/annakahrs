@@ -155,14 +155,14 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
 
   return (
     <nav
-      className={`fixed top-0 inset-x-0 z-100 h-[60px] border-b sm:border-b-0 ${
+      className={`fixed top-0 inset-x-0 z-[100] h-[60px] border-b sm:border-b-0 ${
         isProjectPage
           ? "bg-(--project-bg) border-zinc-200/15"
           : "bg-(--background) border-zinc-900/10"
       }`}
     >
       <div
-        className="relative z-10 flex h-full w-full max-w-[1920px] mx-auto items-center
+        className="relative z-[110] flex h-full w-full max-w-[1920px] mx-auto items-center
           justify-between px-6"
       >
         <div className="relative flex items-center gap-3">
@@ -319,13 +319,15 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
         {/* MOBILE HAMBURGER (right aligned) */}
         <button
           type="button"
-          className="lg:hidden relative z-110 inline-flex items-center justify-center
-            rounded-full p-2 hover:text-zinc-900 hover:bg-zinc-900/10
+          className={`lg:hidden relative z-[110] ml-auto inline-flex items-center justify-center rounded-full p-2
             focus-visible:outline-none focus-visible:ring-2
-            focus-visible:ring-zinc-900/40 ml-auto"
-          style={{
-            color: isProjectPage && !open ? "rgb(244 244 245 / 0.9)" : undefined,
-          }}
+            focus-visible:ring-zinc-900/40 ${
+              open
+                ? "text-zinc-900 hover:bg-zinc-900/10"
+                : isProjectPage
+                  ? "text-zinc-100 hover:bg-white/10"
+                  : "text-zinc-900 hover:bg-zinc-900/10"
+            }`}
           onClick={() => setOpen((prev) => !prev)}
         >
           {open ? (
@@ -366,7 +368,7 @@ function Nav({ setActive, setPendingTarget }: NavProps) {
         {open && (
           <motion.div
             key="mobile-nav"
-            className={`lg:hidden fixed inset-0 w-full h-screen z-90 backdrop-blur-md ${
+            className={`lg:hidden fixed inset-0 z-[105] h-screen w-full backdrop-blur-md ${
               isProjectPage ? "bg-(--project-bg)/95" : "bg-(--background)/95"
             }`}
             initial={{ opacity: 0 }}

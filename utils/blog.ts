@@ -10,6 +10,9 @@ export interface PostMetadata {
   excerpt: string;
   slug: string;
   image?: string;
+  imageAlt?: string;
+  imageSource?: string;
+  imageCitation?: string;
   category?: string;
 }
 

@@ -1,8 +1,20 @@
 ---
-title: "Patterns in Practice: Intertwingled by Peter Morville"
-date: "2025-12-12"
-excerpt: "A collection of reflections on design books that have shaped how I think, work, and build for people."
-category: "Design Strategy"
+title: 'Patterns in Practice: Intertwingled by Peter Morville'
+date: '2025-12-12'
+excerpt: >-
+  A collection of reflections on design books that have shaped how I think,
+  work, and build for people.
+category: Design Strategy
+image: /blog/intertwingled/death-rises-from-the-grave.jpg
+imageAlt: >-
+  Death Rises from the Grave. Old book illustration selected to complement the
+  post "Ideas in Motion".
+imageSource: 'https://www.oldbookillustrations.com/illustrations/death-rises/'
+imageCitation: >-
+  "Death Rises from the Grave", by Rethel, Alfred Dates: 1816-1859 Country:
+  Germany, in Alfred Rethel; 16 Zeichnungen und Entwürfe, via Old Book
+  Illustrations. Source:
+  https://www.oldbookillustrations.com/illustrations/death-rises/
 ---
 
 A collection of reflections on design books that have shaped how I think, work, and build for people.

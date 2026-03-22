@@ -1,8 +1,20 @@
 ---
-title: "AI Prototyping Is Changing UX Faster Than Our Process Is Ready For"
-date: "2026-03-13"
-excerpt: "AI prototyping speeds up design dramatically, but when early prototypes look real, feedback can shift from exploratory to critiquing the interface."
-category: "Design Strategy"
+title: AI Prototyping Is Changing UX Faster Than Our Process Is Ready For
+date: '2026-03-13'
+excerpt: >-
+  AI prototyping speeds up design dramatically, but when early prototypes look
+  real, feedback can shift from exploratory to critiquing the interface.
+category: Design Strategy
+image: /blog/ai-prototyping-changing-ux-faster-than-process/hero.jpg
+imageAlt: >-
+  SS La Champagne—Cross-Section through the Engine Room. Old book illustration
+  selected to complement the post "Innovation".
+imageSource: 'https://www.oldbookillustrations.com/illustrations/champagne-cross-section-1/'
+imageCitation: >-
+  "SS La Champagne—Cross-Section through the Engine Room", by Rose, Victor
+  Dates: 18??-19?? Country: France, in Les merveilles de la science, supplément
+  1, Wood Engraving, via Old Book Illustrations. Source:
+  https://www.oldbookillustrations.com/illustrations/champagne-cross-section-1/
 ---
 
 AI prototyping speeds up design dramatically, but when early prototypes look real, feedback can shift from exploratory to critiquing the interface.

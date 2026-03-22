@@ -1,8 +1,21 @@
 ---
-title: "Stop Asking If Users Are Enjoying Your App"
-date: "2026-01-18"
-excerpt: "User satisfaction surveys often assume enjoyment is the goal. This post explores why that framing fails for task driven, enterprise, and institutional tools."
-category: "UX Research"
+title: Stop Asking If Users Are Enjoying Your App
+date: '2026-01-18'
+excerpt: >-
+  User satisfaction surveys often assume enjoyment is the goal. This post
+  explores why that framing fails for task driven, enterprise, and institutional
+  tools.
+category: UX Research
+image: /blog/survey-design-problem/a-grand-attack-of-toothache.jpg
+imageAlt: >-
+  A Grand Attack of Toothache. Old book illustration selected to complement the
+  post "Ideas in Motion".
+imageSource: 'https://www.oldbookillustrations.com/illustrations/attack-toothache/'
+imageCitation: >-
+  "A Grand Attack of Toothache", by Tegner, Hans Dates: 1853-1932 Country:
+  Denmark, in Fairy tales and stories, Wood Engraving, via Old Book
+  Illustrations. Source:
+  https://www.oldbookillustrations.com/illustrations/attack-toothache/
 ---
 
 User satisfaction surveys often assume enjoyment is the goal. This post explores why that framing fails for task driven, enterprise, and institutional tools.

@@ -23,11 +23,11 @@ function Footer() {
         className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center
           justify-center gap-6 px-6 text-center"
       >
-        <p className="text-sm text-zinc-600">
+        <p className="text-sm text-emerald-700">
           © {year} Made thoughtfully by Anna Kahrs. See, users do scroll.
         </p>
-        <p className="mt-2 text-[11px] text-zinc-400 uppercase tracking-widest font-medium">
-          Views expressed here are my own and do not represent my employer.
+        <p className="mt-2 text-[11px] text-emerald-700 uppercase tracking-widest font-medium">
+          Views expressed here are my own.
         </p>
       </div>
     </footer>
