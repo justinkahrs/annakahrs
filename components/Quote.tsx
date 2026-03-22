@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Playfair_Display, DM_Sans } from "next/font/google";
-import Link from "next/link";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -71,22 +70,8 @@ export default function Quote() {
       className="relative right-[50%] left-[50%] -mr-[50vw] -ml-[50vw]
         w-screen bg-(--background) px-4 pb-8 pt-8 text-black sm:px-12"
     >
-      <div className="relative mx-auto mt-8 max-w-[1500px] px-0 sm:px-6">
-        {/* EYEBROW */}
-        <div className="w-full relative mb-6">
-          <div
-            className={`${dmSans.className} absolute left-0 bottom-[12px] flex items-center gap-2 text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-600/60 pointer-events-none select-none`}
-          >
-            <div className="w-2 h-2 bg-(--highlight)" />
-            FEATURED POST
-          </div>
-          <div className="w-full border-t-[3px] border-dotted border-zinc-900/10" />
-        </div>
-
-      </div>
-      
       {/* FEATURED POST SECTION (FULL BLEED) */}
-        <div className="relative mt-12 -mx-4 sm:-mx-12 overflow-hidden">
+        <div className="relative mt-2 -mx-4 overflow-hidden sm:-mx-12">
           {loading ? (
             <div className="w-full flex justify-center py-20">
               <span className="loading loading-spinner loading-lg text-zinc-900" />
@@ -147,11 +132,11 @@ export default function Quote() {
                 <div className="relative z-10 mx-auto max-w-4xl px-6">
                   {/* Badge */}
                   <div className="mb-10 flex items-center gap-3">
-                    <span className={`${dmSans.className} text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-600`}>
+                    <span className={`${dmSans.className} text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-emerald-600`}>
                       Latest Insight
                     </span>
                     <div className="h-px w-8 bg-emerald-600/20" />
-                    <span className={`${dmSans.className} text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500`}>
+                    <span className={`${dmSans.className} text-xs sm:text-sm font-medium uppercase tracking-[0.12em] text-zinc-500`}>
                       {getFirstCategory(posts[0])}
                     </span>
                   </div>
